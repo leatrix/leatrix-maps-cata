@@ -1,4 +1,4 @@
-3.0.49.alpha.1 - 9th November 2022
+3.0.52 - 9th November 2022
 - Fixed an issue which may have caused other map addon buttons to not show on the world map.
 
 3.0.29 - 12th October 2022
