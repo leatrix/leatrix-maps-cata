@@ -1,3 +1,6 @@
+3.0.53 - 15th November 2022
+- Updated LibDBIcon.
+
 3.0.52 - 9th November 2022
 - Fixed an issue which may have caused other map addon buttons to not show on the world map.
 
