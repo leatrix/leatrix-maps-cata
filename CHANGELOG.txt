@@ -1,5 +1,5 @@
-3.0.55 - 16th November 2022
-- Maintenance update.
+3.0.56.alpha.1 - 17th November 2022
+- For Krowi's Map Buttons users, fixed an issue which caused the borderless map close button to be hidden.
 
 3.0.53 - 15th November 2022
 - Updated LibDBIcon.

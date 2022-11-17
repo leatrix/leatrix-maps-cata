@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.55 (16th November 2022)
+	-- 	Leatrix Maps 3.0.56.alpha.1 (17th November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.55"
+	LeaMapsLC["AddonVer"] = "3.0.56.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1176,6 +1176,14 @@
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			if LeaMapsLC["NoMapBorder"] == "On" then
+
+				-- Reposition Krowi's World Map Buttons if installed
+				if LibStub("Krowi_WorldMapButtons-1.4", true) then
+					local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
+					if lib and lib.SetOffsets then
+						lib:SetOffsets(40, 0)
+					end
+				end
 
 				-- Hide border frame
 				WorldMapFrame.BorderFrame:Hide()
