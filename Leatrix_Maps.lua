@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.56.alpha.1 (17th November 2022)
+	-- 	Leatrix Maps 3.0.56 (22nd November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.56.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.56"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1377,10 +1377,10 @@
 				-- Northrend
 				-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
 				-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
-				--[[Borean Tundra]]			[114] = {minLevel = 70, 	maxLevel = 72,		minFish = "380 (475)",},
+				--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
 				--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,		minFish = "430 (525)",},
 				--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
-				--[[The Storm Peaks]]		[120] = {minLevel = 73, 	maxLevel = 77,},
+				--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
 				--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
 				--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,		minFish = "380 (475)",},
 				--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
