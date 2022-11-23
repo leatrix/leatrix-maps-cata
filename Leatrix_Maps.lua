@@ -3541,7 +3541,7 @@
 	-- Replacement for broken slash command system
 	if LeaMapsLC.NewPatch then
 		function leamaps(self)
-			SlashFunc(self)
+			SlashFunc(self or "")
 		end
 	end
 
