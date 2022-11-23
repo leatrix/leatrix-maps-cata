@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.56 (22nd November 2022)
+	-- 	Leatrix Maps 3.0.60 (23rd November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.56"
+	LeaMapsLC["AddonVer"] = "3.0.60"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -27,6 +27,9 @@
 				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
 			end)
 			return
+		end
+		if gametocversion == 30401 then
+			LeaMapsLC.NewPatch = true
 		end
 	end
 
@@ -3522,14 +3525,24 @@
 	end
 
 	-- Add slash commands
-	_G.SLASH_Leatrix_Maps1 = "/ltm"
-	_G.SLASH_Leatrix_Maps2 = "/leamaps"
+	if not LeaMapsLC.NewPatch then
+		_G.SLASH_Leatrix_Maps1 = "/ltm"
+		_G.SLASH_Leatrix_Maps2 = "/leamaps"
+	end
+
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
 		SlashFunc(self)
 		-- Redirect tainted variables
 		RunScript('ACTIVE_CHAT_EDIT_BOX = ACTIVE_CHAT_EDIT_BOX')
 		RunScript('LAST_ACTIVE_CHAT_EDIT_BOX = LAST_ACTIVE_CHAT_EDIT_BOX')
+	end
+
+	-- Replacement for broken slash command system
+	if LeaMapsLC.NewPatch then
+		function leamaps(self)
+			LeaMapsLC:SlashFunc(self)
+		end
 	end
 
 	----------------------------------------------------------------------
