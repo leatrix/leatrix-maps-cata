@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.60 (23rd November 2022)
+	-- 	Leatrix Maps 3.0.61.alpha.1 (27th November 2022)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.60"
+	LeaMapsLC["AddonVer"] = "3.0.61.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2022,31 +2022,31 @@
 								-- Override travel textures
 								if pinInfo[1] == "TravelA" then
 									pin.Texture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-									pin.Texture:SetTexCoord(0, 0.125, 0.5, 1)
+									pin.Texture:SetTexCoord(0, 0.25, 0.75, 1)
 									pin.Texture:SetSize(32, 32)
 									pin.HighlightTexture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-									pin.HighlightTexture:SetTexCoord(0, 0.125, 0.5, 1)
+									pin.HighlightTexture:SetTexCoord(0, 0.25, 0.75, 1)
 									pin.HighlightTexture:SetSize(32, 32)
 								elseif pinInfo[1] == "TravelH" then
 									pin.Texture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
 									pin.HighlightTexture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-									pin.Texture:SetTexCoord(0.125, 0.25, 0.5, 1)
+									pin.Texture:SetTexCoord(0.25, 0.5, 0.75, 1)
 									pin.Texture:SetSize(32, 32)
-									pin.HighlightTexture:SetTexCoord(0.125, 0.25, 0.5, 1)
+									pin.HighlightTexture:SetTexCoord(0.25, 0.5, 0.75, 1)
 									pin.HighlightTexture:SetSize(32, 32)
 								elseif pinInfo[1] == "TravelN" then
 									pin.Texture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
 									pin.HighlightTexture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-									pin.Texture:SetTexCoord(0.25, 0.375, 0.5, 1)
+									pin.Texture:SetTexCoord(0.5, 0.75, 0.75, 1)
 									pin.Texture:SetSize(32, 32)
-									pin.HighlightTexture:SetTexCoord(0.25, 0.375, 0.5, 1)
+									pin.HighlightTexture:SetTexCoord(0.5, 0.75, 0.75, 1)
 									pin.HighlightTexture:SetSize(32, 32)
 								elseif pinInfo[1] == "Dunraid" then
 									pin.Texture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
 									pin.HighlightTexture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-									pin.Texture:SetTexCoord(0.375, 0.5, 0.5, 1)
+									pin.Texture:SetTexCoord(0.75, 1, 0.75, 1)
 									pin.Texture:SetSize(32, 32)
-									pin.HighlightTexture:SetTexCoord(0.375, 0.5, 0.5, 1)
+									pin.HighlightTexture:SetTexCoord(0.75, 1, 0.75, 1)
 									pin.HighlightTexture:SetSize(32, 32)
 								elseif pinInfo[1] == "Spirit" then
 									pin.Texture:SetSize(20, 20)
@@ -2967,9 +2967,9 @@
 
 		-- Set skinned button textures
 		mbtn:SetNormalTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-		mbtn:GetNormalTexture():SetTexCoord(0.5, 1, 0, 0.5)
+		mbtn:GetNormalTexture():SetTexCoord(0, 1, 0.25, 0.5)
 		mbtn:SetHighlightTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
-		mbtn:GetHighlightTexture():SetTexCoord(0, 0.5, 0, 0.5)
+		mbtn:GetHighlightTexture():SetTexCoord(0, 1, 0, 0.25)
 
 		-- Hide the default textures
 		mbtn:HookScript("OnShow", function() mbtn.Left:Hide(); mbtn.Middle:Hide(); mbtn.Right:Hide() end)
