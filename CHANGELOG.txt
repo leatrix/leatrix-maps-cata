@@ -1,3 +1,6 @@
+3.0.63.alpha.1 - 1st December 2022
+- Adjusted world map frame strata.
+
 3.0.62 - 30th November 2022
 - Reformatted the texture file.
 
