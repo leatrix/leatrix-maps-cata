@@ -1,3 +1,6 @@
+3.0.68 - 16th December 2022
+- Maintenance update.
+
 3.0.65 - 5th December 2022
 - Fixed frame border issue with 'Use default map'.
 
