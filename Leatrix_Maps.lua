@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.77.alpha.1 (6th January 2023)
+	-- 	Leatrix Maps 3.0.77.alpha.2 (6th January 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.77.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.77.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -3538,9 +3538,9 @@
 	if not LeaMapsLC.NewPatch then
 		_G.SLASH_Leatrix_Maps1 = "/ltm"
 		_G.SLASH_Leatrix_Maps2 = "/leamaps"
+	else
+		_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
 	end
-
-	_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
 
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
