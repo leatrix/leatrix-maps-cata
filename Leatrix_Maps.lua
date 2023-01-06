@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.77 (4th January 2023)
+	-- 	Leatrix Maps 3.0.77.alpha.1 (6th January 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.77"
+	LeaMapsLC["AddonVer"] = "3.0.77.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2639,6 +2639,9 @@
 			slashTitle:SetFont(slashTitle:GetFont(), 72)
 			slashTitle:ClearAllPoints()
 			slashTitle:SetPoint("BOTTOM", subTitle, "TOP", 0, 40)
+			if LeaMapsLC.NewPatch then
+				slashTitle:SetText("/run leamaps()")
+			end
 
 			local pTex = interPanel:CreateTexture(nil, "BACKGROUND")
 			pTex:SetAllPoints()
@@ -3536,6 +3539,8 @@
 		_G.SLASH_Leatrix_Maps1 = "/ltm"
 		_G.SLASH_Leatrix_Maps2 = "/leamaps"
 	end
+
+	_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
 
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function

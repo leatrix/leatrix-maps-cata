@@ -1,5 +1,5 @@
-3.0.77 - 4th January 2023
-- Maintenance update.
+3.0.77.alpha.1 - 6th January 2023
+- PTR (3.4.1): The interface options panel now shows /run leamaps() instead of /ltm.
 
 3.0.65 - 5th December 2022
 - Fixed frame border issue with 'Use default map'.
