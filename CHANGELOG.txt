@@ -1,4 +1,4 @@
-3.0.77.alpha.2 - 6th January 2023
+3.0.78 - 8th January 2023
 - PTR (3.4.1): The interface options panel now shows /run leamaps() instead of /ltm.
 
 3.0.65 - 5th December 2022
