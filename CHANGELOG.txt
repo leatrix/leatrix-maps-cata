@@ -1,5 +1,6 @@
-3.0.79 - 11th January 2023
-- Maintenance update.
+3.0.83 - 18th January 2023
+- Updated for game version 3.4.1.
+- Due to problems with Blizzard's slash command system in 3.4.1, the /ltm command has been replaced with /run leamaps().  If you wish to pass a parameter, enter it in quotes between the brackets.
 
 3.0.78 - 8th January 2023
 - PTR (3.4.1): The interface options panel now shows /run leamaps() instead of /ltm.
