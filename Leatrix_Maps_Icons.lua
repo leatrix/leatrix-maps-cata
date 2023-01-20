@@ -710,6 +710,7 @@
 			{"Arrow", 93.2, 58.4, L["Zul'Drak"], nil, arTex, nil, nil, nil, nil, nil, 4.6, 121},
 			{"Arrow", 85.7, 44.7, L["The Storm Peaks"], nil, arTex, nil, nil, nil, nil, nil, 0.3, 120},
 			{"TravelN", 15.7, 42.5, L["Dalaran"], L["Teleport Crystal"], pNTex, nil, nil, nil, nil, nil, 0, 125},
+			{"Arrow", 36.4, 37.6, L["Dalaran"], nil, arTex, nil, nil, nil, nil, nil, 1.5, 125},
 		},
 
 		--[[Dalaran]] [125] = {
@@ -718,6 +719,7 @@
 			{"TravelA", 37.8, 62.2, L["Portals"], L["Stormwind"] .. ", " .. L["Ironforge"] .. ", " .. L["Darnassus"] .. ", " .. L["Exodar"] .. ", " .. L["Shattrath"], pATex},
 			{"TravelH", 57.8, 24.5, L["Portals"], L["Orgrimmar"] .. ", " .. L["Undercity"] .. ", " .. L["Shattrath"] .. ", " .. L["Thunder Bluff"] .. ", " .. L["Silvermoon"], pHTex},
 			{"TravelN", 56.0, 46.8, L["Crystalsong Forest"], L["Teleport Crystal"], pNTex, nil, nil, nil, nil, nil, 0, 127},
+			{"Arrow", 80.9, 46.6, L["Crystalsong Forest"], nil, arTex, nil, nil, nil, nil, nil, 4.6, 127},
 		},
 
 		--[[Dragonblight]] [115] = {
