@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.105 (8th February 2023)
+	-- 	Leatrix Maps 3.0.106 (22nd February 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.105"
+	LeaMapsLC["AddonVer"] = "3.0.106"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1187,6 +1187,13 @@
 				-- Reposition Krowi's World Map Buttons if installed
 				if LibStub("Krowi_WorldMapButtons-1.4", true) then
 					local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
+					if lib and lib.SetOffsets then
+						lib:SetOffsets(40, 0)
+					end
+				end
+
+				if LibStub("Krowi_WorldMapButtons-1.5", true) then
+					local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.5")
 					if lib and lib.SetOffsets then
 						lib:SetOffsets(40, 0)
 					end
