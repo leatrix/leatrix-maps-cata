@@ -1,3 +1,6 @@
+3.0.135 - 11th June 2023
+- The /ltm slash command has returned.  /run leamaps() has been removed.
+
 3.0.110 - 25th February 2023
 - Fix for Krowi Map Buttons library 1.4.4.
 

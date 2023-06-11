@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.134 (3rd June 2023)
+	-- 	Leatrix Maps 3.0.135 (11th June 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.134"
+	LeaMapsLC["AddonVer"] = "3.0.135"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2632,7 +2632,7 @@
 			subTitle:ClearAllPoints()
 			subTitle:SetPoint("BOTTOM", 0, 72)
 
-			local slashTitle = LeaMapsLC:MakeTx(interPanel, "/run leamaps()", 0, 0)
+			local slashTitle = LeaMapsLC:MakeTx(interPanel, "/ltm", 0, 0)
 			slashTitle:SetFont(slashTitle:GetFont(), 72)
 			slashTitle:ClearAllPoints()
 			slashTitle:SetPoint("BOTTOM", subTitle, "TOP", 0, 40)
@@ -2693,7 +2693,7 @@
 
 		-- Show first run message
 		if not LeaMapsDB["FirstRunMessageSeen"] then
-			LeaMapsLC:Print(L["Enter"] .. " |cff00ff00" .. "/run leamaps()" .. "|r " .. L["or click the minimap button to open Leatrix Maps."])
+			LeaMapsLC:Print(L["Enter"] .. " |cff00ff00" .. "/ltm" .. "|r " .. L["or click the minimap button to open Leatrix Maps."])
 			LeaMapsDB["FirstRunMessageSeen"] = true
 		end
 
@@ -3506,13 +3506,13 @@
 				-- Show available commands
 				LeaMapsLC:Print("Leatrix Maps" .. "|n")
 				LeaMapsLC:Print(L["WC"] .. " " .. LeaMapsLC["AddonVer"] .. "|n|n")
-				LeaMapsLC:Print('/run leamaps("reset") - Reset the panel position.')
-				LeaMapsLC:Print('/run leamaps("wipe") - Wipe all settings and reload.')
-				LeaMapsLC:Print('/run leamaps("help") - Show this information.')
+				LeaMapsLC:Print('/ltm reset - Reset the panel position.')
+				LeaMapsLC:Print('/ltm wipe - Wipe all settings and reload.')
+				LeaMapsLC:Print('/ltm help - Show this information.')
 				return
 			else
 				-- Invalid command entered
-				LeaMapsLC:Print('Invalid command.  Enter /run leamaps("help") for help.')
+				LeaMapsLC:Print('Invalid command.  Enter /ltm help for help.')
 				return
 			end
 		else
@@ -3529,9 +3529,8 @@
 	end
 
 	-- Add slash commands
-	-- _G.SLASH_Leatrix_Maps1 = "/ltm"
-	-- _G.SLASH_Leatrix_Maps2 = "/leamaps"
-	_G.SLASH_Leatrix_Maps1 = "/ztm" -- temp
+	_G.SLASH_Leatrix_Maps1 = "/ltm"
+	_G.SLASH_Leatrix_Maps2 = "/leamaps"
 
 	SlashCmdList["Leatrix_Maps"] = function(self)
 		-- Run slash command function
@@ -3539,11 +3538,6 @@
 		-- Redirect tainted variables
 		RunScript('ACTIVE_CHAT_EDIT_BOX = ACTIVE_CHAT_EDIT_BOX')
 		RunScript('LAST_ACTIVE_CHAT_EDIT_BOX = LAST_ACTIVE_CHAT_EDIT_BOX')
-	end
-
-	-- Replacement for broken slash command system
-	function leamaps(self)
-		SlashFunc(self or "")
 	end
 
 	----------------------------------------------------------------------
