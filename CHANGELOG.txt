@@ -1,3 +1,6 @@
+3.0.137 - 24th June 2023
+- Updated for game version 3.4.2.
+
 3.0.135 - 11th June 2023
 - The /ltm slash command has returned.  /run leamaps() has been removed.
 
