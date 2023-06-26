@@ -1,3 +1,6 @@
+3.0.138.alpha.1 - 24th June 2023
+- Updated LibDBIcon.
+
 3.0.137 - 24th June 2023
 - Updated for game version 3.4.2.
 
