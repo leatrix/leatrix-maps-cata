@@ -57,6 +57,8 @@
 			WorldMapTitleDropDown_ToggleLock()
 			-- Remove click from title bar (required for unlock map and opacity)
 			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
+			-- Required for unlock map frame
+			WorldMapFrame:SetHitRectInsets(0, 0, 24, 0)
 		end
 
 		-- Replace map border textures
