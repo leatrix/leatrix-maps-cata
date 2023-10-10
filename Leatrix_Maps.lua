@@ -53,6 +53,8 @@
 			WorldMapFrame_SetOpacity(0)
 			WorldMapFrame_SaveOpacity()
 			SetCVar("worldMapOpacity", 0)
+			-- Unlock map frame
+			WorldMapTitleDropDown_ToggleLock()
 		end
 
 		-- Replace map border textures
@@ -118,7 +120,7 @@
 
 			if LeaMapsLC.NewPatch then
 				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
-				WorldMapTitleButton:Hide()
+				WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
 			else
 				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
