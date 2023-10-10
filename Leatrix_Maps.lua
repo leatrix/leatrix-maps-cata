@@ -110,10 +110,16 @@
 			-- Create outer frame for dropdown menus
 			local outerFrame = CreateFrame("FRAME", nil, WorldMapFrame)
 			outerFrame:SetSize(360, 20)
-			if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
-				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
+
+			if LeaMapsLC.NewPatch then
+				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+				WorldMapTitleButton:Hide()
 			else
-				outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
+				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
+				else
+					outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
+				end
 			end
 
 			-- Create No zones available dropdown menu
@@ -3633,6 +3639,13 @@
 			LeaMapsLC:LoadVarAnc("MainPanelR", "CENTER")				-- Panel relative
 			LeaMapsLC:LoadVarNum("MainPanelX", 0, -5000, 5000)			-- Panel X axis
 			LeaMapsLC:LoadVarNum("MainPanelY", 0, -5000, 5000)			-- Panel Y axis
+
+			if LeaMapsLC.NewPatch then
+				LeaMapsLC["NoMapBorder"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
+				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
+				LeaMapsLC["UseDefaultMap"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["UseDefaultMap"], true)
+				LeaMapsCB["UseDefaultMap"].tiptext = LeaMapsCB["UseDefaultMap"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
+			end
 
 			LeaMapsLC:SetDim()
 
