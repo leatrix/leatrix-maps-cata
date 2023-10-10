@@ -113,7 +113,7 @@
 
 			if LeaMapsLC.NewPatch then
 				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
-				WorldMapTitleButton:Hide()
+				MiniWorldMapTitle:Hide()
 			else
 				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
@@ -3645,6 +3645,11 @@
 				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
 				LeaMapsLC["UseDefaultMap"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["UseDefaultMap"], true)
 				LeaMapsCB["UseDefaultMap"].tiptext = LeaMapsCB["UseDefaultMap"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
+				LeaMapsLC["SetMapOpacity"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["SetMapOpacity"], true)
+				LeaMapsCB["SetMapOpacity"].tiptext = LeaMapsCB["SetMapOpacity"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available.  You can adjust the map opacity by right-clicking the map window title bar."]
+
+
+
 			end
 
 			LeaMapsLC:SetDim()
