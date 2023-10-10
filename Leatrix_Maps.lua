@@ -44,9 +44,11 @@
 	function LeaMapsLC:MainFunc()
 
 		-- Prevent the map from being maximised
-		SetCVar("miniWorldMap", 1)
-		WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
-		WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
+		if LeaMapsLC.NewPatch then
+			SetCVar("miniWorldMap", 1)
+			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
+			WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
+		end
 
 		-- Replace map border textures
 		local layout = {"Top", "Middle", "Bottom"}
