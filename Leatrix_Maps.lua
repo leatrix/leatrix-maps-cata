@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.152 (4th October 2023)
+	-- 	Leatrix Maps 3.0.153.alpha.1 (4th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.152"
+	LeaMapsLC["AddonVer"] = "3.0.153.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -27,6 +27,9 @@
 				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
 			end)
 			return
+		end
+		if gametocversion and gametocversion == 30403 then
+			LeaMapsLC.NewPatch = true
 		end
 	end
 
@@ -2067,7 +2070,11 @@
 				end
 			end
 
-			_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
+			if LeaMapsLC.NewPatch then
+				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_MAP_EXPLORATION")
+			else
+				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
+			end
 
 			function LeaMapsGlobalPinMixin:OnAcquired(myInfo)
 				BaseMapPoiPinMixin.OnAcquired(self, myInfo)
