@@ -118,7 +118,7 @@
 
 			if LeaMapsLC.NewPatch then
 				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
-				MiniWorldMapTitle:Hide()
+				WorldMapTitleButton:Hide()
 			else
 				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
@@ -1542,7 +1542,7 @@
 				WorldMapQuestShowObjectivesText:SetText("")
 				WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 				WorldMapQuestShowObjectives:ClearAllPoints()
-				WorldMapQuestShowObjectives:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -10, 4)
+				WorldMapQuestShowObjectives:SetPoint("LEFT", WorldMapTrackQuest, "RIGHT", 0, 0)
 			end
 
 			-- Create cursor coordinates frame
