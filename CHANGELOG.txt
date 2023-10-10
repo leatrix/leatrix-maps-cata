@@ -1,5 +1,6 @@
 3.0.153.alpha.1 - 10th October 2023
 - Updated for game version 3.4.3.
+- The 'Show coordinates' option now requires a UI reload.
 
 3.0.138 - 28th June 2023
 - Updated LibDBIcon.
