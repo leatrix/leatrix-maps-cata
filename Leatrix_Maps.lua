@@ -51,15 +51,17 @@
 		end
 
 		-- Replace map border textures
-		local layout = {"Top", "Middle", "Bottom"}
-		for i = 1, select('#', WorldMapFrame.BorderFrame:GetRegions()) do
-			local region = select(i, WorldMapFrame.BorderFrame:GetRegions())
-			if region.GetTexture then
-				for k = 1, 3 do
-					for j = 1, 4 do
-						if region:GetTexture() == "Interface\\WorldMap\\UI-WorldMap-" .. layout[k] .. j then
-							region:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps_Frame.blp")
-							region:SetTexCoord(j * 0.25 - 0.25, j * 0.25, k * 0.25 - 0.25, k * 0.25)
+		if not LeaMapsLC.NewPatch then
+			local layout = {"Top", "Middle", "Bottom"}
+			for i = 1, select('#', WorldMapFrame.BorderFrame:GetRegions()) do
+				local region = select(i, WorldMapFrame.BorderFrame:GetRegions())
+				if region.GetTexture then
+					for k = 1, 3 do
+						for j = 1, 4 do
+							if region:GetTexture() == "Interface\\WorldMap\\UI-WorldMap-" .. layout[k] .. j then
+								region:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps_Frame.blp")
+								region:SetTexCoord(j * 0.25 - 0.25, j * 0.25, k * 0.25 - 0.25, k * 0.25)
+							end
 						end
 					end
 				end
