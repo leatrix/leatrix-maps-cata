@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.153.alpha.1 (4th October 2023)
+	-- 	Leatrix Maps 3.0.153 (10th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.153.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.153"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -55,6 +55,8 @@
 			SetCVar("worldMapOpacity", 0)
 			-- Unlock map frame
 			WorldMapTitleDropDown_ToggleLock()
+			-- Remove click from title bar (required for unlock map and opacity)
+			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
 		end
 
 		-- Replace map border textures
@@ -120,7 +122,6 @@
 
 			if LeaMapsLC.NewPatch then
 				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
-				WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
 			else
 				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
