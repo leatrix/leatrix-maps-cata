@@ -1146,7 +1146,7 @@
 			LeaMapsCB["UnlockMapFrameBtn"]:HookScript("OnClick", function()
 				if IsShiftKeyDown() and IsControlKeyDown() then
 					-- Preset profile
-					LeaMapsLC["MapScale"] = 0.9
+					LeaMapsLC["MapScale"] = 1
 					WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 					if UnlockMapPanel:IsShown() then UnlockMapPanel:Hide(); UnlockMapPanel:Show(); end
 				else
@@ -2614,8 +2614,6 @@
 			LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
 			LeaMapsLC:LockItem(LeaMapsCB["UnlockMapFrame"], true)
 			LeaMapsLC:LockItem(LeaMapsCB["StickyMapFrame"], true)
-			-- Lock reset map layout button
-			LeaMapsLC:LockItem(LeaMapsCB["resetMapPosBtn"], true)
 			-- Hide default map maximised right-click to zoom out text
 			WorldMapMagnifyingGlassButton:HookScript("OnShow", function()
 				WorldMapMagnifyingGlassButton:Hide()
@@ -3507,7 +3505,7 @@
 				LeaMapsDB["MapPosR"] = "CENTER"
 				LeaMapsDB["MapPosX"] = 0
 				LeaMapsDB["MapPosY"] = 0
-				LeaMapsDB["MapScale"] = 0.9
+				LeaMapsDB["MapScale"] = 1
 				LeaMapsDB["SetMapOpacity"] = "Off"
 				LeaMapsDB["stationaryOpacity"] = 1.0
 				LeaMapsDB["movingOpacity"] = 0.5
@@ -3622,7 +3620,7 @@
 			LeaMapsLC:LoadVarAnc("MapPosR", "CENTER")					-- Map relative
 			LeaMapsLC:LoadVarNum("MapPosX", 0, -5000, 5000)				-- Map X axis
 			LeaMapsLC:LoadVarNum("MapPosY", 20, -5000, 5000)			-- Map Y axis
-			LeaMapsLC:LoadVarNum("MapScale", 0.9, 0.2, 3)				-- Map scale
+			LeaMapsLC:LoadVarNum("MapScale", 1, 0.2, 3)					-- Map scale
 			LeaMapsLC:LoadVarChk("SetMapOpacity", "Off")				-- Set map opacity
 			LeaMapsLC:LoadVarNum("stationaryOpacity", 1, 0.1, 1)		-- Stationary opacity
 			LeaMapsLC:LoadVarNum("movingOpacity", 0.5, 0.1, 1)			-- Moving opacity
@@ -3888,17 +3886,20 @@
 	-- Add reset map position button
 	local resetMapPosBtn = LeaMapsLC:CreateButton("resetMapPosBtn", PageF, "Reset Map Layout", "BOTTOMLEFT", 16, 10, 25, "Click to reset the position and scale of the map frame.")
 	resetMapPosBtn:HookScript("OnClick", function()
-		-- Reset map position
-		if LeaMapsLC["NoMapBorder"] == "On" then
-			LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "CENTER", "CENTER", 0, 20
-		else
-			LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "CENTER", "CENTER", 0, 0
+		if not WorldMapFrame:IsMaximized() then
+			-- Reset map position
+			if LeaMapsLC["NoMapBorder"] == "On" then
+				LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "TOPLEFT", "TOPLEFT", 16, -96
+			else
+				LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "TOPLEFT", "TOPLEFT", 16, -116
+			end
+			WorldMapFrame:ClearAllPoints()
+			WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
+			WorldMapTitleButton_OnDragStop()
+			-- Reset map scale
+			LeaMapsLC["MapScale"] = 1
+			LeaMapsLC:SetDim()
+			LeaMapsLC["PageF"]:Hide(); LeaMapsLC["PageF"]:Show()
+			WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 		end
-		WorldMapFrame:ClearAllPoints()
-		WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
-		-- Reset map scale
-		LeaMapsLC["MapScale"] = 0.9
-		LeaMapsLC:SetDim()
-		LeaMapsLC["PageF"]:Hide(); LeaMapsLC["PageF"]:Show()
-		WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 	end)
