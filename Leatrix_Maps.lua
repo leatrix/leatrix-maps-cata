@@ -45,17 +45,19 @@
 
 		-- Patch 3.4.3
 		if LeaMapsLC.NewPatch then
-			-- Prevent the map from being maximised
-			SetCVar("miniWorldMap", 1)
-			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
-			WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
+			-- Prevent the map from being maximised (except with default map)
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
+				SetCVar("miniWorldMap", 1)
+				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
+				WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
+			end
 			-- Set built-in map opacity (right-click title bar)
 			WorldMapFrame_SetOpacity(0)
 			WorldMapFrame_SaveOpacity()
 			SetCVar("worldMapOpacity", 0)
 			-- Unlock map frame
 			WorldMapTitleDropDown_ToggleLock()
-			-- Remove click from title bar (required for unlock map and opacity)
+			-- Remove click from title bar (required for moving map and setting opacity)
 			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
 			MiniWorldMapTitle:Hide()
 		end
@@ -374,6 +376,23 @@
 			-- Set dropdown menu when map changes and when map is shown
 			hooksecurefunc(WorldMapFrame, "OnMapChanged", SetMapControls)
 			WorldMapFrame:HookScript("OnShow", SetMapControls)
+
+			-- Move dropdown menus if using default map
+			if LeaMapsLC["UseDefaultMap"] == "On" then
+				WorldMapContinentDropDown:ClearAllPoints()
+				WorldMapContinentDropDown.SetPoint = function() return end
+
+				hooksecurefunc(WorldMapFrame, "Minimize", function()
+					outerFrame:ClearAllPoints()
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+				end)
+
+				hooksecurefunc(WorldMapFrame, "Maximize", function()
+					WorldMapContinentDropDown:Hide()
+					outerFrame:ClearAllPoints()
+					outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
+				end)
+			end
 
 			-- ElvUI fixes
 			local function ElvUIFixes()
@@ -2574,6 +2593,10 @@
 			LeaMapsLC:LockItem(LeaMapsCB["StickyMapFrame"], true)
 			-- Lock reset map layout button
 			LeaMapsLC:LockItem(LeaMapsCB["resetMapPosBtn"], true)
+			-- Hide default map maximised right-click to zoom out text
+			WorldMapMagnifyingGlassButton:HookScript("OnShow", function()
+				WorldMapMagnifyingGlassButton:Hide()
+			end)
 		end
 
 		----------------------------------------------------------------------
@@ -3626,11 +3649,6 @@
 			LeaMapsLC:LoadVarAnc("MainPanelR", "CENTER")				-- Panel relative
 			LeaMapsLC:LoadVarNum("MainPanelX", 0, -5000, 5000)			-- Panel X axis
 			LeaMapsLC:LoadVarNum("MainPanelY", 0, -5000, 5000)			-- Panel Y axis
-
-			if LeaMapsLC.NewPatch then
-				LeaMapsLC["UseDefaultMap"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["UseDefaultMap"], true)
-				LeaMapsCB["UseDefaultMap"].tiptext = LeaMapsCB["UseDefaultMap"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
-			end
 
 			LeaMapsLC:SetDim()
 

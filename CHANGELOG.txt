@@ -1,5 +1,6 @@
 3.0.155.alpha.1 - 11th October 2023
 - Updates for game version 3.4.3.
+- The 'Use default map' option is now available once again.
 
 3.0.154 - 11th October 2023
 - The 'Remove map border' option is now available once again.
