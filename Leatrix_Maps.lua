@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.154 (11th October 2023)
+	-- 	Leatrix Maps 3.0.155.alpha.1 (11th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.154"
+	LeaMapsLC["AddonVer"] = "3.0.155.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -58,10 +58,6 @@
 			-- Remove click from title bar (required for unlock map and opacity)
 			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
 			MiniWorldMapTitle:Hide()
-			-- Required for unlock map frame
-			WorldMapFrame:SetHitRectInsets(0, 0, 24, 0)
-			-- Make only the top of the map movable
-			WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
 		end
 
 		-- Replace map border textures
@@ -1241,21 +1237,6 @@
 				WorldMapFrameCloseButton:SetFrameLevel(5000)
 				WorldMapFrameCloseButton.SetPoint = function() return end
 
-				-- Function to set world map clickable area
-				local function SetBorderClickInset()
-					if LeaMapsLC["UnlockMapFrame"] == "On" then
-						-- Map is unlocked so increase clickable area at top of map
-						WorldMapFrame:SetHitRectInsets(20, 8, 38, 28)
-					else
-						-- Map is locked so remove clickable area around map
-						WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
-					end
-				end
-
-				-- Set world map clickable area when unlock map frame option is clicked and on startup
-				LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
-				SetBorderClickInset()
-
 				-- Create black border around map
 				local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
 				border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
@@ -1803,17 +1784,14 @@
 				table.insert(UISpecialFrames, "WorldMapFrame")
 			end
 
-			-- Enable movement
-			WorldMapFrame:SetMovable(true)
-			WorldMapFrame:RegisterForDrag("LeftButton")
-
-			WorldMapFrame:SetScript("OnDragStart", function()
+			-- Movement
+			WorldMapFrame.MiniBorderFrame:SetScript("OnDragStart", function()
 				if LeaMapsLC["UnlockMapFrame"] == "On" then
 					WorldMapFrame:StartMoving()
 				end
 			end)
 
-			WorldMapFrame:SetScript("OnDragStop", function()
+			WorldMapFrame.MiniBorderFrame:SetScript("OnDragStop", function()
 				WorldMapFrame:StopMovingOrSizing()
 				WorldMapFrame:SetUserPlaced(false)
 				-- Save map frame position
