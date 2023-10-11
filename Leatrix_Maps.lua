@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.155.alpha.1 (11th October 2023)
+	-- 	Leatrix Maps 3.0.155.alpha.2 (11th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.155.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.155.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -42,6 +42,24 @@
 
 	-- Main function
 	function LeaMapsLC:MainFunc()
+
+		local LeaMapsPoiScale = 0.7
+
+		-- Set POI scale for quest icons
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			local function questPinScale(pin)
+				pin:SetSize(50 * LeaMapsPoiScale, 50 * LeaMapsPoiScale)
+				pin.Texture:SetScale(LeaMapsPoiScale)
+				pin.PushedTexture:SetScale(LeaMapsPoiScale)
+				pin.Number:SetScale(LeaMapsPoiScale)
+				pin.Highlight:SetScale(LeaMapsPoiScale)
+			end
+
+			hooksecurefunc(QuestPinMixin, "OnAcquired", questPinScale)
+			for pin in WorldMapFrame:EnumeratePinsByTemplate("QuestPinTemplate") do
+				pin.OnAcquired = questPinScale
+			end
+		end
 
 		-- Patch 3.4.3
 		if LeaMapsLC.NewPatch then
@@ -2043,6 +2061,11 @@
 								local pin = self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
 								pin.Texture:SetRotation(0)
 								pin.HighlightTexture:SetRotation(0)
+								if LeaMapsLC["UseDefaultMap"] == "Off" then
+									pin.Texture:SetScale(LeaMapsPoiScale)
+									pin.HighlightTexture:SetScale(LeaMapsPoiScale)
+								end
+
 								-- Override travel textures
 								if pinInfo[1] == "TravelA" then
 									pin.Texture:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps.blp")
@@ -2088,7 +2111,7 @@
 			end
 
 			if LeaMapsLC.NewPatch then
-				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_MAP_EXPLORATION")
+				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DEBUG")
 			else
 				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
 			end
