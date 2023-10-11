@@ -1,3 +1,8 @@
+3.0.154 - 11th October 2023
+- The 'Remove map border' option is now available once again.
+- You can move the map by dragging the top border.
+- You can scale the map by enabling 'Unlock map frame' and dragging the bottom-right corner of the map frame.
+
 3.0.153 - 10th October 2023
 - Preliminary update for game version 3.4.3.
 - The 'Show coordinates' option now requires a UI reload.

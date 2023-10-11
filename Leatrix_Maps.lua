@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.153 (10th October 2023)
+	-- 	Leatrix Maps 3.0.154 (11th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.153"
+	LeaMapsLC["AddonVer"] = "3.0.154"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -57,8 +57,11 @@
 			WorldMapTitleDropDown_ToggleLock()
 			-- Remove click from title bar (required for unlock map and opacity)
 			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
+			MiniWorldMapTitle:Hide()
 			-- Required for unlock map frame
 			WorldMapFrame:SetHitRectInsets(0, 0, 24, 0)
+			-- Make only the top of the map movable
+			WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
 		end
 
 		-- Replace map border textures
@@ -123,7 +126,11 @@
 			outerFrame:SetSize(360, 20)
 
 			if LeaMapsLC.NewPatch then
-				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 16, -24)
+				else
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+				end
 			else
 				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
@@ -1221,29 +1228,24 @@
 				end
 
 				-- Hide border frame
-				WorldMapFrame.BorderFrame:Hide()
+				MiniBorderLeft:Hide()
+				MiniBorderRight:Hide()
 
-				-- Hide dropdown menus
-				WorldMapZoneDropDown:Hide()
-				WorldMapContinentDropDown:Hide()
-				WorldMapZoneMinimapDropDown:Hide()
-
-				-- Hide zoom out button
-				WorldMapZoomOutButton:Hide()
-
-				-- Hide right-click to zoom out text
-				WorldMapMagnifyingGlassButton:Hide()
+				-- Hide maximise and minimise buttons
+				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:ClearAllPoints()
+				WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:ClearAllPoints()
 
 				-- Move close button inside scroll container
 				WorldMapFrameCloseButton:ClearAllPoints()
 				WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame.ScrollContainer, "TOPRIGHT", 0, 0)
 				WorldMapFrameCloseButton:SetFrameLevel(5000)
+				WorldMapFrameCloseButton.SetPoint = function() return end
 
 				-- Function to set world map clickable area
 				local function SetBorderClickInset()
 					if LeaMapsLC["UnlockMapFrame"] == "On" then
-						-- Map is unlocked so increase clickable area around map
-						WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
+						-- Map is unlocked so increase clickable area at top of map
+						WorldMapFrame:SetHitRectInsets(20, 8, 38, 28)
 					else
 						-- Map is locked so remove clickable area around map
 						WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
@@ -1546,8 +1548,18 @@
 				WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
 				WorldMapQuestShowObjectivesText:SetText("")
 				WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
-				WorldMapQuestShowObjectives:ClearAllPoints()
-				WorldMapQuestShowObjectives:SetPoint("LEFT", WorldMapTrackQuest, "RIGHT", 0, 0)
+				if LeaMapsLC["NoMapBorder"] == "On" then
+					WorldMapTrackQuest:ClearAllPoints()
+					WorldMapTrackQuest.SetPoint = function() return end
+					WorldMapQuestShowObjectives:ClearAllPoints()
+					WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 20)
+					WorldMapQuestShowObjectives:SetFrameLevel(5000)
+				else
+					WorldMapTrackQuest:ClearAllPoints()
+					WorldMapTrackQuest.SetPoint = function() return end
+					WorldMapQuestShowObjectives:ClearAllPoints()
+					WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 4)
+				end
 			end
 
 			-- Create cursor coordinates frame
@@ -1623,19 +1635,6 @@
 				cPlayer:SetParent(cFrame)
 				cPlayer:ClearAllPoints()
 				cPlayer:SetPoint("BOTTOMRIGHT", -82, 0)
-
-				-- Function to toggle background frame
-				local function SetCoordsBackground()
-					if LeaMapsLC["ShowCoords"] == "On" then
-						cFrame:Show()
-					else
-						cFrame:Hide()
-					end
-				end
-
-				-- Set background frame when option is clicked and startup
-				LeaMapsCB["ShowCoords"]:HookScript("OnClick", SetCoordsBackground)
-				SetCoordsBackground()
 
 			end
 
@@ -3651,8 +3650,6 @@
 			LeaMapsLC:LoadVarNum("MainPanelY", 0, -5000, 5000)			-- Panel Y axis
 
 			if LeaMapsLC.NewPatch then
-				LeaMapsLC["NoMapBorder"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
-				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
 				LeaMapsLC["UseDefaultMap"] = "Off"; LeaMapsLC:LockItem(LeaMapsCB["UseDefaultMap"], true)
 				LeaMapsCB["UseDefaultMap"].tiptext = LeaMapsCB["UseDefaultMap"].tiptext .. "|n|n|cff00AAFF" .. L["Since patch 3.4.3, this option is no longer available."]
 			end
@@ -3843,7 +3840,7 @@
 	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -312, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 225, -72)
-	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale and move the map.|n|nScale the map by dragging the scale handle in the bottom-right corner.|n|nMove the map by dragging the border and frame edges.")
+	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale the map by dragging the scale handle in the bottom-right corner.|n|nYou can always move the map by dragging the top border regardless of this option.")
 	LeaMapsLC:MakeCB(PageF, "AutoChangeZones", "Auto change zones", 225, -112, true, "If checked, when your character changes zones, the map will automatically change to the new zone.")
 	LeaMapsLC:MakeCB(PageF, "StickyMapFrame", "Sticky map frame", 225, -132, true, "If checked, the map frame will remain open until you close it.")
 	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 225, -152, true, "If checked, the default fullscreen map will be used.|n|nNote that enabling this option will lock out some of the other options.")
