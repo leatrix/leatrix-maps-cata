@@ -1,5 +1,6 @@
-3.0.156.alpha.1 - 12th October 2023
+3.0.156 - 12th October 2023
 - Updates for game version 3.4.3.
+- If 'Unlock map frame' is enabled, you can drag the map by any of its borders once again.  You can always drag the map by the top border regardless of this setting.
 
 3.0.155 - 12th October 2023
 - Updates for game version 3.4.3.

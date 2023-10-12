@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.156.alpha.1 (12th October 2023)
+	-- 	Leatrix Maps 3.0.156 (12th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.156.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.156"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1276,6 +1276,21 @@
 				WorldMapFrameCloseButton:SetFrameLevel(5000)
 				WorldMapFrameCloseButton.SetPoint = function() return end
 
+				-- Function to set world map clickable area
+				local function SetBorderClickInset()
+					if LeaMapsLC["UnlockMapFrame"] == "On" then
+						-- Map is unlocked so increase clickable area around map
+						WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
+					else
+						-- Map is locked so remove clickable area around map
+						WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
+					end
+				end
+
+				-- Set world map clickable area when unlock map frame option is clicked and on startup
+				LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
+				SetBorderClickInset()
+
 				-- Create black border around map
 				local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
 				border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
@@ -1823,23 +1838,26 @@
 				table.insert(UISpecialFrames, "WorldMapFrame")
 			end
 
-			-- Movement
-			WorldMapFrame.MiniBorderFrame:SetScript("OnDragStart", function()
+			-- Enable movement
+			WorldMapFrame:SetMovable(true)
+			WorldMapFrame:RegisterForDrag("LeftButton")
+			WorldMapFrame:SetScript("OnDragStart", function()
 				if LeaMapsLC["UnlockMapFrame"] == "On" then
 					WorldMapFrame:StartMoving()
 				end
 			end)
-
-			WorldMapFrame.MiniBorderFrame:SetScript("OnDragStop", function()
+			WorldMapFrame:SetScript("OnDragStop", function()
 				WorldMapFrame:StopMovingOrSizing()
 				WorldMapFrame:SetUserPlaced(false)
 				-- Save map frame position
 				LeaMapsLC["MapPosA"], void, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = WorldMapFrame:GetPoint()
+				WorldMapTitleButton_OnDragStop()
 			end)
 
 			-- Set position on startup
 			WorldMapFrame:ClearAllPoints()
 			WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
+			WorldMapTitleButton_OnDragStop()
 
 			-- Function to set position after Carbonite has loaded
 			local function CaboniteFix()
@@ -1847,6 +1865,7 @@
 					if Nx.db.profile.Map.MaxOverride == false then
 						WorldMapFrame:ClearAllPoints()
 						WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
+						WorldMapTitleButton_OnDragStop()
 					end
 				end)
 			end
@@ -3859,7 +3878,7 @@
 	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -312, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 225, -72)
-	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale the map by dragging the scale handle in the bottom-right corner.|n|nYou can always move the map by dragging the top border regardless of this option.")
+	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale the map by dragging the scale handle in the bottom-right corner.|n|nYou will be able to move the map by dragging any border.|n|nYou can always drag the top border to move the map regardless of this setting.")
 	LeaMapsLC:MakeCB(PageF, "AutoChangeZones", "Auto change zones", 225, -112, true, "If checked, when your character changes zones, the map will automatically change to the new zone.")
 	LeaMapsLC:MakeCB(PageF, "StickyMapFrame", "Sticky map frame", 225, -132, true, "If checked, the map frame will remain open until you close it.")
 	LeaMapsLC:MakeCB(PageF, "UseDefaultMap", "Use default map", 225, -152, true, "If checked, the default fullscreen map will be used.|n|nNote that enabling this option will lock out some of the other options.")
