@@ -1,3 +1,6 @@
+3.0.156.alpha.1 - 12th October 2023
+- Updates for game version 3.4.3.
+
 3.0.155 - 12th October 2023
 - Updates for game version 3.4.3.
 - The 'Use default map' option is now available once again.

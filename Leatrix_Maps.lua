@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.155 (12th October 2023)
+	-- 	Leatrix Maps 3.0.156.alpha.1 (12th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.155"
+	LeaMapsLC["AddonVer"] = "3.0.156.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1265,8 +1265,10 @@
 				MiniBorderRight:Hide()
 
 				-- Hide maximise and minimise buttons
-				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:ClearAllPoints()
-				WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:ClearAllPoints()
+				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+				hooksecurefunc(WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton, "Show", function()
+					WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+				end)
 
 				-- Move close button inside scroll container
 				WorldMapFrameCloseButton:ClearAllPoints()
