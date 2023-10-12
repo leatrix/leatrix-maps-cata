@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.156 (12th October 2023)
+	-- 	Leatrix Maps 3.0.157.alpha.1 (12th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.156"
+	LeaMapsLC["AddonVer"] = "3.0.157.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -43,21 +43,41 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		local LeaMapsPoiScale = 0.7
+		-- Show quest objectives on map
+		SetCVar("questPOI", "1")
 
-		-- Set POI scale for quest icons
+		-- Hide checkboxes (Large map support) (DoNotUseThisForNow)
+		WorldMapTrackQuest:ClearAllPoints()
+		WorldMapTrackQuest.SetPoint = function() return end
+		WorldMapQuestShowObjectives:ClearAllPoints()
+		WorldMapQuestShowObjectives.SetPoint = function() return end
+
+		-- Large map support
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
-			local function questPinScale(pin)
-				pin:SetSize(50 * LeaMapsPoiScale, 50 * LeaMapsPoiScale)
-				pin.Texture:SetScale(LeaMapsPoiScale)
-				pin.PushedTexture:SetScale(LeaMapsPoiScale)
-				pin.Number:SetScale(LeaMapsPoiScale)
-				pin.Highlight:SetScale(LeaMapsPoiScale)
-			end
+			WorldMapFrame.minimizedWidth = 1024
+			WorldMapFrame.minimizedHeight = 740
+			WorldMapFrame:SynchronizeDisplayState()
+			WorldMapFrame:OnFrameSizeChanged()
+		end
 
-			hooksecurefunc(QuestPinMixin, "OnAcquired", questPinScale)
-			for pin in WorldMapFrame:EnumeratePinsByTemplate("QuestPinTemplate") do
-				pin.OnAcquired = questPinScale
+		-- Large map support
+		if DoNotUseThisForNow then
+			local LeaMapsPoiScale = 0.7
+
+			-- Set POI scale for quest icons
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
+				local function questPinScale(pin)
+					pin:SetSize(50 * LeaMapsPoiScale, 50 * LeaMapsPoiScale)
+					pin.Texture:SetScale(LeaMapsPoiScale)
+					pin.PushedTexture:SetScale(LeaMapsPoiScale)
+					pin.Number:SetScale(LeaMapsPoiScale)
+					pin.Highlight:SetScale(LeaMapsPoiScale)
+				end
+
+				hooksecurefunc(QuestPinMixin, "OnAcquired", questPinScale)
+				for pin in WorldMapFrame:EnumeratePinsByTemplate("QuestPinTemplate") do
+					pin.OnAcquired = questPinScale
+				end
 			end
 		end
 
@@ -1584,16 +1604,19 @@
 				WorldMapQuestShowObjectivesText:SetText("")
 				WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 				if LeaMapsLC["NoMapBorder"] == "On" then
-					WorldMapTrackQuest:ClearAllPoints()
-					WorldMapTrackQuest.SetPoint = function() return end
-					WorldMapQuestShowObjectives:ClearAllPoints()
-					WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 20)
-					WorldMapQuestShowObjectives:SetFrameLevel(5000)
+					--WorldMapTrackQuest:ClearAllPoints()
+					--WorldMapTrackQuest.SetPoint = function() return end
+					-- Large map Support (DoNotUseThisForNow)
+					--WorldMapQuestShowObjectives:ClearAllPoints()
+					--WorldMapQuestShowObjectives.SetPoint = function() return end
+					--WorldMapQuestShowObjectives:ClearAllPoints()
+					--WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 20)
+					--WorldMapQuestShowObjectives:SetFrameLevel(5000)
 				else
-					WorldMapTrackQuest:ClearAllPoints()
-					WorldMapTrackQuest.SetPoint = function() return end
-					WorldMapQuestShowObjectives:ClearAllPoints()
-					WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 4)
+					--WorldMapTrackQuest:ClearAllPoints()
+					--WorldMapTrackQuest.SetPoint = function() return end
+					--WorldMapQuestShowObjectives:ClearAllPoints()
+					--WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 4)
 				end
 			end
 
@@ -2083,8 +2106,10 @@
 								pin.Texture:SetRotation(0)
 								pin.HighlightTexture:SetRotation(0)
 								if LeaMapsLC["UseDefaultMap"] == "Off" then
-									pin.Texture:SetScale(LeaMapsPoiScale)
-									pin.HighlightTexture:SetScale(LeaMapsPoiScale)
+									if DoNotUseThisForNow then
+										pin.Texture:SetScale(LeaMapsPoiScale)
+										pin.HighlightTexture:SetScale(LeaMapsPoiScale)
+									end
 								end
 
 								-- Override travel textures
@@ -3693,6 +3718,13 @@
 			LeaMapsLC:LoadVarNum("MainPanelY", 0, -5000, 5000)			-- Panel Y axis
 
 			LeaMapsLC:SetDim()
+
+			-- Large map support
+			if not DoNotUsethisForNow then
+				LeaMapsLC["NoMapBorder"] = "On"
+				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
+				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. "This option can no longer be turned off."
+			end
 
 			-- Set initial minimum button position
 			if not LeaMapsDB["minimapPos"] then
