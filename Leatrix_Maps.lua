@@ -1162,6 +1162,7 @@
 			LeaMapsCB["MapScale"]:HookScript("OnValueChanged", function()
 				WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 				LeaMapsCB["MapScale"].f:SetText(string.format("%.1f%%", LeaMapsLC["MapScale"] / 1 * 100))
+				WorldMapFrame:OnFrameSizeChanged()
 			end)
 
 			-- Back to Main Menu button click
@@ -1258,6 +1259,7 @@
 				LeaMapsLC["MapScale"] = WorldMapFrame:GetScale()
 				WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 				LeaMapsLC["MapPosA"], void, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = WorldMapFrame:GetPoint()
+				WorldMapFrame:OnFrameSizeChanged()
 			end)
 
 			-- Function to set scale handle
