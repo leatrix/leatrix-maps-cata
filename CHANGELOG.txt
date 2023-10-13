@@ -1,4 +1,4 @@
-3.0.158.alpha.x - 13th October 2023
+3.0.158 - 14th October 2023
 - Added new option 'Show objectives'.  If enabled, quest objectives will be shown on the map.  It's enabled by default.
 - The 'Remove map border' option has been removed.
 - The 'Show coordinates' option no longer requires a UI reload once again.
