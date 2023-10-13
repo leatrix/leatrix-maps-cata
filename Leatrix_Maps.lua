@@ -1838,9 +1838,14 @@
 			end)
 
 			-- Set position on startup
-			WorldMapFrame:ClearAllPoints()
-			WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
-			WorldMapTitleButton_OnDragStop()
+			WorldMapFrame:HookScript("OnShow", function()
+				if not LeaMapsLC.MapLoadPositioned then
+					WorldMapFrame:ClearAllPoints()
+					WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
+					WorldMapTitleButton_OnDragStop()
+					LeaMapsLC.MapLoadPositioned = true
+				end
+			end)
 
 			-- Function to set position after Carbonite has loaded
 			local function CaboniteFix()
