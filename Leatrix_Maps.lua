@@ -52,7 +52,7 @@
 		WorldMapQuestShowObjectives:ClearAllPoints()
 		WorldMapQuestShowObjectives.SetPoint = function() return end
 
-		-- Large map support
+		-- Make map bigger
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
 			WorldMapFrame.minimizedWidth = 1024
 			WorldMapFrame.minimizedHeight = 740
@@ -66,6 +66,7 @@
 			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
 			WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
 		end
+
 		-- Set built-in map opacity (right-click title bar)
 		WorldMapFrame_SetOpacity(0)
 		WorldMapFrame_SaveOpacity()
