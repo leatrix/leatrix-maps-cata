@@ -46,7 +46,7 @@
 		-- Show quest objectives on map
 		SetCVar("questPOI", "1")
 
-		-- Hide checkboxes (Large map support) (DoNotUseThisForNow)
+		-- Hide checkboxes
 		WorldMapTrackQuest:ClearAllPoints()
 		WorldMapTrackQuest.SetPoint = function() return end
 		WorldMapQuestShowObjectives:ClearAllPoints()
@@ -58,27 +58,6 @@
 			WorldMapFrame.minimizedHeight = 740
 			WorldMapFrame:SynchronizeDisplayState()
 			WorldMapFrame:OnFrameSizeChanged()
-		end
-
-		-- Large map support
-		if DoNotUseThisForNow then
-			local LeaMapsPoiScale = 0.7
-
-			-- Set POI scale for quest icons
-			if LeaMapsLC["UseDefaultMap"] == "Off" then
-				local function questPinScale(pin)
-					pin:SetSize(50 * LeaMapsPoiScale, 50 * LeaMapsPoiScale)
-					pin.Texture:SetScale(LeaMapsPoiScale)
-					pin.PushedTexture:SetScale(LeaMapsPoiScale)
-					pin.Number:SetScale(LeaMapsPoiScale)
-					pin.Highlight:SetScale(LeaMapsPoiScale)
-				end
-
-				hooksecurefunc(QuestPinMixin, "OnAcquired", questPinScale)
-				for pin in WorldMapFrame:EnumeratePinsByTemplate("QuestPinTemplate") do
-					pin.OnAcquired = questPinScale
-				end
-			end
 		end
 
 		-- Prevent the map from being maximised (except with default map)
@@ -2084,12 +2063,6 @@
 								local pin = self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
 								pin.Texture:SetRotation(0)
 								pin.HighlightTexture:SetRotation(0)
-								if LeaMapsLC["UseDefaultMap"] == "Off" then
-									if DoNotUseThisForNow then
-										pin.Texture:SetScale(LeaMapsPoiScale)
-										pin.HighlightTexture:SetScale(LeaMapsPoiScale)
-									end
-								end
 
 								-- Override travel textures
 								if pinInfo[1] == "TravelA" then
