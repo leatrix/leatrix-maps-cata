@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.157 (12th October 2023)
+	-- 	Leatrix Maps 3.0.158.alpha.1 (13th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.157"
+	LeaMapsLC["AddonVer"] = "3.0.158.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -81,42 +81,23 @@
 			end
 		end
 
-		-- Patch 3.4.3
-		if LeaMapsLC.NewPatch then
-			-- Prevent the map from being maximised (except with default map)
-			if LeaMapsLC["UseDefaultMap"] == "Off" then
-				SetCVar("miniWorldMap", 1)
-				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
-				WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
-			end
-			-- Set built-in map opacity (right-click title bar)
-			WorldMapFrame_SetOpacity(0)
-			WorldMapFrame_SaveOpacity()
-			SetCVar("worldMapOpacity", 0)
-			-- Unlock map frame
-			WorldMapTitleDropDown_ToggleLock()
-			-- Remove click from title bar (required for moving map and setting opacity)
-			WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
-			MiniWorldMapTitle:Hide()
+		-- Prevent the map from being maximised (except with default map)
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			SetCVar("miniWorldMap", 1)
+			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
+			WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
 		end
+		-- Set built-in map opacity (right-click title bar)
+		WorldMapFrame_SetOpacity(0)
+		WorldMapFrame_SaveOpacity()
+		SetCVar("worldMapOpacity", 0)
 
-		-- Replace map border textures
-		if not LeaMapsLC.NewPatch then
-			local layout = {"Top", "Middle", "Bottom"}
-			for i = 1, select('#', WorldMapFrame.BorderFrame:GetRegions()) do
-				local region = select(i, WorldMapFrame.BorderFrame:GetRegions())
-				if region.GetTexture then
-					for k = 1, 3 do
-						for j = 1, 4 do
-							if region:GetTexture() == "Interface\\WorldMap\\UI-WorldMap-" .. layout[k] .. j then
-								region:SetTexture("Interface\\AddOns\\Leatrix_Maps\\Leatrix_Maps_Frame.blp")
-								region:SetTexCoord(j * 0.25 - 0.25, j * 0.25, k * 0.25 - 0.25, k * 0.25)
-							end
-						end
-					end
-				end
-			end
-		end
+		-- Unlock map frame
+		WorldMapTitleDropDown_ToggleLock()
+
+		-- Remove click from title bar (required for moving map and setting opacity)
+		WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
+		MiniWorldMapTitle:Hide()
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
@@ -161,18 +142,10 @@
 			local outerFrame = CreateFrame("FRAME", nil, WorldMapFrame)
 			outerFrame:SetSize(360, 20)
 
-			if LeaMapsLC.NewPatch then
-				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
-					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 16, -24)
-				else
-					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
-				end
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
+				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 16, -24)
 			else
-				if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
-					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 10, -50)
-				else
-					outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
-				end
+				outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
 			end
 
 			-- Create No zones available dropdown menu
@@ -1270,59 +1243,55 @@
 
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
 
-			if LeaMapsLC["NoMapBorder"] == "On" then
-
-				-- Reposition Krowi's World Map Buttons if installed
-				if LibStub("Krowi_WorldMapButtons-1.4", true) then
-					local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
-					if lib and lib.SetOffsets then
-						lib:SetOffsets(40, 0)
-					end
+			-- Reposition Krowi's World Map Buttons if installed
+			if LibStub("Krowi_WorldMapButtons-1.4", true) then
+				local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
+				if lib and lib.SetOffsets then
+					lib:SetOffsets(40, 0)
 				end
-
-				-- Hide border frame
-				MiniBorderLeft:Hide()
-				MiniBorderRight:Hide()
-
-				-- Hide maximise and minimise buttons
-				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
-				hooksecurefunc(WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton, "Show", function()
-					WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
-				end)
-
-				-- Move close button inside scroll container
-				WorldMapFrameCloseButton:ClearAllPoints()
-				WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame.ScrollContainer, "TOPRIGHT", 0, 0)
-				WorldMapFrameCloseButton:SetFrameLevel(5000)
-				WorldMapFrameCloseButton.SetPoint = function() return end
-
-				-- Function to set world map clickable area
-				local function SetBorderClickInset()
-					if LeaMapsLC["UnlockMapFrame"] == "On" then
-						-- Map is unlocked so increase clickable area around map
-						WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
-					else
-						-- Map is locked so remove clickable area around map
-						WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
-					end
-				end
-
-				-- Set world map clickable area when unlock map frame option is clicked and on startup
-				LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
-				SetBorderClickInset()
-
-				-- Create black border around map
-				local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
-				border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-				border:SetPoint("TOPLEFT", -5, 5)
-				border:SetPoint("BOTTOMRIGHT", 5, -5)
-				border:SetVertexColor(0, 0, 0, 0.5)
-
-				-- Move scale handle
-				LeaMapsLC.scaleHandle:ClearAllPoints()
-				LeaMapsLC.scaleHandle:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -10, 28)
-
 			end
+
+			-- Hide border frame
+			MiniBorderLeft:Hide()
+			MiniBorderRight:Hide()
+
+			-- Hide maximise and minimise buttons
+			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+			hooksecurefunc(WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton, "Show", function()
+				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+			end)
+
+			-- Move close button inside scroll container
+			WorldMapFrameCloseButton:ClearAllPoints()
+			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame.ScrollContainer, "TOPRIGHT", 0, 0)
+			WorldMapFrameCloseButton:SetFrameLevel(5000)
+			WorldMapFrameCloseButton.SetPoint = function() return end
+
+			-- Function to set world map clickable area
+			local function SetBorderClickInset()
+				if LeaMapsLC["UnlockMapFrame"] == "On" then
+					-- Map is unlocked so increase clickable area around map
+					WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
+				else
+					-- Map is locked so remove clickable area around map
+					WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
+				end
+			end
+
+			-- Set world map clickable area when unlock map frame option is clicked and on startup
+			LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
+			SetBorderClickInset()
+
+			-- Create black border around map
+			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
+			border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
+			border:SetPoint("TOPLEFT", -5, 5)
+			border:SetPoint("BOTTOMRIGHT", 5, -5)
+			border:SetVertexColor(0, 0, 0, 0.5)
+
+			-- Move scale handle
+			LeaMapsLC.scaleHandle:ClearAllPoints()
+			LeaMapsLC.scaleHandle:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -10, 28)
 
 		end
 
@@ -1598,27 +1567,10 @@
 		if LeaMapsLC["ShowCoords"] == "On" then
 
 			-- Modify Track Quest and Quest Objectives checkboxes to make room for coordinates
-			if LeaMapsLC.NewPatch then
-				WorldMapTrackQuestText:SetText("")
-				WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
-				WorldMapQuestShowObjectivesText:SetText("")
-				WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
-				if LeaMapsLC["NoMapBorder"] == "On" then
-					--WorldMapTrackQuest:ClearAllPoints()
-					--WorldMapTrackQuest.SetPoint = function() return end
-					-- Large map Support (DoNotUseThisForNow)
-					--WorldMapQuestShowObjectives:ClearAllPoints()
-					--WorldMapQuestShowObjectives.SetPoint = function() return end
-					--WorldMapQuestShowObjectives:ClearAllPoints()
-					--WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 20)
-					--WorldMapQuestShowObjectives:SetFrameLevel(5000)
-				else
-					--WorldMapTrackQuest:ClearAllPoints()
-					--WorldMapTrackQuest.SetPoint = function() return end
-					--WorldMapQuestShowObjectives:ClearAllPoints()
-					--WorldMapQuestShowObjectives:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", 20, 4)
-				end
-			end
+			WorldMapTrackQuestText:SetText("")
+			WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
+			WorldMapQuestShowObjectivesText:SetText("")
+			WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 
 			-- Create cursor coordinates frame
 			local cCursor = CreateFrame("Frame", nil, WorldMapFrame)
@@ -1672,8 +1624,8 @@
 				cPlayerTime = cPlayerTime + elapsed
 			end)
 
-			-- If remove map border is enabled, create background frame and move coordinates into it
-			if LeaMapsLC["NoMapBorder"] == "On" and LeaMapsLC["UseDefaultMap"] == "Off" then
+			-- Create background frame and move coordinates into it
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
 
 				-- Create background frame
 				local cFrame = CreateFrame("FRAME", nil, WorldMapFrame.ScrollContainer)
@@ -2156,11 +2108,7 @@
 				end
 			end
 
-			if LeaMapsLC.NewPatch then
-				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DEBUG")
-			else
-				_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DUNGEON_ENTRANCE")
-			end
+			_G.LeaMapsGlobalPinMixin = BaseMapPoiPinMixin:CreateSubPin("PIN_FRAME_LEVEL_DEBUG")
 
 			function LeaMapsGlobalPinMixin:OnAcquired(myInfo)
 				BaseMapPoiPinMixin.OnAcquired(self, myInfo)
@@ -2657,7 +2605,6 @@
 			MaximizeUIPanel(WorldMapFrame)
 			WorldMapFrame:SetScale(1)
 			-- Lock some incompatible options
-			LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
 			LeaMapsLC:LockItem(LeaMapsCB["UnlockMapFrame"], true)
 			LeaMapsLC:LockItem(LeaMapsCB["StickyMapFrame"], true)
 			-- Hide default map maximised right-click to zoom out text
@@ -3198,8 +3145,7 @@
 
 	-- Set reload button status
 	function LeaMapsLC:ReloadCheck()
-		if	(LeaMapsLC["NoMapBorder"] ~= LeaMapsDB["NoMapBorder"])				-- Remove map border
-		or	(LeaMapsLC["ShowZoneMenu"] ~= LeaMapsDB["ShowZoneMenu"])			-- Show zone menu
+		if	(LeaMapsLC["ShowZoneMenu"] ~= LeaMapsDB["ShowZoneMenu"])			-- Show zone menu
 		or	(LeaMapsLC["UseClassIcons"] ~= LeaMapsDB["UseClassIcons"])			-- Use class colors
 		or	(LeaMapsLC["StickyMapFrame"] ~= LeaMapsDB["StickyMapFrame"])		-- Sticky map frame
 		or	(LeaMapsLC["AutoChangeZones"] ~= LeaMapsDB["AutoChangeZones"])		-- Auto change zones
@@ -3538,7 +3484,6 @@
 				wipe(LeaMapsDB)
 
 				-- Mechanics
-				LeaMapsDB["NoMapBorder"] = "On"
 				LeaMapsDB["ShowZoneMenu"] = "On"
 				LeaMapsDB["RememberZoom"] = "On"
 				LeaMapsDB["IncreaseZoom"] = "On"
@@ -3652,7 +3597,6 @@
 		if event == "ADDON_LOADED" and arg1 == "Leatrix_Maps" then
 
 			-- Mechanics
-			LeaMapsLC:LoadVarChk("NoMapBorder", "On")					-- Remove map border
 			LeaMapsLC:LoadVarChk("ShowZoneMenu", "On")					-- Show zone menu
 			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
 			LeaMapsLC:LoadVarChk("IncreaseZoom", "Off")					-- Increase zoom level
@@ -3719,13 +3663,6 @@
 
 			LeaMapsLC:SetDim()
 
-			-- Large map support
-			if not DoNotUsethisForNow then
-				LeaMapsLC["NoMapBorder"] = "On"
-				LeaMapsLC:LockItem(LeaMapsCB["NoMapBorder"], true)
-				LeaMapsCB["NoMapBorder"].tiptext = LeaMapsCB["NoMapBorder"].tiptext .. "|n|n|cff00AAFF" .. "This option can no longer be turned off."
-			end
-
 			-- Set initial minimum button position
 			if not LeaMapsDB["minimapPos"] then
 				LeaMapsDB["minimapPos"] = 204
@@ -3738,7 +3675,6 @@
 
 		elseif event == "PLAYER_LOGOUT" and not LeaMapsLC["NoSaveSettings"] then
 			-- Mechanics
-			LeaMapsDB["NoMapBorder"] = LeaMapsLC["NoMapBorder"]
 			LeaMapsDB["ShowZoneMenu"] = LeaMapsLC["ShowZoneMenu"]
 			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
 			LeaMapsDB["IncreaseZoom"] = LeaMapsLC["IncreaseZoom"]
@@ -3896,18 +3832,17 @@
 
 	-- Add content
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
-	LeaMapsLC:MakeCB(PageF, "NoMapBorder", "Remove map border", 16, -92, true, "If checked, the map border will be removed.")
-	LeaMapsLC:MakeCB(PageF, "ShowZoneMenu", "Show zone menus", 16, -112, true, "If checked, zone and continent dropdown menus will be shown in the map frame.")
-	LeaMapsLC:MakeCB(PageF, "SetMapOpacity", "Set map opacity", 16, -132, false, "If checked, you will be able to set the opacity of the map.")
+	LeaMapsLC:MakeCB(PageF, "ShowZoneMenu", "Show zone menus", 16, -92, true, "If checked, zone and continent dropdown menus will be shown in the map frame.")
+	LeaMapsLC:MakeCB(PageF, "SetMapOpacity", "Set map opacity", 16, -112, false, "If checked, you will be able to set the opacity of the map.")
 
-	LeaMapsLC:MakeTx(PageF, "Icons", 16, -172)
-	LeaMapsLC:MakeCB(PageF, "EnlargePlayerArrow", "Enlarge player arrow", 16, -192, false, "If checked, you will be able to enlarge the player arrow.")
-	LeaMapsLC:MakeCB(PageF, "UseClassIcons", "Class colored icons", 16, -212, true, "If checked, group icons will use a modern, class-colored design.")
+	LeaMapsLC:MakeTx(PageF, "Icons", 16, -152)
+	LeaMapsLC:MakeCB(PageF, "EnlargePlayerArrow", "Enlarge player arrow", 16, -172, false, "If checked, you will be able to enlarge the player arrow.")
+	LeaMapsLC:MakeCB(PageF, "UseClassIcons", "Class colored icons", 16, -192, true, "If checked, group icons will use a modern, class-colored design.")
 
-	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -252)
-	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -272, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -292, false, "If checked, you will be able to zoom further into the world map.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -312, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
+	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -232)
+	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -252, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
+	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -272, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -292, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale the map by dragging the scale handle in the bottom-right corner.|n|nYou will be able to move the map by dragging any border.|n|nYou can always drag the top border to move the map regardless of this setting.")
@@ -3941,11 +3876,7 @@
 	resetMapPosBtn:HookScript("OnClick", function()
 		if not WorldMapFrame:IsMaximized() then
 			-- Reset map position
-			if LeaMapsLC["NoMapBorder"] == "On" then
-				LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "CENTER", "CENTER", 0, 20
-			else
-				LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "TOPLEFT", "TOPLEFT", 16, -116
-			end
+			LeaMapsLC["MapPosA"], LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = "CENTER", "CENTER", 0, 20
 			WorldMapFrame:ClearAllPoints()
 			WorldMapFrame:SetPoint(LeaMapsLC["MapPosA"], UIParent, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"])
 			WorldMapTitleButton_OnDragStop()

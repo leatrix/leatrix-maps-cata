@@ -1,3 +1,7 @@
+3.0.158.alpha.1 - 13th October 2023
+- The 'Remove map border' option has been removed.
+- Removed 3.4.3 transitional code.
+
 3.0.157 - 12th October 2023
 - The world map frame is now sized as it was prior to game patch 3.4.3.  After installing this update, the map will appear larger at first.  You can resize it by enabling 'Unlock map frame' or you can click the 'Reset map layout' button in the Leatrix Maps panel.  The size change does not apply if 'Use default map' is enabled.
 - You can no longer disable 'Remove map border'.  It's now always enabled.  This does not apply if 'Use default map' is enabled.
