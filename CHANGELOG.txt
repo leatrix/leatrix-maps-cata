@@ -1,5 +1,6 @@
 3.0.158.alpha.1 - 13th October 2023
 - The 'Remove map border' option has been removed.
+- The 'Show coordinates' option no longer requires a UI reload once again.
 - Removed 3.4.3 transitional code.
 
 3.0.157 - 12th October 2023

@@ -1564,7 +1564,7 @@
 		-- Show coordinates (must be after remove map border)
 		----------------------------------------------------------------------
 
-		if LeaMapsLC["ShowCoords"] == "On" then
+		do
 
 			-- Modify Track Quest and Quest Objectives checkboxes to make room for coordinates
 			WorldMapTrackQuestText:SetText("")
@@ -1624,6 +1624,20 @@
 				cPlayerTime = cPlayerTime + elapsed
 			end)
 
+			-- Function to show or hide coordinates
+			local function SetupCoords()
+				if LeaMapsLC["ShowCoords"] == "On" then
+					-- Show coordinaes
+					cCursor:Show(); cPlayer:Show()
+				else
+					cCursor:Hide(); cPlayer:Hide()
+				end
+			end
+
+			-- Set coordinates when option is clicked and on startp
+			LeaMapsCB["ShowCoords"]:HookScript("OnClick", SetupCoords)
+			SetupCoords()
+
 			-- Create background frame and move coordinates into it
 			if LeaMapsLC["UseDefaultMap"] == "Off" then
 
@@ -1645,6 +1659,19 @@
 				cPlayer:SetParent(cFrame)
 				cPlayer:ClearAllPoints()
 				cPlayer:SetPoint("BOTTOMRIGHT", -82, 0)
+
+				-- Function to toggle background frame
+				local function SetCoordsBackground()
+					if LeaMapsLC["ShowCoords"] == "On" then
+						cFrame:Show()
+					else
+						cFrame:Hide()
+					end
+				end
+
+				-- Set background frame when option is clicked and startup
+				LeaMapsCB["ShowCoords"]:HookScript("OnClick", SetCoordsBackground)
+				SetCoordsBackground()
 
 			end
 
@@ -3151,7 +3178,6 @@
 		or	(LeaMapsLC["AutoChangeZones"] ~= LeaMapsDB["AutoChangeZones"])		-- Auto change zones
 		or	(LeaMapsLC["UseDefaultMap"] ~= LeaMapsDB["UseDefaultMap"])			-- Use default map
 		or	(LeaMapsLC["RevealMap"] ~= LeaMapsDB["RevealMap"])					-- Show unexplored areas
-		or	(LeaMapsLC["ShowCoords"] ~= LeaMapsDB["ShowCoords"])				-- Show coordinates
 		or	(LeaMapsLC["HideTownCityIcons"] ~= LeaMapsDB["HideTownCityIcons"])	-- Hide town and city icons
 		or	(LeaMapsLC["EnhanceBattleMap"] ~= LeaMapsDB["EnhanceBattleMap"])	-- Enhance battlefield map
 		then
@@ -3854,7 +3880,7 @@
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -212, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
 	LeaMapsLC:MakeCB(PageF, "ShowPointsOfInterest", "Show points of interest", 225, -232, false, "If checked, points of interest will be shown.")
 	LeaMapsLC:MakeCB(PageF, "ShowZoneLevels", "Show zone levels", 225, -252, false, "If checked, zone, dungeon and fishing skill levels will be shown.")
-	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -272, true, "If checked, coordinates will be shown.")
+	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -272, false, "If checked, coordinates will be shown.")
 	LeaMapsLC:MakeCB(PageF, "HideTownCityIcons", "Hide town and city icons", 225, -292, true, "If checked, town and city icons will not be shown on the continent maps.")
 
 	LeaMapsLC:MakeTx(PageF, "More", 225, -332)
