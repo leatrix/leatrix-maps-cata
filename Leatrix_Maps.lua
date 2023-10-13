@@ -46,28 +46,21 @@
 		-- Show quest objectives on map
 		SetCVar("questPOI", "1")
 
-		-- Hide checkboxes
+		-- Hide track quest and show objectives checkboxes
 		WorldMapTrackQuest:ClearAllPoints()
 		WorldMapTrackQuest.SetPoint = function() return end
 		WorldMapQuestShowObjectives:ClearAllPoints()
 		WorldMapQuestShowObjectives.SetPoint = function() return end
 
-		-- Make map bigger
+		-- Make the map bigger
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			SetCVar("miniWorldMap", 1)
 			WorldMapFrame.minimizedWidth = 1024
 			WorldMapFrame.minimizedHeight = 740
-			WorldMapFrame:SynchronizeDisplayState()
 			WorldMapFrame:OnFrameSizeChanged()
 		end
 
-		-- Prevent the map from being maximised (except with default map)
-		if LeaMapsLC["UseDefaultMap"] == "Off" then
-			SetCVar("miniWorldMap", 1)
-			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:SetScript("OnClick", function() end)
-			WorldMapFrame.MaximizeMinimizeFrame.MinimizeButton:SetScript("OnClick", function() end)
-		end
-
-		-- Set built-in map opacity (right-click title bar)
+		-- Disable built-in map opacity
 		WorldMapFrame_SetOpacity(0)
 		WorldMapFrame_SaveOpacity()
 		SetCVar("worldMapOpacity", 0)
@@ -103,6 +96,60 @@
 			WorldMapFrame:SetFrameStrata("MEDIUM")
 			WorldMapFrame.BorderFrame:SetFrameStrata("MEDIUM")
 			WorldMapFrame.BorderFrame:SetFrameLevel(1)
+		end
+
+		----------------------------------------------------------------------
+		-- Remove map border
+		----------------------------------------------------------------------
+
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+
+			-- Reposition Krowi's World Map Buttons if installed
+			if LibStub("Krowi_WorldMapButtons-1.4", true) then
+				local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
+				if lib and lib.SetOffsets then
+					lib:SetOffsets(40, 0)
+				end
+			end
+
+			-- Hide border frame
+			MiniBorderLeft:Hide()
+			MiniBorderRight:Hide()
+
+			-- Hide maximise and minimise buttons
+			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+			hooksecurefunc(WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton, "Show", function()
+				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
+			end)
+
+			-- Move close button inside scroll container
+			WorldMapFrameCloseButton:ClearAllPoints()
+			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame.ScrollContainer, "TOPRIGHT", 0, 0)
+			WorldMapFrameCloseButton:SetFrameLevel(5000)
+			WorldMapFrameCloseButton.SetPoint = function() return end
+
+			-- Function to set world map clickable area
+			local function SetBorderClickInset()
+				if LeaMapsLC["UnlockMapFrame"] == "On" then
+					-- Map is unlocked so increase clickable area around map
+					WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
+				else
+					-- Map is locked so remove clickable area around map
+					WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
+				end
+			end
+
+			-- Set world map clickable area when unlock map frame option is clicked and on startup
+			LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
+			SetBorderClickInset()
+
+			-- Create black border around map
+			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
+			border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
+			border:SetPoint("TOPLEFT", -5, 5)
+			border:SetPoint("BOTTOMRIGHT", 5, -5)
+			border:SetVertexColor(0, 0, 0, 0.5)
+
 		end
 
 		----------------------------------------------------------------------
@@ -1146,7 +1193,8 @@
 			scaleHandle:SetWidth(20)
 			scaleHandle:SetHeight(20)
 			scaleHandle:SetAlpha(0.5)
-			scaleHandle:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", 0, 0)
+			scaleHandle:ClearAllPoints()
+			scaleHandle:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -10, 28)
 			scaleHandle:SetFrameStrata(WorldMapFrame:GetFrameStrata())
 			scaleHandle:SetFrameLevel(WorldMapFrame:GetFrameLevel() + 15)
 
@@ -1155,9 +1203,6 @@
 			scaleHandle.t:SetTexture([[Interface\Buttons\UI-AutoCastableOverlay]])
 			scaleHandle.t:SetTexCoord(0.619, 0.760, 0.612, 0.762)
 			scaleHandle.t:SetDesaturated(true)
-
-			-- Give scale handle file level scope (it's used in remove map border)
-			LeaMapsLC.scaleHandle = scaleHandle
 
 			-- Create scale frame
 			local scaleMouse = CreateFrame("Frame", nil, WorldMapFrame)
@@ -1214,64 +1259,6 @@
 			-- Set scale handle when option is clicked and on startup
 			LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetScaleHandle)
 			SetScaleHandle()
-
-		end
-
-		----------------------------------------------------------------------
-		-- Remove map border (must be after show scale and before coordinates)
-		----------------------------------------------------------------------
-
-		if LeaMapsLC["UseDefaultMap"] == "Off" then
-
-			-- Reposition Krowi's World Map Buttons if installed
-			if LibStub("Krowi_WorldMapButtons-1.4", true) then
-				local lib = LibStub:GetLibrary("Krowi_WorldMapButtons-1.4")
-				if lib and lib.SetOffsets then
-					lib:SetOffsets(40, 0)
-				end
-			end
-
-			-- Hide border frame
-			MiniBorderLeft:Hide()
-			MiniBorderRight:Hide()
-
-			-- Hide maximise and minimise buttons
-			WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
-			hooksecurefunc(WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton, "Show", function()
-				WorldMapFrame.MaximizeMinimizeFrame.MaximizeButton:Hide()
-			end)
-
-			-- Move close button inside scroll container
-			WorldMapFrameCloseButton:ClearAllPoints()
-			WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapFrame.ScrollContainer, "TOPRIGHT", 0, 0)
-			WorldMapFrameCloseButton:SetFrameLevel(5000)
-			WorldMapFrameCloseButton.SetPoint = function() return end
-
-			-- Function to set world map clickable area
-			local function SetBorderClickInset()
-				if LeaMapsLC["UnlockMapFrame"] == "On" then
-					-- Map is unlocked so increase clickable area around map
-					WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
-				else
-					-- Map is locked so remove clickable area around map
-					WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
-				end
-			end
-
-			-- Set world map clickable area when unlock map frame option is clicked and on startup
-			LeaMapsCB["UnlockMapFrame"]:HookScript("OnClick", SetBorderClickInset)
-			SetBorderClickInset()
-
-			-- Create black border around map
-			local border = WorldMapFrame.ScrollContainer:CreateTexture(nil, "BACKGROUND")
-			border:SetTexture("Interface\\ChatFrame\\ChatFrameBackground")
-			border:SetPoint("TOPLEFT", -5, 5)
-			border:SetPoint("BOTTOMRIGHT", 5, -5)
-			border:SetVertexColor(0, 0, 0, 0.5)
-
-			-- Move scale handle
-			LeaMapsLC.scaleHandle:ClearAllPoints()
-			LeaMapsLC.scaleHandle:SetPoint("BOTTOMRIGHT", WorldMapFrame, "BOTTOMRIGHT", -10, 28)
 
 		end
 
@@ -1541,7 +1528,7 @@
 		end
 
 		----------------------------------------------------------------------
-		-- Show coordinates (must be after remove map border)
+		-- Show coordinates
 		----------------------------------------------------------------------
 
 		do
