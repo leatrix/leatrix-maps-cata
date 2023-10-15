@@ -1,3 +1,6 @@
+3.0.159.alpha.1 - 14th October 2023
+- Updates for game version 3.4.3.
+
 3.0.158 - 14th October 2023
 - Added new option 'Show objectives'.  If enabled, quest objectives will be shown on the map.  It's enabled by default.
 - The 'Remove map border' option has been removed.
