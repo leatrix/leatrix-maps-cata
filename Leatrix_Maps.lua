@@ -43,11 +43,17 @@
 	-- Main function
 	function LeaMapsLC:MainFunc()
 
-		-- Hide track quest and show objectives checkboxes
+		-- Hide Track Quest checkbox (it's not needed)
 		WorldMapTrackQuest:ClearAllPoints()
 		WorldMapTrackQuest.SetPoint = function() return end
+		WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
+		WorldMapTrackQuestText:SetText("")
+
+		-- Hide Quest Objectives checkbox (it's in the configuration panel)
+		WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 		WorldMapQuestShowObjectives:ClearAllPoints()
 		WorldMapQuestShowObjectives.SetPoint = function() return end
+		WorldMapQuestShowObjectivesText:SetText("")
 
 		-- Make the map bigger
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
@@ -575,7 +581,7 @@
 			end)
 
 			----------------------------------------------------------------------
-			-- Battlefield map maximum zoom
+			-- Battlefield map: Maximum zoom
 			----------------------------------------------------------------------
 
 			-- Function to set maximum zoom level
@@ -626,7 +632,7 @@
 			end)
 
 			----------------------------------------------------------------------
-			-- Resize battlefield map
+			-- Battlefield map: Resize map
 			----------------------------------------------------------------------
 
 			do
@@ -729,7 +735,7 @@
 			end
 
 			----------------------------------------------------------------------
-			-- Center map on player
+			-- Battlefield map: Center map on player
 			----------------------------------------------------------------------
 
 			do
@@ -809,7 +815,7 @@
 			end
 
 			----------------------------------------------------------------------
-			-- Map opacity
+			-- Battlefield map: Map opacity
 			----------------------------------------------------------------------
 
 			local function DoMapOpacity()
@@ -823,7 +829,7 @@
 			DoMapOpacity()
 
 			----------------------------------------------------------------------
-			-- Player arrow
+			-- Battlefield map: Player arrow
 			----------------------------------------------------------------------
 
 			-- Function to set player arrow size
@@ -841,7 +847,7 @@
 			SetPlayerArrow()
 
 			----------------------------------------------------------------------
-			-- Group icons
+			-- Battlefield map: Group icons
 			----------------------------------------------------------------------
 
 			-- Function to set group icons
@@ -889,7 +895,7 @@
 			FixGroupPin(true)
 
 			----------------------------------------------------------------------
-			-- Rest of configuration panel
+			-- Battlefield map: Rest of configuration panel
 			----------------------------------------------------------------------
 
 			-- Back to Main Menu button click
@@ -1058,7 +1064,7 @@
 		end
 
 		----------------------------------------------------------------------
-		-- Use class icons
+		-- Class colored icons
 		----------------------------------------------------------------------
 
 		if LeaMapsLC["UseClassIcons"] == "On" then
@@ -1140,7 +1146,7 @@
 		end
 
 		----------------------------------------------------------------------
-		-- Lock map frame (must be before remove map border)
+		-- Unlock map frame
 		----------------------------------------------------------------------
 
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
@@ -1544,16 +1550,10 @@
 		end
 
 		----------------------------------------------------------------------
-		-- Show coordinates
+		-- Show coordinates (no reload required)
 		----------------------------------------------------------------------
 
 		do
-
-			-- Modify Track Quest and Quest Objectives checkboxes to make room for coordinates
-			WorldMapTrackQuestText:SetText("")
-			WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
-			WorldMapQuestShowObjectivesText:SetText("")
-			WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 
 			-- Create cursor coordinates frame
 			local cCursor = CreateFrame("Frame", nil, WorldMapFrame)
