@@ -72,8 +72,10 @@
 		WorldMapTitleDropDown_ToggleLock()
 
 		-- Remove click from title bar (required for moving map and setting opacity)
-		WorldMapTitleButton:SetScript("OnClick", function() end) -- Cannot be hidden due to unlock map
-		MiniWorldMapTitle:Hide()
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapTitleButton:EnableMouse(false)
+			MiniWorldMapTitle:Hide()
+		end
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
@@ -135,7 +137,7 @@
 			local function SetBorderClickInset()
 				if LeaMapsLC["UnlockMapFrame"] == "On" then
 					-- Map is unlocked so increase clickable area around map
-					WorldMapFrame:SetHitRectInsets(-20, -20, 38, 0)
+					WorldMapFrame:SetHitRectInsets(-20, -20, 20, 0)
 				else
 					-- Map is locked so remove clickable area around map
 					WorldMapFrame:SetHitRectInsets(6, 6, 65, 25)
