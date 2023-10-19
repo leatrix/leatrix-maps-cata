@@ -2,6 +2,7 @@
 - Updates for game version 3.4.3.
 - Fixed two issues with 'Set map opacity' (opacity not applied on login and opacity incorrectly applied to maximised map).
 - Fixed two issues with 'Use default map' (maximised map movable and possibly uninteractive on login).
+- If 'Use default map' is enabled, the map will no longer close when other system windows are opened.
 
 3.0.159 - 16th October 2023
 - Updates for game version 3.4.3.

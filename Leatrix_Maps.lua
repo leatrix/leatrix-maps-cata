@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.160.alpha.1 (16th October 2023)
+	-- 	Leatrix Maps 3.0.160.alpha.2 (16th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.160.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.160.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -42,6 +42,11 @@
 
 	-- Main function
 	function LeaMapsLC:MainFunc()
+
+		-- Replace map toggle function
+		WorldMapFrame.HandleUserActionToggleSelf = function()
+			if WorldMapFrame:IsShown() then WorldMapFrame:Hide() else WorldMapFrame:Show() end
+		end
 
 		-- Hide Track Quest checkbox (it's not needed)
 		WorldMapTrackQuest:ClearAllPoints()
@@ -1821,9 +1826,6 @@
 			WorldMapFrame.ScrollContainer:SetIgnoreParentScale(false)
 			WorldMapFrame.BlackoutFrame:Hide()
 			WorldMapFrame.IsMaximized = function() return false end
-			WorldMapFrame.HandleUserActionToggleSelf = function()
-				if WorldMapFrame:IsShown() then WorldMapFrame:Hide() else WorldMapFrame:Show() end
-			end
 
 			-- Handle open and close the map for sticky map frame
 			if LeaMapsLC["StickyMapFrame"] == "Off" then
