@@ -1,3 +1,6 @@
+3.0.160.alpha.1 - 16th October 2023
+- Updates for game version 3.4.3.
+
 3.0.159 - 16th October 2023
 - Updates for game version 3.4.3.
 

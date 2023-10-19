@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.159 (16th October 2023)
+	-- 	Leatrix Maps 3.0.160.alpha.1 (16th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.159"
+	LeaMapsLC["AddonVer"] = "3.0.160.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -71,11 +71,9 @@
 		-- Unlock map frame
 		WorldMapTitleDropDown_ToggleLock()
 
-		-- Remove click from title bar (required for moving map and setting opacity)
-		if LeaMapsLC["UseDefaultMap"] == "Off" then
-			WorldMapTitleButton:EnableMouse(false)
-			MiniWorldMapTitle:Hide()
-		end
+		-- Remove right-click from title bar
+		WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
+		MiniWorldMapTitle:Hide()
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
@@ -86,11 +84,21 @@
 		local playerFaction = UnitFactionGroup("player")
 
 		-- Hide world map dropdown menus to prevent GuildControlSetRank() taint
-		WorldMapZoneDropDown:Hide()
-		WorldMapContinentDropDown:Hide()
+		local menuTempFrame = CreateFrame("FRAME")
+		menuTempFrame:Hide()
+		WorldMapContinentDropDown:SetParent(menuTempFrame)
+		WorldMapZoneDropDown:SetParent(menuTempFrame)
+		WorldMapZoomOutButton:SetParent(menuTempFrame)
+		WorldMapZoneMinimapDropDown:SetParent(menuTempFrame)
 
-		-- Hide zone map dropdown menu as it's shown in the main panel
-		WorldMapZoneMinimapDropDown:Hide()
+		-- Hide world map title button (used for movement) if default maximised map is showing
+		hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
+			if LeaMapsLC["UseDefaultMap"] == "On" and GetCVar("miniWorldMap") == "0" then
+				WorldMapTitleButton:Hide()
+			else
+				WorldMapTitleButton:Show()
+			end
+		end)
 
 		-- Hide right-click to zoom out button and message
 		WorldMapZoomOutButton:Hide()
@@ -439,8 +447,6 @@
 
 			-- Move dropdown menus if using default map
 			if LeaMapsLC["UseDefaultMap"] == "On" then
-				WorldMapContinentDropDown:ClearAllPoints()
-				WorldMapContinentDropDown.SetPoint = function() return end
 
 				hooksecurefunc(WorldMapFrame, "Minimize", function()
 					outerFrame:ClearAllPoints()
@@ -448,7 +454,6 @@
 				end)
 
 				hooksecurefunc(WorldMapFrame, "Maximize", function()
-					WorldMapContinentDropDown:Hide()
 					outerFrame:ClearAllPoints()
 					outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
 				end)
