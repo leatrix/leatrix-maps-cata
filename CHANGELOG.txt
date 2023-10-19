@@ -1,5 +1,7 @@
 3.0.160.alpha.1 - 16th October 2023
 - Updates for game version 3.4.3.
+- Fixed two issues with 'Set map opacity' which caused the map opacity to be incorrectly applied to the maximised map and for the map opacity to not be applied on login until the character started moving.
+- Fixed an issue with 'Use default map' which caused the maximised map to be movable.
 
 3.0.159 - 16th October 2023
 - Updates for game version 3.4.3.

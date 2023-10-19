@@ -1923,7 +1923,7 @@
 			local function SetMapOpacity()
 				LeaMapsCB["stationaryOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["stationaryOpacity"] * 100)
 				LeaMapsCB["movingOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["movingOpacity"] * 100)
-				if LeaMapsLC["SetMapOpacity"] == "On" then
+				if LeaMapsLC["SetMapOpacity"] == "On" and GetCVar("miniWorldMap") == "1" then
 					-- Set opacity level as frame fader only takes effect when player moves
 					if IsPlayerMoving() then
 						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
@@ -1944,6 +1944,26 @@
 			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
 			LeaMapsCB["SetMapOpacity"]:HookScript("OnClick", SetMapOpacity)
 			SetMapOpacity()
+
+			-- Set map opacity when options are changed and on startup
+			LeaMapsCB["stationaryOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
+			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
+			LeaMapsCB["SetMapOpacity"]:HookScript("OnClick", SetMapOpacity)
+			SetMapOpacity()
+
+			-- Set opacity when map size is switched
+			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
+				if LeaMapsLC["SetMapOpacity"] == "On" and GetCVar("miniWorldMap") == "1" then
+					if IsPlayerMoving() then
+						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+					else
+						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+					end
+					PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
+				else
+					PlayerMovementFrameFader.RemoveFrame(WorldMapFrame)
+				end
+			end)
 
 			-- Back to Main Menu button click
 			alphaFrame.b:HookScript("OnClick", function()
