@@ -48,6 +48,11 @@
 			if WorldMapFrame:IsShown() then WorldMapFrame:Hide() else WorldMapFrame:Show() end
 		end
 
+		-- Handle open and close the map for sticky map frame
+		if LeaMapsLC["UseDefaultMap"] == "On" or LeaMapsLC["StickyMapFrame"] == "Off" then
+			table.insert(UISpecialFrames, "WorldMapFrame")
+		end
+
 		-- Hide Track Quest checkbox (it's not needed)
 		WorldMapTrackQuest:ClearAllPoints()
 		WorldMapTrackQuest.SetPoint = function() return end
@@ -1826,11 +1831,6 @@
 			WorldMapFrame.ScrollContainer:SetIgnoreParentScale(false)
 			WorldMapFrame.BlackoutFrame:Hide()
 			WorldMapFrame.IsMaximized = function() return false end
-
-			-- Handle open and close the map for sticky map frame
-			if LeaMapsLC["StickyMapFrame"] == "Off" then
-				table.insert(UISpecialFrames, "WorldMapFrame")
-			end
 
 			-- Enable movement
 			WorldMapFrame:SetMovable(true)
