@@ -1,8 +1,8 @@
-3.0.160.alpha.1 - 16th October 2023
+3.0.160 - 19th October 2023
 - Updates for game version 3.4.3.
 - Fixed two issues with 'Set map opacity' (opacity not applied on login and opacity incorrectly applied to maximised map).
-- Fixed two issues with 'Use default map' (maximised map movable and possibly uninteractive on login).
-- If 'Use default map' is enabled, the map will no longer close when other system windows are opened.
+- Fixed two issues with 'Use default map' (maximised map was movable and possibly non-interactive on login).
+- For 'Use default map', the smaller map frame will no longer align with other system frames.
 
 3.0.159 - 16th October 2023
 - Updates for game version 3.4.3.
