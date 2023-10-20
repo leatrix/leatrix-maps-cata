@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.160 (19th October 2023)
+	-- 	Leatrix Maps 3.0.161.alpha.1 (20th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -9,10 +9,10 @@
 	_G.LeaMapsDB = _G.LeaMapsDB or {}
 
 	-- Create local tables
-	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList = {}, {}, {}, {}
+	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.160"
+	LeaMapsLC["AddonVer"] = "3.0.161.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -32,6 +32,9 @@
 			LeaMapsLC.NewPatch = true
 		end
 	end
+
+	-- Check for addons
+	if IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
 
 	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
@@ -470,8 +473,8 @@
 			end
 
 			-- ElvUI fixes
-			local function ElvUIFixes()
-				local E, S = unpack(ElvUI)
+			if LeaMapsLC.ElvUI then
+				local E, S = LeaMapsLC.ElvUI
 				local S = E:GetModule('Skins')
 				if E.private.skins.blizzard.enable and E.private.skins.blizzard.worldmap then
 					S:HandleDropDownBox(ekdd.dd); ekdd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
@@ -488,20 +491,6 @@
 					cond.btn:SetHitRectInsets(cond.btn:GetHitRectInsets() - 10, 0, 0, 0)
 					nodd.btn:SetHitRectInsets(nodd.btn:GetHitRectInsets() - 10, 0, 0, 0)
 				end
-			end
-
-			-- Run ElvUI fixes when ElvUI has loaded
-			if IsAddOnLoaded("ElvUI") then
-				ElvUIFixes()
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "ElvUI" then
-						ElvUIFixes()
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
 			end
 
 		end
@@ -1909,7 +1898,7 @@
 		-- Set map opacity
 		----------------------------------------------------------------------
 
-		do
+		if not LeaLockList["SetMapOpacity"] then
 
 			-- Create configuraton panel
 			local alphaFrame = LeaMapsLC:CreatePanel("Set map opacity", "alphaFrame")
@@ -2655,37 +2644,16 @@
 		-- Third party fixes
 		----------------------------------------------------------------------
 
-		do
-
-			-- Function to fix third party addons
-			local function thirdPartyFunc(thirdPartyAddOn)
-				if thirdPartyAddOn == "ElvUI" then
-					-- ElvUI: Fix map movement and scale
-					hooksecurefunc(WorldMapFrame, "Show", function()
-						if not WorldMapFrame:IsMouseEnabled() then
-							WorldMapFrame:EnableMouse(true)
-							if LeaMapsLC["UseDefaultMap"] == "Off" then
-								WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
-							end
-						end
-					end)
-				end
-			end
-
-			-- Run function when third party addon has loaded
-			if IsAddOnLoaded("ElvUI") then
-				thirdPartyFunc("ElvUI")
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "ElvUI" then
-						thirdPartyFunc("ElvUI")
-						waitFrame:UnregisterAllEvents()
+		-- ElvUI: Fix map movement and scale
+		if LeaMapsLC.ElvUI then
+			hooksecurefunc(WorldMapFrame, "Show", function()
+				if not WorldMapFrame:IsMouseEnabled() then
+					WorldMapFrame:EnableMouse(true)
+					if LeaMapsLC["UseDefaultMap"] == "Off" then
+						WorldMapFrame:SetScale(LeaMapsLC["MapScale"])
 					end
-				end)
-			end
-
+				end
+			end)
 		end
 
 		----------------------------------------------------------------------
@@ -3705,6 +3673,39 @@
 			-- Set initial minimum button position
 			if not LeaMapsDB["minimapPos"] then
 				LeaMapsDB["minimapPos"] = 204
+			end
+
+			-- Lock conflicting options
+			do
+
+				-- Function to disable and lock an option and add a note to the tooltip
+				local function Lock(option, reason, optmodule)
+					LeaLockList[option] = LeaMapsLC[option]
+					LeaMapsLC:LockItem(LeaMapsCB[option], true)
+					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "|n|n|cff00AAFF" .. reason
+					if optmodule then
+						LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. " " .. optmodule .. " " .. L["module"]
+					end
+					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "."
+					-- Remove hover from configuration button if there is one
+					local temp = {LeaMapsCB[option]:GetChildren()}
+					if temp and temp[1] and temp[1].t and temp[1].t:GetTexture() == "Interface\\WorldMap\\Gear_64.png" then
+						temp[1]:SetHighlightTexture(0)
+						temp[1]:SetScript("OnEnter", nil)
+					end
+				end
+
+				-- Disable items that conflict with ElvUI
+				if LeaMapsLC.ElvUI then
+					local E = LeaMapsLC.ElvUI
+					if E and E.private then
+						local reason = L["Cannot be used with ElvUI"]
+						if E.private.general.worldMap then
+							Lock("SetMapOpacity", reason, "Maps") -- Set map opacity
+						end
+						EnableAddOn("Leatrix_Maps")
+					end
+				end
 			end
 
 		elseif event == "PLAYER_ENTERING_WORLD" then

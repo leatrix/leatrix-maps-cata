@@ -1,3 +1,6 @@
+3.0.161.alpha.1 - 20th October 2023
+- The 'Set map opacity' option will now be locked out if ElvUI is installed with the maps module enabled.
+
 3.0.160 - 19th October 2023
 - Updates for game version 3.4.3.
 - Fixed two issues with 'Set map opacity' (opacity not applied on login and opacity incorrectly applied to maximised map).
