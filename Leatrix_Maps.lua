@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.161.alpha.2 (20th October 2023)
+	-- 	Leatrix Maps 3.0.161.alpha.3 (20th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.161.alpha.2"
+	LeaMapsLC["AddonVer"] = "3.0.161.alpha.3"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1936,12 +1936,24 @@
 			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
 			SetMapOpacity()
 
+			-- Disable map opacity when map is maximised
+			hooksecurefunc(WorldMapFrame, "Maximize", function()
+				PlayerMovementFrameFader.RemoveFrame(WorldMapFrame)
+			end)
+
+			-- Enable map opacity when map is minimised
+			hooksecurefunc(WorldMapFrame, "Minimize", function()
+				PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
+			end)
+
 			-- Set opacity when map size is synchronised
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if IsPlayerMoving() then
-					WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
-				else
-					WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+				if not WorldMapFrame:IsMaximized() then
+					if IsPlayerMoving() then
+						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+					else
+						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+					end
 				end
 			end)
 
