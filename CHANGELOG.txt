@@ -1,6 +1,6 @@
-3.0.161.alpha.1 - 20th October 2023
-- The 'Set map opacity' option will now be locked out if ElvUI is installed with the maps module enabled.  Toggling the setting now requires a UI reload.
-- Fixed an issue with 'Use stationary opacity while pointing at map' which caused the setting to be ignored if the map was opened while the character was moving.
+3.0.161.alpha.2 - 20th October 2023
+- The 'Set map opacity' option now applies to the maximised map (as well as the windowed map).  The option will be locked out if ElvUI is installed with the maps module enabled.  Toggling the option now requires a UI reload.  Fixed an issue with 'Use stationary opacity while pointing at map' which caused the setting to be ignored if the map was opened while the character was moving.
+- For 'Use default map', the blackout frame is now hidden when the map is maximised.
 
 3.0.160 - 19th October 2023
 - Updates for game version 3.4.3.

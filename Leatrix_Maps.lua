@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.161.alpha.1 (20th October 2023)
+	-- 	Leatrix Maps 3.0.161.alpha.2 (20th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.161.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.161.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -74,6 +74,13 @@
 			WorldMapFrame.minimizedWidth = 1024
 			WorldMapFrame.minimizedHeight = 740
 			WorldMapFrame:OnFrameSizeChanged()
+		end
+
+		-- Hide the default map blackout frame
+		if LeaMapsLC["UseDefaultMap"] == "On" then
+			hooksecurefunc(WorldMapFrame.BlackoutFrame, "Show", function()
+				WorldMapFrame.BlackoutFrame:Hide()
+			end)
 		end
 
 		-- Disable built-in map opacity
@@ -1818,8 +1825,8 @@
 			WorldMapFrame:SetAttribute("UIPanelLayout-allowOtherPanels", true)
 			WorldMapFrame:SetIgnoreParentScale(false)
 			WorldMapFrame.ScrollContainer:SetIgnoreParentScale(false)
-			WorldMapFrame.BlackoutFrame:Hide()
-			WorldMapFrame.IsMaximized = function() return false end
+			--WorldMapFrame.BlackoutFrame:Hide()
+			--WorldMapFrame.IsMaximized = function() return false end
 
 			-- Enable movement
 			WorldMapFrame:SetMovable(true)
@@ -1921,16 +1928,7 @@
 					WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
 				end
 				-- Setup frame fader
-				PlayerMovementFrameFader.AddDeferredFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function()
-					if GetCVar("miniWorldMap") == "1" then
-						if not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" then
-							return true
-						end
-					else
-						WorldMapFrame:SetAlpha(1)
-						return
-					end
-				end)
+				PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
 			end
 
 			-- Set map opacity when options are changed and on startup
@@ -1940,12 +1938,10 @@
 
 			-- Set opacity when map size is synchronised
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if GetCVar("miniWorldMap") == "1" then
-					if IsPlayerMoving() then
-						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
-					else
-						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
-					end
+				if IsPlayerMoving() then
+					WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+				else
+					WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
 				end
 			end)
 
