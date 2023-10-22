@@ -1898,7 +1898,7 @@
 		-- Set map opacity
 		----------------------------------------------------------------------
 
-		if not LeaLockList["SetMapOpacity"] then
+		if LeaMapsLC["SetMapOpacity"] == "On" and not LeaLockList["SetMapOpacity"] then
 
 			-- Create configuraton panel
 			local alphaFrame = LeaMapsLC:CreatePanel("Set map opacity", "alphaFrame")
@@ -1914,7 +1914,7 @@
 			local function SetMapOpacity()
 				LeaMapsCB["stationaryOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["stationaryOpacity"] * 100)
 				LeaMapsCB["movingOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["movingOpacity"] * 100)
-				if LeaMapsLC["SetMapOpacity"] == "On" and GetCVar("miniWorldMap") == "1" then
+				if GetCVar("miniWorldMap") == "1" then
 					-- Set opacity level as frame fader only takes effect when player moves
 					if IsPlayerMoving() then
 						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
@@ -1933,18 +1933,16 @@
 			-- Set map opacity when options are changed and on startup
 			LeaMapsCB["stationaryOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
 			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
-			LeaMapsCB["SetMapOpacity"]:HookScript("OnClick", SetMapOpacity)
 			SetMapOpacity()
 
 			-- Set map opacity when options are changed and on startup
 			LeaMapsCB["stationaryOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
 			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
-			LeaMapsCB["SetMapOpacity"]:HookScript("OnClick", SetMapOpacity)
 			SetMapOpacity()
 
 			-- Set opacity when map size is synchronised
 			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if LeaMapsLC["SetMapOpacity"] == "On" and GetCVar("miniWorldMap") == "1" then
+				if GetCVar("miniWorldMap") == "1" then
 					if IsPlayerMoving() then
 						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
 					else
@@ -2985,7 +2983,7 @@
 		LeaMapsLC:LockOption("EnlargePlayerArrow", "EnlargePlayerArrowBtn", false) -- Enlarge player arrow
 		LeaMapsLC:LockOption("UseClassIcons", "UseClassIconsBtn", true) -- Class colored icons
 		LeaMapsLC:LockOption("UnlockMapFrame", "UnlockMapFrameBtn", false) -- Unlock map frame
-		LeaMapsLC:LockOption("SetMapOpacity", "SetMapOpacityBtn", false) -- Set map opacity
+		LeaMapsLC:LockOption("SetMapOpacity", "SetMapOpacityBtn", true) -- Set map opacity
 		LeaMapsLC:LockOption("ShowPointsOfInterest", "ShowPointsOfInterestBtn", false) -- Show points of interest
 		LeaMapsLC:LockOption("ShowZoneLevels", "ShowZoneLevelsBtn", false) -- Show zone levels
 		LeaMapsLC:LockOption("EnhanceBattleMap", "EnhanceBattleMapBtn", true) -- Enhance battlefield map
@@ -3149,6 +3147,7 @@
 	-- Set reload button status
 	function LeaMapsLC:ReloadCheck()
 		if	(LeaMapsLC["ShowZoneMenu"] ~= LeaMapsDB["ShowZoneMenu"])			-- Show zone menu
+		or	(LeaMapsLC["SetMapOpacity"] ~= LeaMapsDB["SetMapOpacity"])			-- Set map opacity
 		or	(LeaMapsLC["UseClassIcons"] ~= LeaMapsDB["UseClassIcons"])			-- Use class colors
 		or	(LeaMapsLC["StickyMapFrame"] ~= LeaMapsDB["StickyMapFrame"])		-- Sticky map frame
 		or	(LeaMapsLC["AutoChangeZones"] ~= LeaMapsDB["AutoChangeZones"])		-- Auto change zones
@@ -3871,7 +3870,7 @@
 	-- Add content
 	LeaMapsLC:MakeTx(PageF, "Appearance", 16, -72)
 	LeaMapsLC:MakeCB(PageF, "ShowZoneMenu", "Show zone menus", 16, -92, true, "If checked, zone and continent dropdown menus will be shown in the map frame.")
-	LeaMapsLC:MakeCB(PageF, "SetMapOpacity", "Set map opacity", 16, -112, false, "If checked, you will be able to set the opacity of the map.")
+	LeaMapsLC:MakeCB(PageF, "SetMapOpacity", "Set map opacity", 16, -112, true, "If checked, you will be able to set the opacity of the map.")
 
 	LeaMapsLC:MakeTx(PageF, "Icons", 16, -152)
 	LeaMapsLC:MakeCB(PageF, "EnlargePlayerArrow", "Enlarge player arrow", 16, -172, false, "If checked, you will be able to enlarge the player arrow.")
