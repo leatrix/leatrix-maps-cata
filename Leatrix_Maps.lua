@@ -1922,13 +1922,15 @@
 				LeaMapsCB["stationaryOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["stationaryOpacity"] * 100)
 				LeaMapsCB["movingOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["movingOpacity"] * 100)
 				-- Set opacity level as frame fader only takes effect when player moves
-				if IsPlayerMoving() then
-					WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
-				else
-					WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+				if not WorldMapFrame:IsMaximized() then
+					if IsPlayerMoving() then
+						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+					else
+						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+					end
+					-- Setup frame fader
+					PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
 				end
-				-- Setup frame fader
-				PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
 			end
 
 			-- Set map opacity when options are changed and on startup
