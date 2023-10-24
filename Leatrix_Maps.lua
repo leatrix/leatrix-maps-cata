@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.161.alpha.3 (20th October 2023)
+	-- 	Leatrix Maps 3.0.161.alpha.4 (20th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.161.alpha.3"
+	LeaMapsLC["AddonVer"] = "3.0.161.alpha.4"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -84,15 +84,21 @@
 		end
 
 		-- Disable built-in map opacity
-		WorldMapFrame_SetOpacity(0)
-		WorldMapFrame_SaveOpacity()
-		SetCVar("worldMapOpacity", 0)
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapFrame_SetOpacity(0)
+			WorldMapFrame_SaveOpacity()
+			SetCVar("worldMapOpacity", 0)
+		end
 
 		-- Unlock map frame
-		WorldMapTitleDropDown_ToggleLock()
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapTitleDropDown_ToggleLock()
+		end
 
 		-- Remove right-click from title bar
-		WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
+			WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
+		end
 		MiniWorldMapTitle:Hide()
 
 		-- Load Battlefield addon
@@ -1907,22 +1913,23 @@
 
 		if LeaMapsLC["SetMapOpacity"] == "On" and not LeaLockList["SetMapOpacity"] then
 
-			-- Create configuraton panel
-			local alphaFrame = LeaMapsLC:CreatePanel("Set map opacity", "alphaFrame")
+			if LeaMapsLC["UseDefaultMap"] == "Off" then
 
-			-- Add controls
-			LeaMapsLC:MakeTx(alphaFrame, "Settings", 16, -72)
-			LeaMapsLC:MakeWD(alphaFrame, "Set map opacity while stationary and while moving.", 16, -92)
-			LeaMapsLC:MakeSL(alphaFrame, "stationaryOpacity", "Stationary", "Drag to set the map opacity for when your character is stationary.", 0.1, 1, 0.1, 36, -142, "%.1f")
-			LeaMapsLC:MakeSL(alphaFrame, "movingOpacity", "Moving", "Drag to set the map opacity for when your character is moving.", 0.1, 1, 0.1, 206, -142, "%.1f")
-			LeaMapsLC:MakeCB(alphaFrame, "NoFadeCursor", "Use stationary opacity while pointing at map", 16, -182, false, "If checked, pointing at the map while your character is moving will cause the stationary opacity setting to be applied.")
+				-- Create configuraton panel
+				local alphaFrame = LeaMapsLC:CreatePanel("Set map opacity", "alphaFrame")
 
-			-- Function to set map opacity
-			local function SetMapOpacity()
-				LeaMapsCB["stationaryOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["stationaryOpacity"] * 100)
-				LeaMapsCB["movingOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["movingOpacity"] * 100)
-				-- Set opacity level as frame fader only takes effect when player moves
-				if not WorldMapFrame:IsMaximized() then
+				-- Add controls
+				LeaMapsLC:MakeTx(alphaFrame, "Settings", 16, -72)
+				LeaMapsLC:MakeWD(alphaFrame, "Set map opacity while stationary and while moving.", 16, -92)
+				LeaMapsLC:MakeSL(alphaFrame, "stationaryOpacity", "Stationary", "Drag to set the map opacity for when your character is stationary.", 0.1, 1, 0.1, 36, -142, "%.1f")
+				LeaMapsLC:MakeSL(alphaFrame, "movingOpacity", "Moving", "Drag to set the map opacity for when your character is moving.", 0.1, 1, 0.1, 206, -142, "%.1f")
+				LeaMapsLC:MakeCB(alphaFrame, "NoFadeCursor", "Use stationary opacity while pointing at map", 16, -182, false, "If checked, pointing at the map while your character is moving will cause the stationary opacity setting to be applied.")
+
+				-- Function to set map opacity
+				local function SetMapOpacity()
+					LeaMapsCB["stationaryOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["stationaryOpacity"] * 100)
+					LeaMapsCB["movingOpacity"].f:SetFormattedText("%.0f%%", LeaMapsLC["movingOpacity"] * 100)
+					-- Set opacity level as frame fader only takes effect when player moves
 					if IsPlayerMoving() then
 						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
 					else
@@ -1931,63 +1938,52 @@
 					-- Setup frame fader
 					PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
 				end
-			end
 
-			-- Set map opacity when options are changed and on startup
-			LeaMapsCB["stationaryOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
-			LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
-			SetMapOpacity()
+				-- Set map opacity when options are changed and on startup
+				LeaMapsCB["stationaryOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
+				LeaMapsCB["movingOpacity"]:HookScript("OnValueChanged", SetMapOpacity)
+				SetMapOpacity()
 
-			-- Disable map opacity when map is maximised
-			hooksecurefunc(WorldMapFrame, "Maximize", function()
-				PlayerMovementFrameFader.RemoveFrame(WorldMapFrame)
-			end)
-
-			-- Enable map opacity when map is minimised
-			hooksecurefunc(WorldMapFrame, "Minimize", function()
-				PlayerMovementFrameFader.AddFrame(WorldMapFrame, LeaMapsLC["movingOpacity"], LeaMapsLC["stationaryOpacity"], 0.5, function() return not WorldMapFrame:IsMouseOver() or LeaMapsLC["NoFadeCursor"] == "Off" end)
-			end)
-
-			-- Set opacity when map size is synchronised
-			hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
-				if not WorldMapFrame:IsMaximized() then
+				-- Set opacity when map size is synchronised
+				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 					if IsPlayerMoving() then
 						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
 					else
 						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
 					end
-				end
-			end)
+				end)
 
-			-- Back to Main Menu button click
-			alphaFrame.b:HookScript("OnClick", function()
-				alphaFrame:Hide()
-				LeaMapsLC["PageF"]:Show()
-			end)
+				-- Back to Main Menu button click
+				alphaFrame.b:HookScript("OnClick", function()
+					alphaFrame:Hide()
+					LeaMapsLC["PageF"]:Show()
+				end)
 
-			-- Reset button click
-			alphaFrame.r:HookScript("OnClick", function()
-				LeaMapsLC["stationaryOpacity"] = 1.0
-				LeaMapsLC["movingOpacity"] = 0.5
-				LeaMapsLC["NoFadeCursor"] = "On"
-				SetMapOpacity()
-				alphaFrame:Hide(); alphaFrame:Show()
-			end)
-
-			-- Show configuration panel when configuration button is clicked
-			LeaMapsCB["SetMapOpacityBtn"]:HookScript("OnClick", function()
-				if IsShiftKeyDown() and IsControlKeyDown() then
-					-- Preset profile
+				-- Reset button click
+				alphaFrame.r:HookScript("OnClick", function()
 					LeaMapsLC["stationaryOpacity"] = 1.0
 					LeaMapsLC["movingOpacity"] = 0.5
 					LeaMapsLC["NoFadeCursor"] = "On"
 					SetMapOpacity()
-					if alphaFrame:IsShown() then alphaFrame:Hide(); alphaFrame:Show(); end
-				else
-					alphaFrame:Show()
-					LeaMapsLC["PageF"]:Hide()
-				end
-			end)
+					alphaFrame:Hide(); alphaFrame:Show()
+				end)
+
+				-- Show configuration panel when configuration button is clicked
+				LeaMapsCB["SetMapOpacityBtn"]:HookScript("OnClick", function()
+					if IsShiftKeyDown() and IsControlKeyDown() then
+						-- Preset profile
+						LeaMapsLC["stationaryOpacity"] = 1.0
+						LeaMapsLC["movingOpacity"] = 0.5
+						LeaMapsLC["NoFadeCursor"] = "On"
+						SetMapOpacity()
+						if alphaFrame:IsShown() then alphaFrame:Hide(); alphaFrame:Show(); end
+					else
+						alphaFrame:Show()
+						LeaMapsLC["PageF"]:Hide()
+					end
+				end)
+
+			end
 
 		end
 
@@ -2635,8 +2631,15 @@
 			MaximizeUIPanel(WorldMapFrame)
 			WorldMapFrame:SetScale(1)
 			-- Lock some incompatible options
+			LeaMapsLC:LockItem(LeaMapsCB["SetMapOpacity"], true)
+			LeaMapsCB["SetMapOpacity"].tiptext = LeaMapsCB["SetMapOpacity"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map.|n|nTo adjust map opacity, right-click the map frame title bar."]
+
 			LeaMapsLC:LockItem(LeaMapsCB["UnlockMapFrame"], true)
+			LeaMapsCB["UnlockMapFrame"].tiptext = LeaMapsCB["UnlockMapFrame"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map.|n|nTo move the map, right-click the map frame title bar to unlock it then drag the map frame title bar."]
+
 			LeaMapsLC:LockItem(LeaMapsCB["StickyMapFrame"], true)
+			LeaMapsCB["StickyMapFrame"].tiptext = LeaMapsCB["StickyMapFrame"].tiptext .. "|n|n|cff00AAFF" .. L["Cannot be used with Use default map."]
+
 			-- Hide default map maximised right-click to zoom out text
 			WorldMapMagnifyingGlassButton:HookScript("OnShow", function()
 				WorldMapMagnifyingGlassButton:Hide()
@@ -2997,6 +3000,7 @@
 		LeaMapsLC:LockOption("EnhanceBattleMap", "EnhanceBattleMapBtn", true) -- Enhance battlefield map
 		-- Ensure locked but enabled options remain locked
 		if LeaMapsLC["UseDefaultMap"] == "On" then
+			LeaMapsCB["SetMapOpacityBtn"]:Disable()
 			LeaMapsCB["UnlockMapFrameBtn"]:Disable()
 		end
 	end
