@@ -1947,7 +1947,11 @@
 				-- Set opacity when map size is synchronised
 				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
 					if IsPlayerMoving() then
-						WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+						if LeaMapsLC["NoFadeCursor"] == "On" and MouseIsOver(WorldMapFrame) then
+							WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
+						else
+							WorldMapFrame:SetAlpha(LeaMapsLC["movingOpacity"])
+						end
 					else
 						WorldMapFrame:SetAlpha(LeaMapsLC["stationaryOpacity"])
 					end
