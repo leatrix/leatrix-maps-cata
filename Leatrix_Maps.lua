@@ -35,6 +35,8 @@
 
 	-- Check for addons
 	if IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
+	if IsAddOnLoaded("Carbonite") then LeaMapsLC.Carbonite = true end
+	if IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
 
 	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
@@ -1860,8 +1862,8 @@
 				end
 			end)
 
-			-- Function to set position after Carbonite has loaded
-			local function CaboniteFix()
+			-- Fix for Carbonite changing map position
+			if LeaMapsLC.Carbonite then
 				hooksecurefunc(WorldMapFrame, "Show", function()
 					if Nx.db.profile.Map.MaxOverride == false then
 						WorldMapFrame:ClearAllPoints()
@@ -1871,38 +1873,11 @@
 				end)
 			end
 
-			-- Run function when Carbonite has loaded
-			if IsAddOnLoaded("Carbonite") then
-				CaboniteFix()
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "Carbonite" then
-						CaboniteFix()
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
-			end
-
 			-- Fix for Demodal clamping the map frame to the screen
-			local function FixDemodal()
+			if LeaMapsLC.Demodal then
 				if WorldMapFrame:IsClampedToScreen() then
 					WorldMapFrame:SetClampedToScreen(false)
 				end
-			end
-
-			if IsAddOnLoaded("Demodal") then
-				FixDemodal()
-			else
-				local waitFrame = CreateFrame("FRAME")
-				waitFrame:RegisterEvent("ADDON_LOADED")
-				waitFrame:SetScript("OnEvent", function(self, event, arg1)
-					if arg1 == "Demodal" then
-						FixDemodal()
-						waitFrame:UnregisterAllEvents()
-					end
-				end)
 			end
 
 		end

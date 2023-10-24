@@ -7,7 +7,7 @@
 ## Author: Leatrix
 ## SavedVariables: LeaMapsDB
 
-## OptionalDeps: Leatrix_enUS, ElvUI
+## OptionalDeps: Leatrix_enUS, ElvUI, Demodal, Carbonite
 
 ## X-Curse-Project-ID: 463868
 
