@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.161 (25th October 2023)
+	-- 	Leatrix Maps 3.0.162.alpha.1 (25th October 2023)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.161"
+	LeaMapsLC["AddonVer"] = "3.0.162.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -101,7 +101,11 @@
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
 			WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
 		end
-		MiniWorldMapTitle:Hide()
+
+		-- Hide title bar if default map with menus or custom map
+		if LeaMapsLC["UseDefaultMap"] == "On" and LeaMapsLC["ShowZoneMenu"] == "On" or LeaMapsLC["UseDefaultMap"] == "Off" then
+			MiniWorldMapTitle:Hide()
+		end
 
 		-- Load Battlefield addon
 		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then

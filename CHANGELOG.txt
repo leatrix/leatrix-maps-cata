@@ -1,3 +1,6 @@
+3.0.162.alpha.1 - 25th October 2023
+- For 'Use default map', the map title will be shown if you are not using 'Show zone menus'.
+
 3.0.161 - 25th October 2023
 - For 'Set map opacity', toggling the option will now require a UI reload.  The option will be locked out if ElvUI is installed with the maps module enabled.
 - For 'Use default map', the blackout frame is now hidden when the map is maximised.  The 'Set map opacity' option will be locked out.
