@@ -1,4 +1,4 @@
-3.0.162.alpha.1 - 25th October 2023
+3.0.162 - 1st November 2023
 - For 'Use default map', the map title will be shown if you are not using 'Show zone menus'.
 
 3.0.161 - 25th October 2023
