@@ -1,3 +1,6 @@
+3.0.179.alpha.1 - 13th February 2024
+- Updated Hillsbrad Foothills to Arathi Highlands zone crossing.
+
 3.0.162 - 1st November 2023
 - For 'Use default map', the map title will be shown if you are not using 'Show zone menus'.
 
