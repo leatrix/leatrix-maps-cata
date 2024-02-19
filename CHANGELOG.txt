@@ -1,4 +1,4 @@
-3.0.179 - 14th February 2024
+﻿3.0.179 - 14th February 2024
 - Updated Hillsbrad Foothills to Arathi Highlands zone crossing.
 
 3.0.162 - 1st November 2023
