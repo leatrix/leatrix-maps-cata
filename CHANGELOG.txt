@@ -1,4 +1,4 @@
-﻿3.0.186 - 27th March 2024
+﻿3.0.187 - 3rd April 2024
 - Leatrix addons for Cataclysm Classic will be available when I get access to Cataclysm Classic beta.
 
 3.0.179 - 14th February 2024
