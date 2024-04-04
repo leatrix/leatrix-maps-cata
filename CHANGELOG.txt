@@ -1,5 +1,5 @@
-﻿3.0.187 - 3rd April 2024
-- Leatrix addons for Cataclysm Classic will be available when I get access to Cataclysm Classic beta.
+﻿3.0.188.alpha.1 - 3rd April 2024
+- The addon will no longer show 'Wrong version installed' when run on Cataclysm Classic.
 
 3.0.179 - 14th February 2024
 - Updated Hillsbrad Foothills to Arathi Highlands zone crossing.
