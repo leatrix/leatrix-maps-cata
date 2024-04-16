@@ -169,6 +169,14 @@
 			{"Arrow", 21.0, 79.6, L["Westfall"], nil, arTex, nil, nil, nil, nil, nil, 2.2, 1436},
 			{"Arrow", 93.2, 72.3, L["Redridge Mountains"], nil, arTex, nil, nil, nil, nil, nil, 4.7, 1433},
 			{"Arrow", 32.2, 49.7, L["Stormwind City"], nil, arTex, nil, nil, nil, nil, nil, 0.6, 1453},
+
+
+			{"FlightA", 41.8, 64.6, L["Goldshire"], nil, tATex, nil, nil},
+			{"FlightA", 81.8, 66.4, L["Eastvale Logging Camp"], nil, tATex, nil, nil},
+
+
+
+
 		},
 		--[[Deadwind Pass]] [1430] = {
 			{"Spirit", 40.0, 74.2, L["Spirit Healer"], nil, spTex, nil, nil},
