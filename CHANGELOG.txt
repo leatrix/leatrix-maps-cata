@@ -1,5 +1,5 @@
 ﻿3.0.190.alpha.1 - 16th April 2024
-- Cataclysm Classic Beta: Fixed Blasted Lands reveal data.
+- Cataclysm Classic Beta: Fixed Blasted Lands and The Cape of Stranglethorn reveal data.
 - Cataclysm Classic Beta: Added 'The Maelstrom' map dropdown menu.
 
 3.0.189 - 16th April 2024
