@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.189.alpha.1 (16th April 2024)
+	-- 	Leatrix Maps 3.0.189 (16th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.189.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.189"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -28,7 +28,7 @@
 			end)
 			return
 		end
-		if gametocversion and gametocversion == 30403 then
+		if gametocversion and gametocversion == 40400 then
 			LeaMapsLC.NewPatch = true
 		end
 	end
@@ -1012,13 +1012,17 @@
 				local wmapID = WorldMapFrame.mapID
 				if wmapID and wmapID == 1414 or wmapID == 1415 or wmapID == 947 or wmapID == 1945 or wmapID == 113 then
 					if self.Texture and self.Texture:GetTexture() == 136441 then
-						local a, b, c, d, e, f, g, h = self.Texture:GetTexCoord()
-						if a == 0.35546875 and b == 0.00390625 and c == 0.35546875 and d == 0.0703125 and e == 0.421875 and f == 0.00390625 and g == 0.421875 and h == 0.0703125 then
-							-- Hide town icons
+						if LeaMapsLC.NewPatch then
 							self:Hide()
-						elseif a == 0.42578125 and b == 0.00390625 and c == 0.42578125 and d == 0.0703125 and e == 0.4921875 and f == 0.00390625 and g == 0.4921875 and h == 0.0703125 then
-							-- Hide city icons
-							self:Hide()
+						else
+							local a, b, c, d, e, f, g, h = self.Texture:GetTexCoord()
+							if a == 0.35546875 and b == 0.00390625 and c == 0.35546875 and d == 0.0703125 and e == 0.421875 and f == 0.00390625 and g == 0.421875 and h == 0.0703125 then
+								-- Hide town icons
+								self:Hide()
+							elseif a == 0.42578125 and b == 0.00390625 and c == 0.42578125 and d == 0.0703125 and e == 0.4921875 and f == 0.00390625 and g == 0.4921875 and h == 0.0703125 then
+								-- Hide city icons
+								self:Hide()
+							end
 						end
 					end
 				end
@@ -3684,6 +3688,11 @@
 						temp[1]:SetHighlightTexture(0)
 						temp[1]:SetScript("OnEnter", nil)
 					end
+				end
+
+				if LeaMapsLC.NewPatch then
+					LeaMapsLC["ShowPointsOfInterest"] = "Off"
+					Lock("ShowPointsOfInterest", "Not currently available for Cataclysm Classic") -- Set map opacity
 				end
 
 				-- Disable items that conflict with ElvUI

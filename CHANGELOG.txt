@@ -1,10 +1,10 @@
-﻿3.0.189.alpha.1 - 16th April 2024
+﻿3.0.189 - 16th April 2024
 - Updated for Cataclysm Classic Beta.
-- Updated map reveal data for Cataclysm.
+- Cataclysm Classic Beta: Updated map reveal data for Cataclysm Classic.
+- Cataclysm Classic Beta: The 'Show points of interest' option is currently unavailable.
 
 3.0.188 - 10th April 2024
 - The addon will no longer show 'Wrong version installed' when run on Cataclysm Classic.
-- Leatrix addons for Cataclysm Classic will be available April 2024.
 
 3.0.179 - 14th February 2024
 - Updated Hillsbrad Foothills to Arathi Highlands zone crossing.
