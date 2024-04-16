@@ -225,6 +225,7 @@
 			L["Kalimdor"] = POSTMASTER_PIPE_KALIMDOR
 			L["Outland"] = POSTMASTER_PIPE_OUTLAND
 			L["Northrend"] = POSTMASTER_PIPE_NORTHREND
+			L["The Maelstrom"] = DUNGEON_FLOOR_DRAGONSOUL6
 			L["Azeroth"] = AZEROTH
 
 			-- Create outer frame for dropdown menus
@@ -348,6 +349,36 @@
 				WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
 			end)
 
+			-- Create The Maelstrom dropdown menu
+			LeaMapsLC["ZoneMapTheMaelstromMenu"] = 1
+
+			local mapTheMaelstromTable, mapTheMaelstromString = {}, {}
+			local zones = C_Map.GetMapChildrenInfo(948)
+			if (zones) then
+				for i, zoneInfo in ipairs(zones) do
+					if zoneInfo.mapID ~= 276 then
+						tinsert(mapTheMaelstromTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+						tinsert(mapTheMaelstromString, zoneInfo.name)
+					end
+				end
+			end
+
+			table.sort(mapTheMaelstromString, function(k, v) return k < v end)
+			table.sort(mapTheMaelstromTable, function(k, v) return k.zonename < v.zonename end)
+
+			if LeaMapsLC.NewPatch then
+				tinsert(mapTheMaelstromString, 1, L["The Maelstrom"])
+				tinsert(mapTheMaelstromTable, 1, {zonename = L["The Maelstrom"], mapid = 948})
+			end
+
+			local msdd = LeaMapsLC:CreateDropDown("ZoneMapTheMaelstromMenu", "", WorldMapFrame, 180, "TOP", -80, -35, mapTheMaelstromString, "")
+			msdd:ClearAllPoints()
+			msdd:SetPoint("TOPRIGHT", outerFrame, "TOPRIGHT", 0, 0)
+
+			LeaMapsCB["ListFrameZoneMapTheMaelstromMenu"]:HookScript("OnHide", function()
+				WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+			end)
+
 			-- Create continent dropdown menu
 			LeaMapsLC["ZoneMapContinentMenu"] = 1
 
@@ -360,10 +391,12 @@
 			tinsert(mapContinentTable, 3, {zonename = L["Outland"], mapid = 1945})
 			tinsert(mapContinentString, 4, L["Northrend"])
 			tinsert(mapContinentTable, 4, {zonename = L["Northrend"], mapid = 113})
-			tinsert(mapContinentString, 5, L["Azeroth"])
-			tinsert(mapContinentTable, 5, {zonename = L["Azeroth"], mapid = 947})
-			tinsert(mapContinentString, 6, L["Cosmic"])
-			tinsert(mapContinentTable, 6, {zonename = L["Cosmic"], mapid = 946})
+			tinsert(mapContinentString, 5, L["The Maelstrom"])
+			tinsert(mapContinentTable, 5, {zonename = L["The Maelstrom"], mapid = 948})
+			tinsert(mapContinentString, 6, L["Azeroth"])
+			tinsert(mapContinentTable, 6, {zonename = L["Azeroth"], mapid = 947})
+			tinsert(mapContinentString, 7, L["Cosmic"])
+			tinsert(mapContinentTable, 7, {zonename = L["Cosmic"], mapid = 946})
 
 			local cond = LeaMapsLC:CreateDropDown("ZoneMapContinentMenu", "", WorldMapFrame, 180, "TOP", -80, -35, mapContinentString, "")
 			cond:ClearAllPoints()
@@ -395,9 +428,14 @@
 					nrdd:Show()
 					WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
 				elseif LeaMapsLC["ZoneMapContinentMenu"] == 5 then
+					msdd:Show()
+					if LeaMapsLC.NewPatch then
+						WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+					end
+				elseif LeaMapsLC["ZoneMapContinentMenu"] == 6 then
 					nodd:Show()
 					WorldMapFrame:SetMapID(947)
-				elseif LeaMapsLC["ZoneMapContinentMenu"] == 6 then
+				elseif LeaMapsLC["ZoneMapContinentMenu"] == 7 then
 					nodd:Show()
 					WorldMapFrame:SetMapID(946)
 				end
@@ -407,13 +445,14 @@
 			local function SetMapControls()
 
 				-- Hide dropdown menus
-				ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nodd:Hide(); nrdd:Hide(); cond:Hide()
+				ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nodd:Hide(); nrdd:Hide(); msdd:Hide(); cond:Hide()
 
 				-- Hide dropdown menu list items
 				LeaMapsCB["ListFrameZoneMapEasternMenu"]:Hide()
 				LeaMapsCB["ListFrameZoneMapKalimdorMenu"]:Hide()
 				LeaMapsCB["ListFrameZoneMapOutlandMenu"]:Hide()
 				LeaMapsCB["ListFrameZoneMapNorthrendMenu"]:Hide()
+				LeaMapsCB["ListFrameZoneMapTheMaelstromMenu"]:Hide()
 				LeaMapsCB["ListFrameZoneMapContinentMenu"]:Hide()
 				LeaMapsCB["ListFrameZoneMapNoneMenu"]:Hide()
 
@@ -457,17 +496,26 @@
 					end
 				end
 
+				-- The Maelstrom
+				for k, v in pairs(mapTheMaelstromTable) do
+					if v.mapid == WorldMapFrame.mapID then
+						LeaMapsLC["ZoneMapTheMaelstromMenu"] = k
+						msdd:Show()
+						LeaMapsLC["ZoneMapContinentMenu"] = 5; cond:Show()
+						return
+					end
+				end
 				-- Azeroth
 				if WorldMapFrame.mapID == 947 then
 					nodd:Show()
-					LeaMapsLC["ZoneMapContinentMenu"] = 5; cond:Show()
+					LeaMapsLC["ZoneMapContinentMenu"] = 6; cond:Show()
 					return
 				end
 
 				-- Cosmic
 				if WorldMapFrame.mapID == 946 then
 					nodd:Show()
-					LeaMapsLC["ZoneMapContinentMenu"] = 6; cond:Show()
+					LeaMapsLC["ZoneMapContinentMenu"] = 7; cond:Show()
 					return
 				end
 
