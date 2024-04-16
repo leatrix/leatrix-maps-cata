@@ -1,4 +1,7 @@
-﻿3.0.189 - 16th April 2024
+﻿3.0.190.alpha.1 - 16th April 2024
+- Cataclysm Classic Beta: Fixed Blasted Lands reveal data.
+
+3.0.189 - 16th April 2024
 - Updated for Cataclysm Classic Beta.
 - Cataclysm Classic Beta: Updated map reveal data for Cataclysm Classic.
 - Cataclysm Classic Beta: The 'Show points of interest' option is currently unavailable.
