@@ -1,4 +1,7 @@
-﻿3.0.188 - 10th April 2024
+﻿3.0.189.alpha.1 - 16th April 2024
+- Updated for Cataclysm Classic Beta.
+
+3.0.188 - 10th April 2024
 - The addon will no longer show 'Wrong version installed' when run on Cataclysm Classic.
 - Leatrix addons for Cataclysm Classic will be available April 2024.
 
