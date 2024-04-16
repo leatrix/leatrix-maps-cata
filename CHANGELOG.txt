@@ -1,5 +1,6 @@
 ﻿3.0.189.alpha.1 - 16th April 2024
 - Updated for Cataclysm Classic Beta.
+- Updated map reveal data for Cataclysm.
 
 3.0.188 - 10th April 2024
 - The addon will no longer show 'Wrong version installed' when run on Cataclysm Classic.
