@@ -3741,6 +3741,11 @@
 				if LeaMapsLC.NewPatch then
 					LeaMapsLC["ShowPointsOfInterest"] = "Off"
 					Lock("ShowPointsOfInterest", "Not currently available for Cataclysm Classic") -- Set map opacity
+					--TaxiFrame:SetScale(1.8)
+					--TaxiFrame:HookScript("OnShow", function()
+					--	TaxiFrame:ClearAllPoints()
+					--	TaxiFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 20, 0)
+					--end)
 				end
 
 				-- Disable items that conflict with ElvUI
