@@ -1537,7 +1537,7 @@
 							minFish = mapTable[positionMapInfo.mapID]["minFish"]
 						end
 						-- Show level range if map zone exists in table
-						if name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
+						if NoLongerUsingThis and name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
 							local playerLevel = UnitLevel("player")
 							local color
 							if playerLevel < playerMinLevel then
@@ -2094,7 +2094,7 @@
 								myPOI["description"] = pinInfo[5]
 
 								-- Show dungeon required level
-								if LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[9] then
+								if NoLongerUsingThis and LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[9] then
 									local playerLevel = UnitLevel("player")
 									local color
 									local dungeonReqLevel = pinInfo[9]
@@ -2200,6 +2200,30 @@
 			LeaMapsLC:MakeCB(poiFrame, "ShowTravelOpposing", "Show travel points for opposing faction", 16, -132, false, "If checked, travel points for the opposing faction will be shown.|n|nThis includes flight points, boat harbors, zeppelin towers and tram stations.")
 			LeaMapsLC:MakeCB(poiFrame, "ShowZoneCrossings", "Show zone crossings", 16, -152, false, "If checked, zone crossings will be shown.|n|nThese are clickable arrows that indicate the zone exit pathways.")
 			LeaMapsLC:MakeCB(poiFrame, "ShowSpiritHealers", "Show spirit healers", 16, -172, false, "If checked, spirit healers will be shown.")
+
+			-- Disable Show zone crossings for Cataclysm Classic Beta
+			if LeaMapsLC.NewPatch then
+				-- Function to disable and lock an option and add a note to the tooltip
+				local function Lock(option, reason, optmodule)
+					LeaLockList[option] = LeaMapsLC[option]
+					LeaMapsLC:LockItem(LeaMapsCB[option], true)
+					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "|n|n|cff00AAFF" .. reason
+					if optmodule then
+						LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. " " .. optmodule .. " " .. L["module"]
+					end
+					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "."
+					-- Remove hover from configuration button if there is one
+					local temp = {LeaMapsCB[option]:GetChildren()}
+					if temp and temp[1] and temp[1].t and temp[1].t:GetTexture() == "Interface\\WorldMap\\Gear_64.png" then
+						temp[1]:SetHighlightTexture(0)
+						temp[1]:SetScript("OnEnter", nil)
+					end
+				end
+
+				LeaMapsLC["ShowZoneCrossings"] = "Off"
+				Lock("ShowZoneCrossings", "Not currently available for Cataclysm Classic") -- Set map opacity
+			end
+
 
 			-- Hide spirit healers option for now
 			LeaMapsLC["ShowSpiritHealers"] = "Off"
@@ -3739,13 +3763,16 @@
 				end
 
 				if LeaMapsLC.NewPatch then
-					LeaMapsLC["ShowPointsOfInterest"] = "Off"
-					Lock("ShowPointsOfInterest", "Not currently available for Cataclysm Classic") -- Set map opacity
-					--TaxiFrame:SetScale(1.8)
-					--TaxiFrame:HookScript("OnShow", function()
-					--	TaxiFrame:ClearAllPoints()
-					--	TaxiFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 20, 0)
-					--end)
+					LeaMapsLC["ShowZoneLevels"] = "Off"
+					Lock("ShowZoneLevels", "Not available for Cataclysm Classic") -- Set map opacity
+					local debug = nil
+					if debug then
+						TaxiFrame:SetScale(1.8)
+						TaxiFrame:HookScript("OnShow", function()
+							TaxiFrame:ClearAllPoints()
+							TaxiFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 20, 0)
+						end)
+					end
 				end
 
 				-- Disable items that conflict with ElvUI
