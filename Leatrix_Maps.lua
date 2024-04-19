@@ -1434,88 +1434,188 @@
 
 		do
 
+			local mapTable
+
 			-- Create level range table
-			local mapTable = {
+			if LeaMapsLC.NewPatch then
 
-				-- Eastern Kingdoms
-				--[[Alterac Mountains]]		[1416] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
-				--[[Arathi Highlands]]		[1417] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
-				--[[Badlands]]				[1418] = {minLevel = 35, 	maxLevel = 45,},
-				--[[Blasted Lands]]			[1419] = {minLevel = 45, 	maxLevel = 55},
-				--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 58,		minFish = "330",},
-				--[[Deadwind Pass]]			[1430] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
-				--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[Duskwood]]				[1431] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
-				--[[Eastern Plaguelands]]	[1423] = {minLevel = 53, 	maxLevel = 60,		minFish = "330",},
-				--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10},
-				--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
-				--[[Ironforge]]				[1455] = {minFish = 1,},
-				--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-				--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70},
-				--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-				--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,		minFish = "55",},
-				--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 50},
-				--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
-				--[[Stormwind City]]		[1453] = {minFish = 1,},
-				--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 45,		minFish = "130 (205)",},
-				--[[Swamp of Sorrows]]		[1435] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
-				--[[The Hinterlands]]		[1425] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
-				--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[Undercity]]				[1458] = {minFish = 1,},
-				--[[Westfall]]				[1436] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
-				--[[Western Plaguelands]]	[1422] = {minLevel = 51, 	maxLevel = 58,		minFish = "205",},
-				--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
+				-- Create level range table
+				mapTable = {
 
-				-- Kalimdor
-				--[[Ashenvale]]				[1440] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
-				--[[Azshara]]				[1447] = {minLevel = 45, 	maxLevel = 55,		minFish = "205 (330)",},
-				--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,		minFish = "1",},
-				--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,		minFish = "1",},
-				--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-				--[[Darnassus]]				[1457] = {minFish = 1,},
-				--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
-				--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
-				--[[Felwood]]				[1448] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
-				--[[Feralas]]				[1444] = {minLevel = 40, 	maxLevel = 50,		minFish = "205 (330)",},
-				--[[Moonglade]]				[1450] = {minFish = 205,},
-				--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[Orgrimmar]]				[1454] = {minFish = 1,},
-				--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
-				--[[Stonetalon Mountains]]	[1442] = {minLevel = 15, 	maxLevel = 27,		minFish = "55",},
-				--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
-				--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-				--[[The Barrens]]			[1413] = {minLevel = 10, 	maxLevel = 25,		minFish = "1",},
-				--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 35,		minFish = "130",},
-				--[[Thunder Bluff]]			[1456] = {minFish = 1,},
-				--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
-				--[[Winterspring]]			[1452] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
+					-- Eastern Kingdoms
+					--[[Arathi Highlands]]		[1417] = {minLevel = 25, 	maxLevel = 40,},
+					--[[Badlands]]				[1418] = {minLevel = 36, 	maxLevel = 47,},
+					--[[Blasted Lands]]			[1419] = {minLevel = 46, 	maxLevel = 55,},
+					--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 59,},
+					--[[Deadwind Pass]]			[1430] = {minLevel = 50, 	maxLevel = 60,},
+					--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 11,},
+					--[[Duskwood]]				[1431] = {minLevel = 10, 	maxLevel = 30,},
+					--[[Eastern Plaguelands]]	[1423] = {minLevel = 40, 	maxLevel = 59,},
+					--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10,},
+					--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 39,},
+					--[[Ironforge]]				[1455] = {},
+					--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,},
+					--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70,},
+					--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 18,},
+					--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,},
+					--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 56,},
+					--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 19,},
+					--[[Stormwind City]]		[1453] = {},
+					--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 50,},
+					--[[Swamp of Sorrows]]		[1435] = {minLevel = 51, 	maxLevel = 54,},
+					--[[The Hinterlands]]		[1425] = {minLevel = 33, 	maxLevel = 49,},
+					--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 12,},
+					--[[Twilight Highlands]]	[241]  = {minLevel = 74, 	maxLevel = 85,},
+					--[[Undercity]]				[1458] = {},
+					--[[Westfall]]				[1436] = {minLevel = 9, 	maxLevel = 18,},
+					--[[Western Plaguelands]]	[1422] = {minLevel = 36, 	maxLevel = 57,},
+					--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,},
 
-				-- Outland
-				--[[Blade's Edge Mntains]]	[1949] = {minLevel = 65, 	maxLevel = 70,},
-				--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,		minFish = "280",},
-				--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,		minFish = "280 (380) (395)",},
-				--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,		minFish = "380",},
-				--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,		minFish = "280",},
-				--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,		minFish = "355 (405)",},
-				--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,		minFish = "305 (355)",},
+					-- Kalimdor
+					--[[Ashenvale]]				[1440] = {minLevel = 19, 	maxLevel = 30,},
+					--[[Azshara]]				[1447] = {minLevel = 10, 	maxLevel = 46,},
+					--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,},
+					--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,},
+					--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,},
+					--[[Darnassus]]				[1457] = {},
+					--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 39,},
+					--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 61,},
+					--[[Felwood]]				[1448] = {minLevel = 46, 	maxLevel = 54,},
+					--[[Feralas]]				[1444] = {minLevel = 35, 	maxLevel = 45,},
+					--[[Moonglade]]				[1450] = {},
+					--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Northern Barrens]]		[1413] = {minLevel = 10, 	maxLevel = 33,},
+					--[[Orgrimmar]]				[1454] = {},
+					--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 59,},
+					--[[Southern Barrens]]		[199]  = {minLevel = 30, 	maxLevel = 35,},
+					--[[Stonetalon Mountains]]	[1442] = {minLevel = 25, 	maxLevel = 30,},
+					--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,},
+					--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 11,},
+					--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 45,},
+					--[[Thunder Bluff]]			[1456] = {},
+					--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,},
+					--[[Winterspring]]			[1452] = {minLevel = 50, 	maxLevel = 60,},
 
-				-- Northrend
-				-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
-				-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
-				--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
-				--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,		minFish = "430 (525)",},
-				--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
-				--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
-				--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
-				--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,		minFish = "380 (475)",},
-				--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
-				--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,		minFish = "380 (475)",},
-				--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,		minFish = "405 (500)",},
-				--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,		minFish = "430 (525)",},
+					-- Outland
+					--[[Blade's Edge Montains]]	[1949] = {minLevel = 65, 	maxLevel = 70,},
+					--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,},
+					--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,},
+					--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,},
+					--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,},
+					--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,},
+					--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,},
 
-			}
+					-- Northrend
+					-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
+					-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
+					--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,},
+					--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,},
+					--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
+					--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
+					--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
+					--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,},
+					--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,},
+					--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,},
+					--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,},
+					--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,},
+
+					-- Cataclysm
+					--[[Deepholm]]				[207] = {minLevel = 81, 	maxLevel = 83,},
+					--[[Kezan]]					[194] = {minLevel = 1, 		maxLevel = 6,},
+					--[[Mount Hyjal]]			[198] = {minLevel = 79, 	maxLevel = 83,},
+					--[[The Lost Isles]]		[174] = {minLevel = 6, 		maxLevel = 10,},
+					--[[Uldum]]					[249] = {minLevel = 81, 	maxLevel = 84,},
+					--[[Vashj'ir]]				[203] = {minLevel = 78, 	maxLevel = 85,},
+
+				}
+
+			else
+
+				mapTable = {
+
+					-- Eastern Kingdoms
+					--[[Alterac Mountains]]		[1416] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
+					--[[Arathi Highlands]]		[1417] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
+					--[[Badlands]]				[1418] = {minLevel = 35, 	maxLevel = 45,},
+					--[[Blasted Lands]]			[1419] = {minLevel = 45, 	maxLevel = 55},
+					--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 58,		minFish = "330",},
+					--[[Deadwind Pass]]			[1430] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
+					--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[Duskwood]]				[1431] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
+					--[[Eastern Plaguelands]]	[1423] = {minLevel = 53, 	maxLevel = 60,		minFish = "330",},
+					--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10},
+					--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
+					--[[Ironforge]]				[1455] = {minFish = 1,},
+					--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
+					--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70},
+					--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
+					--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,		minFish = "55",},
+					--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 50},
+					--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
+					--[[Stormwind City]]		[1453] = {minFish = 1,},
+					--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 45,		minFish = "130 (205)",},
+					--[[Swamp of Sorrows]]		[1435] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
+					--[[The Hinterlands]]		[1425] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
+					--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[Undercity]]				[1458] = {minFish = 1,},
+					--[[Westfall]]				[1436] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
+					--[[Western Plaguelands]]	[1422] = {minLevel = 51, 	maxLevel = 58,		minFish = "205",},
+					--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
+
+					-- Kalimdor
+					--[[Ashenvale]]				[1440] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
+					--[[Azshara]]				[1447] = {minLevel = 45, 	maxLevel = 55,		minFish = "205 (330)",},
+					--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,		minFish = "1",},
+					--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,		minFish = "1",},
+					--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
+					--[[Darnassus]]				[1457] = {minFish = 1,},
+					--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
+					--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
+					--[[Felwood]]				[1448] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
+					--[[Feralas]]				[1444] = {minLevel = 40, 	maxLevel = 50,		minFish = "205 (330)",},
+					--[[Moonglade]]				[1450] = {minFish = 205,},
+					--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[Orgrimmar]]				[1454] = {minFish = 1,},
+					--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
+					--[[Stonetalon Mountains]]	[1442] = {minLevel = 15, 	maxLevel = 27,		minFish = "55",},
+					--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
+					--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
+					--[[The Barrens]]			[1413] = {minLevel = 10, 	maxLevel = 25,		minFish = "1",},
+					--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 35,		minFish = "130",},
+					--[[Thunder Bluff]]			[1456] = {minFish = 1,},
+					--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
+					--[[Winterspring]]			[1452] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
+
+					-- Outland
+					--[[Blade's Edge Mntains]]	[1949] = {minLevel = 65, 	maxLevel = 70,},
+					--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,		minFish = "280",},
+					--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,		minFish = "280 (380) (395)",},
+					--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,		minFish = "380",},
+					--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,		minFish = "280",},
+					--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,		minFish = "355 (405)",},
+					--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,		minFish = "305 (355)",},
+
+					-- Northrend
+					-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
+					-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
+					--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
+					--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,		minFish = "430 (525)",},
+					--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
+					--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
+					--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
+					--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,		minFish = "380 (475)",},
+					--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
+					--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,		minFish = "380 (475)",},
+					--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,		minFish = "405 (500)",},
+					--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,		minFish = "430 (525)",},
+
+				}
+
+			end
 
 			-- Replace AreaLabelFrameMixin.OnUpdate
 			local function AreaLabelOnUpdate(self)
@@ -1537,7 +1637,7 @@
 							minFish = mapTable[positionMapInfo.mapID]["minFish"]
 						end
 						-- Show level range if map zone exists in table
-						if not LeaMapsLC.NewPatch and name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
+						if name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
 							local playerLevel = UnitLevel("player")
 							local color
 							if playerLevel < playerMinLevel then
@@ -1599,6 +1699,13 @@
 			-- Add controls
 			LeaMapsLC:MakeTx(levelFrame, "Settings", 16, -72)
 			LeaMapsLC:MakeCB(levelFrame, "ShowFishingLevels", "Show minimum fishing skill levels", 16, -92, false, "If checked, the minimum fishing skill levels will be shown.")
+
+			if LeaMapsLC.NewPatch then
+				LeaMapsLC["ShowFishingLevels"] = "Off"
+				LeaMapsCB["ShowFishingLevels"]:Disable()
+				LeaMapsCB["ShowFishingLevels"]:SetAlpha(0.3)
+				LeaMapsCB["ShowFishingLevels"].tiptext = LeaMapsCB["ShowFishingLevels"].tiptext .. "|n|n|cff00AAFF" .. L["Not currently available for Cataclysm Classic."]
+			end
 
 			-- Back to Main Menu button click
 			levelFrame.b:HookScript("OnClick", function()
@@ -2094,17 +2201,17 @@
 								myPOI["description"] = pinInfo[5]
 
 								-- Show dungeon required level
-								if NoLongerUsingThis and LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[9] then
+								if LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[9] then
 									local playerLevel = UnitLevel("player")
 									local color
 									local dungeonReqLevel = pinInfo[9]
-									if dungeonReqLevel then
+									if not LeaMapsLC.NewPatch and dungeonReqLevel then
 										myPOI["description"] = myPOI["description"] .." (" .. L["req"] .. ": " .. dungeonReqLevel .. ")"
 									end
 								end
 
 								-- Show meeting stone level range
-								if LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[10] and pinInfo[11] then
+								if not LeaMapsLC.NewPatch and LeaMapsLC["ShowZoneLevels"] == "On" and pinInfo[10] and pinInfo[11] then
 									local playerLevel = UnitLevel("player")
 									local color, name
 									local dungeonMinSum, dungeonMaxSum = pinInfo[10], pinInfo[11]
@@ -3763,8 +3870,8 @@
 				end
 
 				if LeaMapsLC.NewPatch then
-					LeaMapsLC["ShowZoneLevels"] = "Off"
-					Lock("ShowZoneLevels", "Not available for Cataclysm Classic") -- Set map opacity
+					--LeaMapsLC["ShowZoneLevels"] = "Off"
+					--Lock("ShowZoneLevels", "Not available for Cataclysm Classic") -- Set map opacity
 					local debug = nil
 					if debug then
 						TaxiFrame:SetScale(1.8)
