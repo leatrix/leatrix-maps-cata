@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.191.alpha.1 (19th April 2024)
+	-- 	Leatrix Maps 3.0.191 (19th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.191.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.191"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1537,7 +1537,7 @@
 							minFish = mapTable[positionMapInfo.mapID]["minFish"]
 						end
 						-- Show level range if map zone exists in table
-						if NoLongerUsingThis and name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
+						if not LeaMapsLC.NewPatch and name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
 							local playerLevel = UnitLevel("player")
 							local color
 							if playerLevel < playerMinLevel then
@@ -1555,7 +1555,7 @@
 								name = name..color.." ("..playerMaxLevel..")"..FONT_COLOR_CODE_CLOSE
 							end
 						end
-						if minFish and LeaMapsLC["ShowFishingLevels"] == "On" then
+						if not LeaMapsLC.NewPatch and minFish and LeaMapsLC["ShowFishingLevels"] == "On" then
 							description = L["Fishing"] .. ": " .. minFish
 						end
 					else

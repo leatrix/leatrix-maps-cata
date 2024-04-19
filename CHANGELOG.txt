@@ -1,5 +1,6 @@
-﻿3.0.191.alpha.1 - 19th April 2024
+﻿3.0.191 - 19th April 2024
 - Cataclysm Classic Beta: Added Razorfen Kraul icon.
+- Fixed 'Show zone levels'.
 
 3.0.190 - 19th April 2024
 - Cataclysm Classic Beta: You can now enable 'Show points of interest' to see dungeons, raids and flight points.
