@@ -1,6 +1,8 @@
-﻿3.0.190.alpha.1 - 16th April 2024
-- Cataclysm Classic Beta: Fixed Blasted Lands, The Cape of Stranglethorn and Kezan reveal data.
+﻿3.0.190 - 19th April 2024
+- Cataclysm Classic Beta: You can now enable 'Show points of interest' to see dungeons, raids and flight points.
 - Cataclysm Classic Beta: Added 'The Maelstrom' map dropdown menu.
+- Cataclysm Classic Beta: Fixed Blasted Lands, The Cape of Stranglethorn and Kezan reveal data.
+- Cataclysm Classic Beta: The 'Show zone levels' and 'Show zone crossings' options are currently unavailable.
 
 3.0.189 - 16th April 2024
 - Updated for Cataclysm Classic Beta.
