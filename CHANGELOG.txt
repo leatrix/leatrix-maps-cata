@@ -1,4 +1,7 @@
-﻿3.0.190 - 19th April 2024
+﻿3.0.191.alpha.1 - 19th April 2024
+- Cataclysm Classic Beta: Added Razorfen Kraul icon.
+
+3.0.190 - 19th April 2024
 - Cataclysm Classic Beta: You can now enable 'Show points of interest' to see dungeons, raids and flight points.
 - Cataclysm Classic Beta: Added 'The Maelstrom' map dropdown menu.
 - Cataclysm Classic Beta: Fixed Blasted Lands, The Cape of Stranglethorn and Kezan reveal data.

@@ -802,6 +802,7 @@
 			{"FlightH", 39.8, 20.3, L["Hunter's Hill"] .. ", " .. L["Southern Barrens"], nil, tHTex, nil, nil},
 			{"FlightH", 41.6, 47.6, L["Vendetta Point"] .. ", " .. L["Southern Barrens"], nil, tHTex, nil, nil},
 			{"FlightH", 41.2, 70.8, L["Desolation Hold"] .. ", " .. L["Southern Barrens"], nil, tHTex, nil, nil},
+			{"Dungeon", 41.0, 94.6, L["Razorfen Kraul"], L["Dungeon"], dnTex},
 		},
 
 		--[[Kelp'thar Forest (Vashj'ir)]] [201] = {
