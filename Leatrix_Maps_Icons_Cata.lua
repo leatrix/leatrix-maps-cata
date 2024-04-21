@@ -283,10 +283,10 @@
 			{"Arrow", 15.1, 31.9, L["Tirisfal Glades"], nil, arTex, nil, nil, nil, nil, nil, 6.1, 1420},
 		},
 		--[[Isle of Quel'Danas]] [1957] = {
-			{"Dungeon", 61.2, 30.9, L["Magisters' Terrace"], L["Dungeon"], dnTex, 68, 75}, -- sum cap was 70
+			{"Dungeon", 61.2, 30.9, L["Magisters' Terrace"], L["Dungeon"], dnTex, 68, 75},
 			{"Raid", 44.3, 45.6, L["Sunwell Plateau"], L["Raid"], rdTex, 70, 70},
-			{"FlightA", 48.5, 25.2, L["Sun's Reach Harbor"] .. ", " .. L["Isle of Quel Danas"], nil, tATex, nil, nil},
-			{"FlightH", 48.4, 25.1, L["Sun's Reach Harbor"] .. ", " .. L["Isle of Quel Danas"], nil, tHTex, nil, nil},
+			{"FlightA", 48.5, 25.2, L["Shattered Sun Staging Area"] .. ", " .. L["Isle of Quel Danas"], nil, tATex, nil, nil},
+			{"FlightH", 48.4, 25.1, L["Shattered Sun Staging Area"] .. ", " .. L["Isle of Quel Danas"], nil, tHTex, nil, nil},
 		},
 		--[[Eversong Woods]] [1941] = {
 			{"FlightH", 43.9, 70.0, L["Fairbreeze Village"] .. ", " .. L["Eversong Woods"], nil, tHTex, nil, nil},
@@ -602,10 +602,8 @@
 		--[[Shattrath City]] [1955] = {
 			{"FlightN", 64.1, 41.1, L["Shattrath City"] .. ", " .. L["Terokkar Forest"], nil, tNTex, nil, nil},
 			{"TravelN", 48.5, 42.0, L["Isle of Quel'Danas"], L["Portal"], pNTex, nil, nil, nil, nil, nil, 0, 1957},
-			{"TravelA", 55.8, 36.5, L["Alliance Cities"], L["Darnassus"] .. ", " .. L["Stormwind"] .. ", " .. L["Ironforge"], pATex},
-			{"TravelH", 52.2, 52.9, L["Horde Cities"], L["Thunder Bluff"] .. ", " .. L["Orgrimmar"] .. ", " .. L["Undercity"], pHTex},
-			{"TravelA", 59.6, 46.7, L["The Exodar"], L["Portal"], pATex, nil, nil, nil, nil, nil, 0, 1947},
-			{"TravelH", 59.2, 48.4, L["Silvermoon City"], L["Portal"], pHTex, nil, nil, nil, nil, nil, 0, 1954},
+			{"TravelA", 57.2, 48.2, L["Stormwind City"] .. ", " .. L["Elwynn Forest"], L["Portal"], pATex},
+			{"TravelH", 56.8, 48.9, L["Orgrimmar"] .. ", " .. L["Durotar"], L["Portal"], pHTex},
 			{"Arrow", 62.3, 7.9, L["Terokkar Forest"], nil, arTex, nil, nil, nil, nil, nil, 6.1, 1952},
 			{"Arrow", 79.0, 57.5, L["Terokkar Forest"], nil, arTex, nil, nil, nil, nil, nil, 4, 1952},
 			{"Arrow", 23.0, 49.5, L["Nagrand"], L["Aldor"], arTex, nil, nil, nil, nil, nil, 1.9, 1951},
