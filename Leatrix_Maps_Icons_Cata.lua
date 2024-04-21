@@ -56,9 +56,12 @@
 			{"Arrow", 58.8, 59.7, L["Hellfire Peninsula"], L["The Dark Portal"], arTex, nil, nil, nil, nil, nil, 3.5, 1944},
 		},
 		--[[Tirisfal Glades]] [1420] = {
-			{"Dungeon", 82.5, 33.3, 
-				L["Scarlet Halls"] .. ", " .. 
-				L["Scarlet Monastery"], L["Dungeon"], dnTex, 26, 45},
+			{"Dungeon", 82.5, 33.3, L["Scarlet Monastery"],
+				L["Graveyard"] .. " (26-36), " ..
+				L["Library"] .. " (29-39), " ..
+				L["Armory"] .. " (34-42), " ..
+				L["Cathedral"] .. " (37-45)"
+				, dnTex, 26, 45},
 			{"FlightH", 58.8, 51.9, L["Brill"] .. ", " .. L["Tirisfal Glades"], nil, tHTex, nil, nil},
 			{"FlightH", 83.4, 70.0, L["The Bulwark"] .. ", " .. L["Tirisfal Glades"], nil, tHTex, nil, nil},
 			{"TravelH", 60.7, 58.8, L["Zeppelin to"] .. " " .. L["Orgrimmar"] .. ", " .. L["Durotar"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1411},

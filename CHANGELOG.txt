@@ -1,8 +1,9 @@
 ﻿3.0.192.alpha.1 - 19th April 2024
 - Cataclysm Classic Beta: Added dungeon recommended level ranges.
+- Cataclysm Classic Beta: Fixed Scarlet Monastery dungeon icon.
 
 3.0.191 - 19th April 2024
-- Cataclysm Classic Beta: Added Razorfen Kraul icon.
+- Cataclysm Classic Beta: Added Razorfen Kraul dungeon icon.
 - Fixed 'Show zone levels'.
 
 3.0.190 - 19th April 2024
