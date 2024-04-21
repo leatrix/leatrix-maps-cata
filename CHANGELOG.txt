@@ -1,4 +1,7 @@
-﻿3.0.191 - 19th April 2024
+﻿3.0.192.alpha.1 - 19th April 2024
+- Cataclysm Classic Beta: Added dungeon recommended level ranges.
+
+3.0.191 - 19th April 2024
 - Cataclysm Classic Beta: Added Razorfen Kraul icon.
 - Fixed 'Show zone levels'.
 
