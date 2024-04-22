@@ -38,7 +38,8 @@
 			{"Arrow", 20.9, 30.6, L["Hillsbrad Foothills"], nil, arTex, nil, nil, nil, nil, nil, 1, 1424},
 		},
 		--[[Badlands]] [1418] = {
-			{"Dungeon", 41.7, 11.6, L["Uldaman"], L["Dungeon"], dnTex, 37, 45, 30, 36, 80}, -- sum cap was 44
+			{"Dungeon", 41.7, 11.6, L["Uldaman"], L["Dungeon"], dnTex, 37, 45, 30, 36, 80},
+			{"Dungeon", 58.6, 37.0, L["Uldaman (rear entrance)"], L["Dungeon"], dnTex, 37, 45, 30, 36, 80},
 			{"FlightA", 21.6, 57.6, L["Dragon's Mouth"] .. ", " .. L["Badlands"], nil, tATex, nil, nil},
 			{"FlightA", 48.8, 36.2, L["Dustwind Dig"] .. ", " .. L["Badlands"], nil, tATex, nil, nil},
 			{"FlightN", 64.2, 35.2, L["Fuselight"] .. ", " .. L["Badlands"], nil, tNTex, nil, nil},
