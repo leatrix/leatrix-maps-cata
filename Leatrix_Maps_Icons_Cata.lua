@@ -227,8 +227,8 @@
 			{"FlightA", 47.9, 11.9, L["Rebel Camp"] .. ", " .. L["Northern Stranglethorn"], nil, tATex, nil, nil},
 			{"FlightH", 39.0, 51.2, L["Grom'gol Base Camp"] .. ", " .. L["Northern Stranglethorn"], nil, tHTex, nil, nil},
 			{"FlightH", 62.4, 39.2, L["Bambala"] .. ", " .. L["Northern Stranglethorn"], nil, tHTex, nil, nil},
-			{"TravelH", 31.4, 30.2, L["Zeppelin to"] .. " " .. L["Orgrimmar"] .. ", " .. L["Durotar"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1411},
-			{"TravelH", 31.6, 29.1, L["Zeppelin to"] .. " " .. L["Undercity"] .. ", " .. L["Tirisfal Glades"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1420},
+			{"TravelH", 37.1, 52.4, L["Zeppelin to"] .. " " .. L["Orgrimmar"] .. ", " .. L["Durotar"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1411},
+			{"TravelH", 37.6, 51.0, L["Zeppelin to"] .. " " .. L["Undercity"] .. ", " .. L["Tirisfal Glades"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1420},
 		},
 		--[[Swamp of Sorrows]] [1435] = {
 			{"Dungeon", 69.7, 53.5, L["Temple of Atal'Hakkar"], L["Dungeon"], dnTex, 50, 60},
