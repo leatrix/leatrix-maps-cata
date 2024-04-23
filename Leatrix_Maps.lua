@@ -21,8 +21,8 @@
 	-- Check Wow version is valid
 	do
 		local gameversion, gamebuild, gamedate, gametocversion = GetBuildInfo()
-		if gametocversion and gametocversion < 30000 or gametocversion > 49999 then
-			-- Game client is not Wow Classic
+		if gametocversion and gametocversion < 40000 or gametocversion > 49999 then
+			-- Game client is not Cataclysm Classic
 			C_Timer.After(2, function()
 				print(L["LEATRIX MAPS: WRONG VERSION INSTALLED!"])
 			end)
