@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 3.0.192.alpha.1 (19th April 2024)
+	-- 	Leatrix Maps 3.0.192.alpha.2 (19th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "3.0.192.alpha.1"
+	LeaMapsLC["AddonVer"] = "3.0.192.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -2168,8 +2168,6 @@
 							or LeaMapsLC["ShowTravelPoints"] == "On" and playerFaction == "Horde" and (pinInfo[1] == "FlightH" or pinInfo[1] == "FlightN" or pinInfo[1] == "TravelH" or pinInfo[1] == "TravelN")
 							or LeaMapsLC["ShowTravelOpposing"] == "On" and playerFaction == "Alliance" and (pinInfo[1] == "FlightH" or pinInfo[1] == "FlightN" or pinInfo[1] == "TravelH" or pinInfo[1] == "TravelN")
 							or LeaMapsLC["ShowTravelOpposing"] == "On" and playerFaction == "Horde" and (pinInfo[1] == "FlightA" or pinInfo[1] == "FlightN" or pinInfo[1] == "TravelA" or pinInfo[1] == "TravelN")
-							or LeaMapsLC["ShowSpiritHealers"] == "On" and (pinInfo[1] == "Spirit")
-							or LeaMapsLC["ShowZoneCrossings"] == "On" and (pinInfo[1] == "Arrow")
 							then
 								local myPOI = {}
 								myPOI["position"] = CreateVector2D(pinInfo[2] / 100, pinInfo[3] / 100)
@@ -2220,11 +2218,6 @@
 									else
 										myPOI["description"] = myPOI["description"] .. " (" .. L["sum"] .. ": " .. dungeonMaxSum .. ")"
 									end
-								end
-
-								-- Show zone crossings
-								if LeaMapsLC["ShowZoneCrossings"] == "On" then
-									myPOI["ZoneCrossing"] = pinInfo[13]
 								end
 
 								myPOI["atlasName"] = pinInfo[6]
@@ -2305,36 +2298,6 @@
 			LeaMapsLC:MakeCB(poiFrame, "ShowDungeonIcons", "Show dungeons and raids", 16, -92, false, "If checked, dungeons and raids will be shown.")
 			LeaMapsLC:MakeCB(poiFrame, "ShowTravelPoints", "Show travel points for same faction", 16, -112, false, "If checked, travel points for the same faction will be shown.|n|nThis includes flight points, boat harbors, zeppelin towers and tram stations.")
 			LeaMapsLC:MakeCB(poiFrame, "ShowTravelOpposing", "Show travel points for opposing faction", 16, -132, false, "If checked, travel points for the opposing faction will be shown.|n|nThis includes flight points, boat harbors, zeppelin towers and tram stations.")
-			LeaMapsLC:MakeCB(poiFrame, "ShowZoneCrossings", "Show zone crossings", 16, -152, false, "If checked, zone crossings will be shown.|n|nThese are clickable arrows that indicate the zone exit pathways.")
-			LeaMapsLC:MakeCB(poiFrame, "ShowSpiritHealers", "Show spirit healers", 16, -172, false, "If checked, spirit healers will be shown.")
-
-			-- Disable Show zone crossings for Cataclysm Classic Beta
-			if LeaMapsLC.NewPatch then
-				-- Function to disable and lock an option and add a note to the tooltip
-				local function Lock(option, reason, optmodule)
-					LeaLockList[option] = LeaMapsLC[option]
-					LeaMapsLC:LockItem(LeaMapsCB[option], true)
-					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "|n|n|cff00AAFF" .. reason
-					if optmodule then
-						LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. " " .. optmodule .. " " .. L["module"]
-					end
-					LeaMapsCB[option].tiptext = LeaMapsCB[option].tiptext .. "."
-					-- Remove hover from configuration button if there is one
-					local temp = {LeaMapsCB[option]:GetChildren()}
-					if temp and temp[1] and temp[1].t and temp[1].t:GetTexture() == "Interface\\WorldMap\\Gear_64.png" then
-						temp[1]:SetHighlightTexture(0)
-						temp[1]:SetScript("OnEnter", nil)
-					end
-				end
-
-				LeaMapsLC["ShowZoneCrossings"] = "Off"
-				Lock("ShowZoneCrossings", "Not currently available for Cataclysm Classic") -- Set map opacity
-			end
-
-
-			-- Hide spirit healers option for now
-			LeaMapsLC["ShowSpiritHealers"] = "Off"
-			LeaMapsCB["ShowSpiritHealers"]:Hide()
 
 			-- Function to refresh points of interest
 			local function SetPointsOfInterest()
@@ -2346,8 +2309,6 @@
 			LeaMapsCB["ShowDungeonIcons"]:HookScript("OnClick", SetPointsOfInterest)
 			LeaMapsCB["ShowTravelPoints"]:HookScript("OnClick", SetPointsOfInterest)
 			LeaMapsCB["ShowTravelOpposing"]:HookScript("OnClick", SetPointsOfInterest)
-			LeaMapsCB["ShowSpiritHealers"]:HookScript("OnClick", SetPointsOfInterest)
-			LeaMapsCB["ShowZoneCrossings"]:HookScript("OnClick", SetPointsOfInterest)
 			LeaMapsCB["ShowZoneLevels"]:HookScript("OnClick", SetPointsOfInterest)
 
 			-- Back to Main Menu button click
@@ -2361,8 +2322,6 @@
 				LeaMapsLC["ShowDungeonIcons"] = "On"
 				LeaMapsLC["ShowTravelPoints"] = "On"
 				LeaMapsLC["ShowTravelOpposing"] = "Off"
-				LeaMapsLC["ShowSpiritHealers"] = "On"
-				LeaMapsLC["ShowZoneCrossings"] = "On"
 				SetPointsOfInterest()
 				poiFrame:Hide(); poiFrame:Show()
 			end)
@@ -2374,8 +2333,6 @@
 					LeaMapsLC["ShowDungeonIcons"] = "On"
 					LeaMapsLC["ShowTravelPoints"] = "On"
 					LeaMapsLC["ShowTravelOpposing"] = "Off"
-					LeaMapsLC["ShowSpiritHealers"] = "On"
-					LeaMapsLC["ShowZoneCrossings"] = "On"
 					SetPointsOfInterest()
 					if poiFrame:IsShown() then poiFrame:Hide(); poiFrame:Show(); end
 				else
@@ -3696,8 +3653,6 @@
 				LeaMapsDB["ShowDungeonIcons"] = "On"
 				LeaMapsDB["ShowTravelPoints"] = "On"
 				LeaMapsDB["ShowTravelOpposing"] = "Off"
-				LeaMapsDB["ShowSpiritHealers"] = "On"
-				LeaMapsDB["ShowZoneCrossings"] = "On"
 				LeaMapsDB["ShowZoneLevels"] = "On"
 				LeaMapsDB["ShowFishingLevels"] = "On"
 				LeaMapsDB["ShowCoords"] = "On"
@@ -3811,8 +3766,6 @@
 			LeaMapsLC:LoadVarChk("ShowDungeonIcons", "On")				-- Show dungeons and raids
 			LeaMapsLC:LoadVarChk("ShowTravelPoints", "On")				-- Show travel points for same faction
 			LeaMapsLC:LoadVarChk("ShowTravelOpposing", "Off")			-- Show travel points for opposing faction
-			LeaMapsLC:LoadVarChk("ShowSpiritHealers", "On")				-- Show spirit healers
-			LeaMapsLC:LoadVarChk("ShowZoneCrossings", "On")				-- Show zone crossings
 			LeaMapsLC:LoadVarChk("ShowZoneLevels", "On")				-- Show zone levels
 			LeaMapsLC:LoadVarChk("ShowFishingLevels", "On")				-- Show fishing levels
 			LeaMapsLC:LoadVarChk("ShowCoords", "On")					-- Show coordinates
@@ -3936,8 +3889,6 @@
 			LeaMapsDB["ShowDungeonIcons"] = LeaMapsLC["ShowDungeonIcons"]
 			LeaMapsDB["ShowTravelPoints"] = LeaMapsLC["ShowTravelPoints"]
 			LeaMapsDB["ShowTravelOpposing"] = LeaMapsLC["ShowTravelOpposing"]
-			LeaMapsDB["ShowSpiritHealers"] = LeaMapsLC["ShowSpiritHealers"]
-			LeaMapsDB["ShowZoneCrossings"] = LeaMapsLC["ShowZoneCrossings"]
 			LeaMapsDB["ShowZoneLevels"] = LeaMapsLC["ShowZoneLevels"]
 			LeaMapsDB["ShowFishingLevels"] = LeaMapsLC["ShowFishingLevels"]
 			LeaMapsDB["ShowCoords"] = LeaMapsLC["ShowCoords"]
