@@ -14,6 +14,6 @@
 Leatrix_Maps_Library.lua
 Leatrix_Maps_Locale.lua
 Leatrix_Maps.xml
-Leatrix_Maps_Icons_Cata.lua
+Leatrix_Maps_Icons.lua
 Leatrix_Maps_Reveal_Cata.lua
 Leatrix_Maps.lua
