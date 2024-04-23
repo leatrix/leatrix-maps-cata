@@ -61,14 +61,14 @@
 			{"TravelH", 59.1, 58.9, L["Zeppelin to"] .. " " .. L["Vengeance Landing"] .. ", " .. L["Howling Fjord"], nil, pHTex},
 		},
 		--[[Silverpine Forest]] [1421] = {
-			{"Dungeon", 44.8, 67.8, L["Shadowfang Keep"], L["Dungeon"], dnTex, 18, 26, 14, 17, 80}, -- sum cap was 25
+			{"Dungeon", 44.8, 67.8, L["Shadowfang Keep"], L["Dungeon"], dnTex, 18, 26, 14, 17, 80},
 			{"FlightH", 45.4, 42.5, L["The Sepulcher"] .. ", " .. L["Silverpine Forest"], nil, tHTex, nil, nil},
 			{"FlightH", 57.8, 8.8, L["Forsaken High Command"] .. ", " .. L["Silverpine Forest"], nil, tHTex, nil, nil},
 			{"FlightH", 45.8, 21.8, L["Forsaken Rear Guard"] .. ", " .. L["Silverpine Forest"], nil, tHTex, nil, nil},
 			{"FlightH", 50.8, 63.6, L["The Forsaken Front"] .. ", " .. L["Silverpine Forest"], nil, tHTex, nil, nil},
 		},
 		--[[Western Plaguelands]] [1422] = {
-			{"Dungeon", 69.7, 73.2, L["Scholomance"], L["Dungeon"], dnTex, 38, 48, 45, 56, 80}, -- sum cap was 61
+			{"Dungeon", 69.7, 73.2, L["Scholomance"], L["Dungeon"], dnTex, 38, 48, 45, 56, 80},
 			{"FlightA", 39.4, 69.5, L["Andorhal"] .. ", " .. L["Western Plaguelands"], nil, tATex, nil, nil},
 			{"FlightA", 42.9, 85.1, L["Chillwind Camp"] .. ", " .. L["Western Plaguelands"], nil, tATex, nil, nil},
 			{"FlightH", 46.6, 64.6, L["Andorhal"] .. ", " .. L["Western Plaguelands"], nil, tHTex, nil, nil},
@@ -196,7 +196,7 @@
 			{"TravelA", 4.6, 56.9, L["Boat to"] .. " " .. L["Valgarde"] .. ", " .. L["Howling Fjord"], nil, fATex, nil, nil, nil, nil, nil, 0, 117},
 		},
 		--[[Stormwind City]] [1453] = {
-			{"Dungeon", 52.4, 70.0, L["The Stockade"], L["Dungeon"], dnTex, 22, 30, 15, 21, 80}, -- sum cap was 29
+			{"Dungeon", 52.4, 70.0, L["The Stockade"], L["Dungeon"], dnTex, 22, 30, 15, 21, 80},
 			{"FlightA", 70.9, 72.5, L["Trade District"] .. ", " .. L["Stormwind"], nil, tATex, nil, nil},
 			{"TravelA", 66.6, 34.7, L["Tram to"] .. " " .. L["Tinker Town"] .. ", " .. L["Ironforge"], nil, fATex, nil, nil, nil, nil, nil, 0, 1455},
 			{"TravelA", 22.5, 56.1, L["Boat to"] .. " " .. L["Rut'theran Village"] .. ", " .. L["Teldrassil"], nil, fATex, nil, nil, nil, nil, nil, 0, 1439},
@@ -322,7 +322,7 @@
 			{"TravelA", 71.6, 56.4, L["Boat to"] .. " " .. L["Menethil Harbor"] .. ", " .. L["Wetlands"], nil, fATex, nil, nil, nil, nil, nil, 0, 1437},
 		},
 		--[[Tanaris]] [1446] = {
-			{"Dungeon", 39.2, 21.3, L["Zul'Farrak"], L["Dungeon"], dnTex, 44, 54, 35, 42, 80}, -- sum cap was 50
+			{"Dungeon", 39.2, 21.3, L["Zul'Farrak"], L["Dungeon"], dnTex, 44, 54, 35, 42, 80},
 			{"Dunraid", 64.8, 50.0, L["Caverns of Time"], 
 				L["Culling of Stratholme"] .. " (78-80), " .. 
 				L["Black Morass"]  .. ",|n" .. 
@@ -486,9 +486,9 @@
 
 		--[[Borean Tundra]] [114] = {
 			{"Dunraid", 27.6, 26.6, L["The Nexus"],
-				L["The Nexus"]  .. " (70-79) (" .. " (" .. L["sum"] .. ": 70-80)" .. "|n" ..
-				L["The Oculus"]  .. " (78-80) " .. " ("  .. L["sum"] .. ": 70-80)" .. "|n" ..
-				L["The Eye of Eternity"] .. " (80-83) (" .. L["sum"] .. ": 70-80)",
+				L["The Nexus"]  .. " (70-79), " ..
+				L["The Oculus"]  .. " (78-80), " ..
+				L["The Eye of Eternity"] .. " (80-83)",
 				dnTex, 69, 80},
 			{"FlightA", 56.6, 20.1, L["Fizzcrank Airstrip"] .. ", " .. L["Borean Tundra"], nil, tATex, nil, nil}, -- Kara Thricestar
 			{"FlightA", 58.7, 68.3, L["Valiance Keep"] .. ", " .. L["Borean Tundra"], nil, tATex, nil, nil}, -- Tomas Riverwell
@@ -520,12 +520,12 @@
 		--[[Dragonblight]] [115] = {
 			{"Dungeon", 26.2, 49.6,
 				L["Azjol-Nerub"], 
-				L["Azjol-Nerub"] .. " (72-80) (" .. L["sum"] .. ": 70-80)" .. "|n" ..
-				L["The Old Kingdom"] .. " (72-80) (" .. L["sum"] .. ": 70-80)",
+				L["Azjol-Nerub"] .. " (72-80), " ..
+				L["The Old Kingdom"] .. " (72-80)",
 				dnTex, 72, 75},
 			{"Raid", 59.6, 51.1, L["Wyrmrest Temple"],
-				L["The Ruby Sanctum"] .. " (80-83) (" .. L["sum"] .. ": 80)" .. "|n" ..
-				L["The Obsidian Sanctum"] .. " (80-83) (" .. L["sum"] .. ": 80)",
+				L["The Ruby Sanctum"] .. " (80-83)," ..
+				L["The Obsidian Sanctum"] .. " (80-83)",
 				rdTex, 80, 80},
 			{"Raid", 87.4, 51.1, L["Naxxramas"], L["Raid"], rdTex, 80, 83, 77, 77, 80, 0, 162},
 			{"FlightA", 39.5, 25.9, L["Fordragon Hold"] .. ", " .. L["Dragonblight"], nil, tATex, nil, nil}, -- Derek Rammel
@@ -549,8 +549,8 @@
 		},
 
 		--[[Howlong Fjord]] [117] = {
-			{"Dungeon", 58.8, 48.3, L["Utgarde Keep"], L["Dungeon"]  .. " (" .. L["sum"] .. ": 68-80)", dnTex, 68, 78, nil, nil, nil, 0, 133},
-			{"Dungeon", 57.3, 46.8, L["Utgarde Pinnacle"], L["Dungeon"]  .. " (" .. L["sum"] .. ": 78-80)", dnTex, 78, 80, nil, nil, nil, 0, 137},
+			{"Dungeon", 58.8, 48.3, L["Utgarde Keep"], L["Dungeon"], dnTex, 68, 78, nil, nil, nil, 0, 133},
+			{"Dungeon", 57.3, 46.8, L["Utgarde Pinnacle"], L["Dungeon"], dnTex, 78, 80, nil, nil, nil, 0, 137},
 			{"FlightA", 59.8, 63.2, L["Valgarde Port"] .. ", " .. L["Howling Fjord"], nil, tATex, nil, nil}, -- Pricilla Winterwind
 			{"FlightA", 60.1, 16.1, L["Fort Wildervar"] .. ", " .. L["Howling Fjord"], nil, tATex, nil, nil}, -- James Ormsby
 			{"FlightA", 31.3, 44.0, L["Westguard Keep"] .. ", " .. L["Howling Fjord"], nil, tATex, nil, nil}, -- Greer Orehammer
