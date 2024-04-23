@@ -478,10 +478,8 @@
 			{"Arrow", 35.7, 72.4, L["Felwood"] .. ", " .. L["Winterspring"], L["Timbermaw Hold"], arTex, nil, nil, nil, nil, nil, 3, 1448},
 		},
 		--[[Silithus]] [1451] = {
-			{"Raid", 28.6, 92.4, L["Ahn'Qiraj"], 
-				L["Ruins of Ahn'Qiraj"] .. " (60), " .. 
-				L["Temple of Ahn'Qiraj"] .. " (60)", 
-				rdTex, 60, 60, 50, 60, 80},
+			{"Raid", 24.4, 87.5, L["Temple of Ahn'Qiraj"], L["Raid"], rdTex, 60, 60},
+			{"Raid", 36.5, 93.9, L["Ruins of Ahn'Qiraj"], L["Raid"], rdTex, 60, 60},
 			{"FlightA", 54.4, 32.7, L["Cenarion Hold"] .. ", " .. L["Silithus"], nil, tATex, nil, nil},
 			{"FlightH", 52.8, 34.6, L["Cenarion Hold"] .. ", " .. L["Silithus"], nil, tHTex, nil, nil},
 			{"Arrow", 82.4, 16.0, L["Un'Goro Crater"], nil, arTex, nil, nil, nil, nil, nil, 5.4, 1449},
@@ -906,6 +904,12 @@
 			{"FlightN", 26.6, 8.2, L["Oasis of Vir'sar"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
 			{"FlightN", 22.2, 64.8, L["Schnottz's Landing"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
 			{"FlightN", 45.8, 76.2, L["Ramkahen"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
+		},
+
+		--[[Ahn'Qiraj: The Fallen Kingdom]] [327] = {
+			{"Raid", 46.8, 7.5, L["Temple of Ahn'Qiraj"], L["Raid"], rdTex, 60, 60},
+			{"Raid", 58.9, 14.3, L["Ruins of Ahn'Qiraj"], L["Raid"], rdTex, 60, 60},
+
 		},
 
 	}
