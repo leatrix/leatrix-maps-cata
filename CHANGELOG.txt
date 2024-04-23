@@ -1,10 +1,9 @@
-﻿3.0.192.alpha.2 - 19th April 2024
-- Cataclysm Classic Beta: Added dungeon recommended level ranges.
-- Cataclysm Classic Beta: Updated dungeon icons.
-
-3.0.191 - 19th April 2024
-- Cataclysm Classic Beta: Updated dungeon icons.
-- Fixed 'Show zone levels'.
+﻿4.0.00 - 23rd April 2024
+- Welcome to Cataclysm Classic.
+- Map reveal data, flight points, zone levels and dungeon levels have been updated.
+- Added 'The Maelstrom' to the map dropdown menu.
+- The 'Show zone crossings' and 'Show fishing skill levels' options have been removed.
+- This release and future releases will only work with Cataclysm Classic (not Wrath of the Lich King Classic).
 
 3.0.190 - 19th April 2024
 - Cataclysm Classic Beta: You can now enable 'Show points of interest' to see dungeons, raids and flight points.
