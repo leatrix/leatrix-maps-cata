@@ -1977,10 +1977,6 @@
 		-- Show points of interest (must be after zone levels)
 		----------------------------------------------------------------------
 
-		-- Dungeon levels: https://wowpedia.fandom.com/wiki/Instances_by_level?direction=next&oldid=1191334
-		-- Meeting stone levels: https://www.reddit.com/r/classicwowtbc/comments/nfbdvb/tbc_classic_summoning_stone_level_requirements/
-		-- Spirit healers: https://db.endless.gg/?npc=6491
-
 		do
 
 			-- Get table from file
