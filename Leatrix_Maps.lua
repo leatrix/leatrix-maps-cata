@@ -1509,7 +1509,6 @@
 
 					-- Northrend
 					-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
-					-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
 					--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,},
 					--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,},
 					--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
@@ -1536,82 +1535,81 @@
 				mapTable = {
 
 					-- Eastern Kingdoms
-					--[[Alterac Mountains]]		[1416] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
-					--[[Arathi Highlands]]		[1417] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
+					--[[Alterac Mountains]]		[1416] = {minLevel = 30, 	maxLevel = 40,},
+					--[[Arathi Highlands]]		[1417] = {minLevel = 30, 	maxLevel = 40,},
 					--[[Badlands]]				[1418] = {minLevel = 35, 	maxLevel = 45,},
-					--[[Blasted Lands]]			[1419] = {minLevel = 45, 	maxLevel = 55},
-					--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 58,		minFish = "330",},
-					--[[Deadwind Pass]]			[1430] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
-					--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[Duskwood]]				[1431] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
-					--[[Eastern Plaguelands]]	[1423] = {minLevel = 53, 	maxLevel = 60,		minFish = "330",},
-					--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10},
-					--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
-					--[[Ironforge]]				[1455] = {minFish = 1,},
-					--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-					--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70},
-					--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-					--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,		minFish = "55",},
-					--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 50},
-					--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
-					--[[Stormwind City]]		[1453] = {minFish = 1,},
-					--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 45,		minFish = "130 (205)",},
-					--[[Swamp of Sorrows]]		[1435] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
-					--[[The Hinterlands]]		[1425] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
-					--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[Undercity]]				[1458] = {minFish = 1,},
-					--[[Westfall]]				[1436] = {minLevel = 10, 	maxLevel = 20,		minFish = "1",},
-					--[[Western Plaguelands]]	[1422] = {minLevel = 51, 	maxLevel = 58,		minFish = "205",},
-					--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,		minFish = "55",},
+					--[[Blasted Lands]]			[1419] = {minLevel = 45, 	maxLevel = 55,},
+					--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 58,},
+					--[[Deadwind Pass]]			[1430] = {minLevel = 55, 	maxLevel = 60,},
+					--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Duskwood]]				[1431] = {minLevel = 18, 	maxLevel = 30,},
+					--[[Eastern Plaguelands]]	[1423] = {minLevel = 53, 	maxLevel = 60,},
+					--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10,},
+					--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 30,},
+					--[[Ironforge]]				[1455] = {},
+					--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,},
+					--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70,},
+					--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 20,},
+					--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,},
+					--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 50,},
+					--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 20,},
+					--[[Stormwind City]]		[1453] = {},
+					--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 45,},
+					--[[Swamp of Sorrows]]		[1435] = {minLevel = 35, 	maxLevel = 45,},
+					--[[The Hinterlands]]		[1425] = {minLevel = 40, 	maxLevel = 50,},
+					--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Undercity]]				[1458] = {},
+					--[[Westfall]]				[1436] = {minLevel = 10, 	maxLevel = 20,},
+					--[[Western Plaguelands]]	[1422] = {minLevel = 51, 	maxLevel = 58,},
+					--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,},
 
 					-- Kalimdor
-					--[[Ashenvale]]				[1440] = {minLevel = 18, 	maxLevel = 30,		minFish = "55",},
-					--[[Azshara]]				[1447] = {minLevel = 45, 	maxLevel = 55,		minFish = "205 (330)",},
-					--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,		minFish = "1",},
-					--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,		minFish = "1",},
-					--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,		minFish = "1",},
-					--[[Darnassus]]				[1457] = {minFish = 1,},
-					--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 40,		minFish = "130",},
-					--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 45,		minFish = "130",},
-					--[[Felwood]]				[1448] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
-					--[[Feralas]]				[1444] = {minLevel = 40, 	maxLevel = 50,		minFish = "205 (330)",},
-					--[[Moonglade]]				[1450] = {minFish = 205,},
-					--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[Orgrimmar]]				[1454] = {minFish = 1,},
-					--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
-					--[[Stonetalon Mountains]]	[1442] = {minLevel = 15, 	maxLevel = 27,		minFish = "55",},
-					--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,		minFish = "205",},
-					--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 10,		minFish = "1",},
-					--[[The Barrens]]			[1413] = {minLevel = 10, 	maxLevel = 25,		minFish = "1",},
-					--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 35,		minFish = "130",},
-					--[[Thunder Bluff]]			[1456] = {minFish = 1,},
-					--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,		minFish = "205",},
-					--[[Winterspring]]			[1452] = {minLevel = 55, 	maxLevel = 60,		minFish = "330",},
+					--[[Ashenvale]]				[1440] = {minLevel = 18, 	maxLevel = 30,},
+					--[[Azshara]]				[1447] = {minLevel = 45, 	maxLevel = 55,},
+					--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,},
+					--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,},
+					--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,},
+					--[[Darnassus]]				[1457] = {},
+					--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 40,},
+					--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 45,},
+					--[[Felwood]]				[1448] = {minLevel = 48, 	maxLevel = 55,},
+					--[[Feralas]]				[1444] = {minLevel = 40, 	maxLevel = 50,},
+					--[[Moonglade]]				[1450] = {},
+					--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,},
+					--[[Orgrimmar]]				[1454] = {},
+					--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 60,},
+					--[[Stonetalon Mountains]]	[1442] = {minLevel = 15, 	maxLevel = 27,},
+					--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,},
+					--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 10,},
+					--[[The Barrens]]			[1413] = {minLevel = 10, 	maxLevel = 25,},
+					--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 35,},
+					--[[Thunder Bluff]]			[1456] = {},
+					--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,},
+					--[[Winterspring]]			[1452] = {minLevel = 55, 	maxLevel = 60,},
 
 					-- Outland
 					--[[Blade's Edge Mntains]]	[1949] = {minLevel = 65, 	maxLevel = 70,},
-					--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,		minFish = "280",},
-					--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,		minFish = "280 (380) (395)",},
-					--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,		minFish = "380",},
-					--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,		minFish = "280",},
-					--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,		minFish = "355 (405)",},
-					--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,		minFish = "305 (355)",},
+					--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,},
+					--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,},
+					--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,},
+					--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,},
+					--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,},
+					--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,},
 
 					-- Northrend
 					-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
-					-- Fishing levels: https://www.wowhead.com/wotlk/guides/fishing-profession-overview#fishing-table-by-zone
-					--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
-					--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,		minFish = "430 (525)",},
+					--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,},
+					--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,},
 					--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
 					--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
 					--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
-					--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,		minFish = "380 (475)",},
-					--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,		minFish = "380 (475)",},
-					--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,		minFish = "380 (475)",},
-					--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,		minFish = "405 (500)",},
-					--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,		minFish = "430 (525)",},
+					--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,},
+					--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,},
+					--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,},
+					--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,},
+					--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,},
 
 				}
 
@@ -1630,11 +1628,10 @@
 						-- print(positionMapInfo.mapID)
 						name = positionMapInfo.name
 						-- Get level range from table
-						local playerMinLevel, playerMaxLevel, minFish
+						local playerMinLevel, playerMaxLevel
 						if mapTable[positionMapInfo.mapID] then
 							playerMinLevel = mapTable[positionMapInfo.mapID]["minLevel"]
 							playerMaxLevel = mapTable[positionMapInfo.mapID]["maxLevel"]
-							minFish = mapTable[positionMapInfo.mapID]["minFish"]
 						end
 						-- Show level range if map zone exists in table
 						if name and playerMinLevel and playerMaxLevel and playerMinLevel > 0 and playerMaxLevel > 0 then
@@ -1654,9 +1651,6 @@
 							else
 								name = name..color.." ("..playerMaxLevel..")"..FONT_COLOR_CODE_CLOSE
 							end
-						end
-						if not LeaMapsLC.NewPatch and minFish and LeaMapsLC["ShowFishingLevels"] == "On" then
-							description = L["Fishing"] .. ": " .. minFish
 						end
 					else
 						name = MapUtil.FindBestAreaNameAtMouse(mapID, normalizedCursorX, normalizedCursorY)
@@ -1692,44 +1686,6 @@
 			-- Set zone levels when option is clicked and on startup
 			LeaMapsCB["ShowZoneLevels"]:HookScript("OnClick", SetZoneLevelScript)
 			SetZoneLevelScript()
-
-			-- Create configuraton panel
-			local levelFrame = LeaMapsLC:CreatePanel("Show zone levels", "levelFrame")
-
-			-- Add controls
-			LeaMapsLC:MakeTx(levelFrame, "Settings", 16, -72)
-			LeaMapsLC:MakeCB(levelFrame, "ShowFishingLevels", "Show minimum fishing skill levels", 16, -92, false, "If checked, the minimum fishing skill levels will be shown.")
-
-			if LeaMapsLC.NewPatch then
-				LeaMapsLC["ShowFishingLevels"] = "Off"
-				LeaMapsCB["ShowFishingLevels"]:Disable()
-				LeaMapsCB["ShowFishingLevels"]:SetAlpha(0.3)
-				LeaMapsCB["ShowFishingLevels"].tiptext = LeaMapsCB["ShowFishingLevels"].tiptext .. "|n|n|cff00AAFF" .. L["Not currently available for Cataclysm Classic."]
-			end
-
-			-- Back to Main Menu button click
-			levelFrame.b:HookScript("OnClick", function()
-				levelFrame:Hide()
-				LeaMapsLC["PageF"]:Show()
-			end)
-
-			-- Reset button click
-			levelFrame.r:HookScript("OnClick", function()
-				LeaMapsLC["ShowFishingLevels"] = "On"
-				levelFrame:Hide(); levelFrame:Show()
-			end)
-
-			-- Show configuration panel when configuration button is clicked
-			LeaMapsCB["ShowZoneLevelsBtn"]:HookScript("OnClick", function()
-				if IsShiftKeyDown() and IsControlKeyDown() then
-					-- Preset profile
-					LeaMapsLC["ShowFishingLevels"] = "On"
-					if levelFrame:IsShown() then levelFrame:Hide(); levelFrame:Show(); end
-				else
-					levelFrame:Show()
-					LeaMapsLC["PageF"]:Hide()
-				end
-			end)
 
 		end
 
@@ -3119,7 +3075,6 @@
 		LeaMapsLC:LockOption("UnlockMapFrame", "UnlockMapFrameBtn", false) -- Unlock map frame
 		LeaMapsLC:LockOption("SetMapOpacity", "SetMapOpacityBtn", true) -- Set map opacity
 		LeaMapsLC:LockOption("ShowPointsOfInterest", "ShowPointsOfInterestBtn", false) -- Show points of interest
-		LeaMapsLC:LockOption("ShowZoneLevels", "ShowZoneLevelsBtn", false) -- Show zone levels
 		LeaMapsLC:LockOption("EnhanceBattleMap", "EnhanceBattleMapBtn", true) -- Enhance battlefield map
 		-- Ensure locked but enabled options remain locked
 		if LeaMapsLC["UseDefaultMap"] == "On" then
@@ -3654,7 +3609,6 @@
 				LeaMapsDB["ShowTravelPoints"] = "On"
 				LeaMapsDB["ShowTravelOpposing"] = "Off"
 				LeaMapsDB["ShowZoneLevels"] = "On"
-				LeaMapsDB["ShowFishingLevels"] = "On"
 				LeaMapsDB["ShowCoords"] = "On"
 				LeaMapsDB["ShowObjectives"] = "On"
 				LeaMapsDB["HideTownCityIcons"] = "On"
@@ -3767,7 +3721,6 @@
 			LeaMapsLC:LoadVarChk("ShowTravelPoints", "On")				-- Show travel points for same faction
 			LeaMapsLC:LoadVarChk("ShowTravelOpposing", "Off")			-- Show travel points for opposing faction
 			LeaMapsLC:LoadVarChk("ShowZoneLevels", "On")				-- Show zone levels
-			LeaMapsLC:LoadVarChk("ShowFishingLevels", "On")				-- Show fishing levels
 			LeaMapsLC:LoadVarChk("ShowCoords", "On")					-- Show coordinates
 			LeaMapsLC:LoadVarChk("ShowObjectives", "On")				-- Show objectives
 			LeaMapsLC:LoadVarChk("HideTownCityIcons", "On")				-- Hide town and city icons
@@ -3890,7 +3843,6 @@
 			LeaMapsDB["ShowTravelPoints"] = LeaMapsLC["ShowTravelPoints"]
 			LeaMapsDB["ShowTravelOpposing"] = LeaMapsLC["ShowTravelOpposing"]
 			LeaMapsDB["ShowZoneLevels"] = LeaMapsLC["ShowZoneLevels"]
-			LeaMapsDB["ShowFishingLevels"] = LeaMapsLC["ShowFishingLevels"]
 			LeaMapsDB["ShowCoords"] = LeaMapsLC["ShowCoords"]
 			LeaMapsDB["ShowObjectives"] = LeaMapsLC["ShowObjectives"]
 			LeaMapsDB["HideTownCityIcons"] = LeaMapsLC["HideTownCityIcons"]
@@ -4032,7 +3984,7 @@
 	LeaMapsLC:MakeTx(PageF, "Elements", 225, -192)
 	LeaMapsLC:MakeCB(PageF, "RevealMap", "Show unexplored areas", 225, -212, true, "If checked, unexplored areas of the map will be shown on the world map and the battlefield map.")
 	LeaMapsLC:MakeCB(PageF, "ShowPointsOfInterest", "Show points of interest", 225, -232, false, "If checked, points of interest will be shown.")
-	LeaMapsLC:MakeCB(PageF, "ShowZoneLevels", "Show zone levels", 225, -252, false, "If checked, zone, dungeon and fishing skill levels will be shown.")
+	LeaMapsLC:MakeCB(PageF, "ShowZoneLevels", "Show zone levels", 225, -252, false, "If checked, zone and dungeon levels will be shown.")
 	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -272, false, "If checked, coordinates will be shown.")
 	LeaMapsLC:MakeCB(PageF, "ShowObjectives", "Show objectives", 225, -292, false, "If checked, quest objectives will be shown.")
 	LeaMapsLC:MakeCB(PageF, "HideTownCityIcons", "Hide town and city icons", 225, -312, true, "If checked, town and city icons will not be shown on the continent maps.")
@@ -4048,7 +4000,6 @@
 	LeaMapsLC:CfgBtn("UnlockMapFrameBtn", LeaMapsCB["UnlockMapFrame"])
 	LeaMapsLC:CfgBtn("SetMapOpacityBtn", LeaMapsCB["SetMapOpacity"])
 	LeaMapsLC:CfgBtn("ShowPointsOfInterestBtn", LeaMapsCB["ShowPointsOfInterest"])
-	LeaMapsLC:CfgBtn("ShowZoneLevelsBtn", LeaMapsCB["ShowZoneLevels"])
 	LeaMapsLC:CfgBtn("EnhanceBattleMapBtn", LeaMapsCB["EnhanceBattleMap"])
 
 	-- Add reset map position button
