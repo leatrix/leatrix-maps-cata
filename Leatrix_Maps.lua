@@ -2071,12 +2071,6 @@
 									pin.Texture:SetSize(32, 32)
 									pin.HighlightTexture:SetTexCoord(0.75, 1, 0.75, 1)
 									pin.HighlightTexture:SetSize(32, 32)
-								elseif pinInfo[1] == "Spirit" then
-									pin.Texture:SetSize(20, 20)
-									pin.HighlightTexture:SetSize(20, 20)
-								elseif pinInfo[1] == "Arrow" then
-									pin.Texture:SetRotation(pinInfo[12])
-									pin.HighlightTexture:SetRotation(pinInfo[12])
 								end
 							end
 
