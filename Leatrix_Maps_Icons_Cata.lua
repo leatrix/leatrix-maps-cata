@@ -903,7 +903,7 @@
 			{"Raid", 38.4, 80.6, L["Throne of the Four Winds"], L["Raid"], rdTex, 85, 85},
 			{"FlightN", 26.6, 8.2, L["Oasis of Vir'sar"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
 			{"FlightN", 22.2, 64.8, L["Schnottz's Landing"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
-			{"FlightN", 45.8, 76.2, L["Ramkahen"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
+			{"FlightN", 56.2, 33.6, L["Ramkahen"] .. ", " .. L["Uldum"], nil, tNTex, nil, nil},
 		},
 
 		--[[Ahn'Qiraj: The Fallen Kingdom]] [327] = {
