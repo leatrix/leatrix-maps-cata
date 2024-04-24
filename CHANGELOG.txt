@@ -1,4 +1,4 @@
-﻿4.0.00 - 23rd April 2024
+﻿4.0.00 - 24th April 2024
 - Welcome to Cataclysm Classic.
 - Map reveal data, flight points, zone levels and dungeon levels have been updated.
 - Added 'The Maelstrom' to the map dropdown menu.
