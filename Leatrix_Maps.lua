@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.00 (24th April 2024)
+	-- 	Leatrix Maps 4.0.01.alpha.1 (24th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.00"
+	LeaMapsLC["AddonVer"] = "4.0.01.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1983,6 +1983,7 @@
 			local PinData = Leatrix_Maps["Icons"]
 
 			local LeaMix = CreateFromMixins(MapCanvasDataProviderMixin)
+			LeaMapsLC.LeaMix = LeaMix -- Used in arrow structure
 
 			function LeaMix:RefreshAllData()
 
@@ -3423,6 +3424,46 @@
 					-- Set map by ID
 					WorldMapFrame:SetMapID(tonumber(arg1))
 				end
+				return
+			elseif str == "arrow" then
+				-- Arrow structure
+				local pin, cx, cy
+				local pressed = 1
+				if not LeaMapsLC.rotatearrow then LeaMapsLC.rotatearrow = 0 end
+				hooksecurefunc(LeaMapsLC.LeaMix, "RefreshAllData", function(self)
+					if not pressed then return end
+					-- Make new pin
+					local pMapID = WorldMapFrame.mapID
+					cx, cy = WorldMapFrame.ScrollContainer:GetNormalizedCursorPosition()
+					if cx and cy and cx > 0 and cy > 0 then
+						cx = floor(cx * 1000 + 0.5) / 10
+						cy = floor(cy * 1000 + 0.5) / 10
+						local myPOI = {}
+						myPOI["position"] = CreateVector2D(cx / 100, cy / 100)
+						myPOI["atlasName"] = "Garr_LevelUpgradeArrow"
+						pin = self:GetMap():AcquirePin("LeaMapsGlobalPinTemplate", myPOI)
+						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
+						pin.Texture:SetSize(32, 32)
+						pin.HighlightTexture:SetSize(32, 32)
+					end
+					pressed = nil
+				end)
+				if not pressed then return end
+				LeaMapsLC.LeaMix:RefreshAllData()
+				pin:SetScript("OnUpdate", function()
+					if IsShiftKeyDown() then
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow + 0.005
+						if LeaMapsLC.rotatearrow > 6.3 then LeaMapsLC.rotatearrow = 0 end
+						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
+					elseif IsControlKeyDown() then
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow - 0.005
+						if LeaMapsLC.rotatearrow < 0 then LeaMapsLC.rotatearrow = 6.3 end
+						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
+					end
+				end)
+				pin:SetScript("OnMouseUp", function()
+					print('{"Arrow", ' .. cx .. ',', cy .. ', L["Name"], nil, arTex, nil, nil, nil, nil, nil, ' .. string.format("%.2f", LeaMapsLC.rotatearrow) .. ', 0},')
+				end)
 				return
 			elseif str == "admin" then
 				-- Preset profile (reload required)
