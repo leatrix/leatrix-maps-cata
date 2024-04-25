@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.01.alpha.1 (24th April 2024)
+	-- 	Leatrix Maps 4.0.01 (25th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.01.alpha.1"
+	LeaMapsLC["AddonVer"] = "4.0.01"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1694,6 +1694,7 @@
 
 		do
 
+			-- Zoom in and out with mousewheel
 			WorldMapFrame.ScrollContainer:HookScript("OnMouseWheel", function(self, delta)
 				local x, y = self:GetNormalizedCursorPosition()
 				local nextZoomOutScale, nextZoomInScale = self:GetCurrentZoomRange()
@@ -1704,6 +1705,18 @@
 				else
 					if nextZoomOutScale < self:GetCanvasScale() then
 						self:InstantPanAndZoom(nextZoomOutScale, x, y)
+					end
+				end
+			end)
+
+			-- Zoom should retain scroll
+			WorldMapFrame.ScrollContainer:HookScript("OnMouseUp", function(self, button)
+				local cursorX, cursorY = self:GetCursorPosition()
+				local isClick = self:WouldCursorPositionBeClick(button, cursorX, cursorY)
+				if button == "LeftButton" and not isClick and not self:TryPanOrZoomOnClick() and not self:IsPanning() then
+					if self.currentScrollX and self.currentScrollY then
+						self.targetScrollX = self.currentScrollX
+						self.targetScrollY = self.currentScrollY
 					end
 				end
 			end)

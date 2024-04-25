@@ -1,4 +1,5 @@
-﻿4.0.01.alpha.1 - 24th April 2024
+﻿4.0.01 - 25th April 2024
+- Update.
 
 4.0.00 - 24th April 2024
 - Welcome to Cataclysm Classic.
