@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.02 (26th April 2024)
+	-- 	Leatrix Maps 4.0.03.alpha.1 (26th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.02" -- To do: Check NewPatch map pan issue (World Map and Battlefield)
+	LeaMapsLC["AddonVer"] = "4.0.03.alpha.1" -- To do: Check NewPatch map pan issue (World Map and Battlefield)
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -3481,11 +3481,11 @@
 				LeaMapsLC.LeaMix:RefreshAllData()
 				pin:SetScript("OnUpdate", function()
 					if IsShiftKeyDown() then
-						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow + 0.005
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow + 0.003
 						if LeaMapsLC.rotatearrow > 6.3 then LeaMapsLC.rotatearrow = 0 end
 						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
 					elseif IsControlKeyDown() then
-						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow - 0.005
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow - 0.003
 						if LeaMapsLC.rotatearrow < 0 then LeaMapsLC.rotatearrow = 6.3 end
 						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
 					end
