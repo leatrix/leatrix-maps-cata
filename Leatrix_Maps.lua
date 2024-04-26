@@ -2114,13 +2114,10 @@
 
 			function LeaMapsGlobalPinMixin:OnAcquired(myInfo)
 				BaseMapPoiPinMixin.OnAcquired(self, myInfo)
-				self.ZoneCrossing = myInfo.ZoneCrossing
 			end
 
 			function LeaMapsGlobalPinMixin:OnMouseUp(btn)
-				if btn == "LeftButton" then
-					if self.ZoneCrossing then WorldMapFrame:SetMapID(self.ZoneCrossing) end
-				elseif btn == "RightButton" then
+				if btn == "RightButton" then
 					WorldMapFrame:NavigateToParentMap()
 				end
 			end
@@ -3474,6 +3471,7 @@
 						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
 						pin.Texture:SetSize(32, 32)
 						pin.HighlightTexture:SetSize(32, 32)
+						pin:SetFrameStrata("FULLSCREEN_DIALOG")
 					end
 					pressed = nil
 				end)
@@ -3481,11 +3479,11 @@
 				LeaMapsLC.LeaMix:RefreshAllData()
 				pin:SetScript("OnUpdate", function()
 					if IsShiftKeyDown() then
-						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow + 0.003
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow + 0.002
 						if LeaMapsLC.rotatearrow > 6.3 then LeaMapsLC.rotatearrow = 0 end
 						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
 					elseif IsControlKeyDown() then
-						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow - 0.003
+						LeaMapsLC.rotatearrow = LeaMapsLC.rotatearrow - 0.002
 						if LeaMapsLC.rotatearrow < 0 then LeaMapsLC.rotatearrow = 6.3 end
 						pin.Texture:SetRotation(LeaMapsLC.rotatearrow)
 					end
