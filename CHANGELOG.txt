@@ -1,8 +1,8 @@
-﻿4.0.03.alpha.1 - 26th April 2024
+﻿4.0.03 - 27th April 2024
 - Added a new 'Show digsites' option.
 
 4.0.02 - 26th April 2024
-- Code updates.
+- Cataclysm Classic Beta: Code updates.
 
 4.0.00 - 24th April 2024
 - Welcome to Cataclysm Classic.
