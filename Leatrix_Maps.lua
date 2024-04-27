@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.03.alpha.1" -- To do: Check NewPatch map pan issue (World Map and Battlefield)
+	LeaMapsLC["AddonVer"] = "4.0.03.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -563,20 +563,6 @@
 		----------------------------------------------------------------------
 
 		if LeaMapsLC["EnhanceBattleMap"] == "On" then
-
-			-- Fix game bug where map pan resets after zooming in and panning (LeaMapsLC.NewPatch)
-			BattlefieldMapFrame.ScrollContainer:HookScript("OnMouseUp", function(self, button)
-				local cursorX, cursorY = self:GetCursorPosition()
-				local isClick = self:WouldCursorPositionBeClick(button, cursorX, cursorY)
-				if button == "LeftButton" and not isClick and not self:TryPanOrZoomOnClick() and not self:IsPanning() then
-					if self.currentScrollX and self.currentScrollY then
-						if self.targetScrollX ~= self.currentScrollX or self.targetScrollY ~= self.currentScrollY then
-							self.targetScrollX = self.currentScrollX
-							self.targetScrollY = self.currentScrollY
-						end
-					end
-				end
-			end)
 
 			-- Show teammates
 			RunScript('BattlefieldMapOptions.showPlayers = true')
@@ -1719,20 +1705,6 @@
 				else
 					if nextZoomOutScale < self:GetCanvasScale() then
 						self:InstantPanAndZoom(nextZoomOutScale, x, y)
-					end
-				end
-			end)
-
-			-- Fix game bug where map pan resets after zooming in and panning (LeaMapsLC.NewPatch)
-			WorldMapFrame.ScrollContainer:HookScript("OnMouseUp", function(self, button)
-				local cursorX, cursorY = self:GetCursorPosition()
-				local isClick = self:WouldCursorPositionBeClick(button, cursorX, cursorY)
-				if button == "LeftButton" and not isClick and not self:TryPanOrZoomOnClick() and not self:IsPanning() then
-					if self.currentScrollX and self.currentScrollY then
-						if self.targetScrollX ~= self.currentScrollX or self.targetScrollY ~= self.currentScrollY then
-							self.targetScrollX = self.currentScrollX
-							self.targetScrollY = self.currentScrollY
-						end
 					end
 				end
 			end)
