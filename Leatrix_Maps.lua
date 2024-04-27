@@ -64,7 +64,7 @@
 		WorldMapTrackQuest:SetHitRectInsets(0, 0, 0, 0)
 		WorldMapTrackQuestText:SetText("")
 
-		-- Hide Quest Objectives checkbox (it's in the configuration panel)
+		-- Hide Quest Objectives and Show Digsites checkboxes (both are in the configuration panel)
 		WorldMapQuestShowObjectives:SetHitRectInsets(0, 0, 0, 0)
 		WorldMapQuestShowObjectives:ClearAllPoints()
 		WorldMapQuestShowObjectives.SetPoint = function() return end
@@ -213,6 +213,23 @@
 		-- Set objectives when option is clicked and on startup
 		LeaMapsCB["ShowObjectives"]:HookScript("OnClick", DoShowObjectivesFunc)
 		DoShowObjectivesFunc()
+
+		----------------------------------------------------------------------
+		-- Show digsites
+		----------------------------------------------------------------------
+
+		-- Function to set objectives
+		local function DoShowDigsitesFunc()
+			if LeaMapsLC["ShowDigsites"] == "On" then
+				SetCVar("digSites", "1")
+			else
+				SetCVar("digSites", "0")
+			end
+		end
+
+		-- Set digsites when option is clicked and on startup
+		LeaMapsCB["ShowDigsites"]:HookScript("OnClick", DoShowDigsitesFunc)
+		DoShowDigsitesFunc()
 
 		----------------------------------------------------------------------
 		-- Show zone dropdown menu
@@ -2720,7 +2737,7 @@
 
 		-- Set frame parameters
 		Side:Hide()
-		Side:SetSize(470, 480)
+		Side:SetSize(470, 500)
 		Side:SetClampedToScreen(true)
 		Side:SetFrameStrata("FULLSCREEN_DIALOG")
 		Side:SetFrameLevel(20)
@@ -2763,7 +2780,7 @@
 
 		-- Set textures
 		LeaMapsLC:CreateBar("FootTexture", Side, 470, 48, "BOTTOM", 0.5, 0.5, 0.5, 1.0, "Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
-		LeaMapsLC:CreateBar("MainTexture", Side, 470, 433, "TOPRIGHT", 0.7, 0.7, 0.7, 0.7,  "Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
+		LeaMapsLC:CreateBar("MainTexture", Side, 470, 453, "TOPRIGHT", 0.7, 0.7, 0.7, 0.7,  "Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
 
 		-- Allow movement
 		Side:EnableMouse(true)
@@ -3506,6 +3523,7 @@
 				LeaMapsDB["ShowZoneLevels"] = "On"
 				LeaMapsDB["ShowCoords"] = "On"
 				LeaMapsDB["ShowObjectives"] = "On"
+				LeaMapsDB["ShowDigsites"] = "On"
 				LeaMapsDB["HideTownCityIcons"] = "On"
 
 				-- More
@@ -3618,6 +3636,7 @@
 			LeaMapsLC:LoadVarChk("ShowZoneLevels", "On")				-- Show zone levels
 			LeaMapsLC:LoadVarChk("ShowCoords", "On")					-- Show coordinates
 			LeaMapsLC:LoadVarChk("ShowObjectives", "On")				-- Show objectives
+			LeaMapsLC:LoadVarChk("ShowDigsites", "On")					-- Show digsites
 			LeaMapsLC:LoadVarChk("HideTownCityIcons", "On")				-- Hide town and city icons
 
 			-- More
@@ -3727,6 +3746,7 @@
 			LeaMapsDB["ShowZoneLevels"] = LeaMapsLC["ShowZoneLevels"]
 			LeaMapsDB["ShowCoords"] = LeaMapsLC["ShowCoords"]
 			LeaMapsDB["ShowObjectives"] = LeaMapsLC["ShowObjectives"]
+			LeaMapsDB["ShowDigsites"] = LeaMapsLC["ShowDigsites"]
 			LeaMapsDB["HideTownCityIcons"] = LeaMapsLC["HideTownCityIcons"]
 
 			-- More
@@ -3773,7 +3793,7 @@
 
 	-- Set frame parameters
 	LeaMapsLC["PageF"] = PageF
-	PageF:SetSize(470, 480)
+	PageF:SetSize(470, 500)
 	PageF:Hide()
 	PageF:SetFrameStrata("FULLSCREEN_DIALOG")
 	PageF:SetFrameLevel(20)
@@ -3797,7 +3817,7 @@
 	-- Add textures
 	local MainTexture = PageF:CreateTexture(nil, "BORDER")
 	MainTexture:SetTexture("Interface\\ACHIEVEMENTFRAME\\UI-GuildAchievement-Parchment-Horizontal-Desaturated.png")
-	MainTexture:SetSize(470, 433)
+	MainTexture:SetSize(470, 453)
 	MainTexture:SetPoint("TOPRIGHT")
 	MainTexture:SetVertexColor(0.7, 0.7, 0.7, 0.7)
 	MainTexture:SetTexCoord(0.09, 1, 0, 1)
@@ -3869,11 +3889,12 @@
 	LeaMapsLC:MakeCB(PageF, "ShowZoneLevels", "Show zone levels", 225, -252, false, "If checked, zone and dungeon levels will be shown.")
 	LeaMapsLC:MakeCB(PageF, "ShowCoords", "Show coordinates", 225, -272, false, "If checked, coordinates will be shown.")
 	LeaMapsLC:MakeCB(PageF, "ShowObjectives", "Show objectives", 225, -292, false, "If checked, quest objectives will be shown.")
-	LeaMapsLC:MakeCB(PageF, "HideTownCityIcons", "Hide town and city icons", 225, -312, true, "If checked, town and city icons will not be shown on the continent maps.")
+	LeaMapsLC:MakeCB(PageF, "ShowDigsites", "Show digsites", 225, -312, false, "If checked, archaeology digsites will be shown.")
+	LeaMapsLC:MakeCB(PageF, "HideTownCityIcons", "Hide town and city icons", 225, -332, true, "If checked, town and city icons will not be shown on the continent maps.")
 
-	LeaMapsLC:MakeTx(PageF, "More", 225, -352)
-	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -372, true, "If checked, you will be able to customise the battlefield map.")
-	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -392, false, "If checked, the minimap button will be shown.")
+	LeaMapsLC:MakeTx(PageF, "More", 225, -372)
+	LeaMapsLC:MakeCB(PageF, "EnhanceBattleMap", "Enhance battlefield map", 225, -392, true, "If checked, you will be able to customise the battlefield map.")
+	LeaMapsLC:MakeCB(PageF, "ShowMinimapIcon", "Show minimap button", 225, -412, false, "If checked, the minimap button will be shown.")
 
 	LeaMapsLC:CfgBtn("IncreaseZoomBtn", LeaMapsCB["IncreaseZoom"])
 	LeaMapsLC:CfgBtn("RevTintBtn", LeaMapsCB["RevealMap"])
