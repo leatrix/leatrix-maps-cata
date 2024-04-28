@@ -1,4 +1,7 @@
-﻿4.0.03 - 27th April 2024
+﻿4.0.04.alpha.1 - 27th April 2024
+- Updated deprecated functions.
+
+4.0.03 - 27th April 2024
 - Added a new 'Show digsites' option.
 
 4.0.02 - 26th April 2024

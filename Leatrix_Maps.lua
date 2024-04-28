@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.03 (27th April 2024)
+	-- 	Leatrix Maps 4.0.04.alpha.1 (27th April 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.03"
+	LeaMapsLC["AddonVer"] = "4.0.04.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -34,9 +34,9 @@
 	end
 
 	-- Check for addons
-	if IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
-	if IsAddOnLoaded("Carbonite") then LeaMapsLC.Carbonite = true end
-	if IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
+	if C_AddOns.IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
+	if C_AddOns.IsAddOnLoaded("Carbonite") then LeaMapsLC.Carbonite = true end
+	if C_AddOns.IsAddOnLoaded("Demodal") then LeaMapsLC.Demodal = true end
 
 	-- Set bindings translations
 	_G.BINDING_NAME_LEATRIX_MAPS_GLOBAL_TOGGLE = L["Toggle panel"]
@@ -108,7 +108,7 @@
 		end
 
 		-- Load Battlefield addon
-		if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
+		if not C_AddOns.IsAddOnLoaded("Blizzard_BattlefieldMap") then
 			RunScript('UIParentLoadAddOn("Blizzard_BattlefieldMap")')
 		end
 
@@ -3405,8 +3405,8 @@
 				return
 			elseif str == "dbf" then
 				-- Show battlefield map for debugging
-				if not IsAddOnLoaded("Blizzard_BattlefieldMap") then
-					LoadAddOn("Blizzard_BattlefieldMap")
+				if not C_AddOns.IsAddOnLoaded("Blizzard_BattlefieldMap") then
+					C_AddOns.LoadAddOn("Blizzard_BattlefieldMap")
 				end
 				BattlefieldMapFrame:Show()
 				return
@@ -3697,7 +3697,7 @@
 						if E.private.general.worldMap then
 							Lock("SetMapOpacity", reason, "Maps") -- Set map opacity
 						end
-						EnableAddOn("Leatrix_Maps")
+						C_AddOns.EnableAddOn("Leatrix_Maps")
 					end
 				end
 			end
