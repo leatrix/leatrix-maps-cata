@@ -49,9 +49,9 @@
 		},
 		--[[Tirisfal Glades]] [1420] = {
 			{"Dungeon", 82.5, 33.3, L["Scarlet Monastery"],
-				L["Graveyard"] .. " (26-36), " ..
-				L["Library"] .. " (29-39), " ..
-				L["Armory"] .. " (34-42), " ..
+				L["Graveyard"] .. " (26-36)|n" ..
+				L["Library"] .. " (29-39)|n" ..
+				L["Armory"] .. " (34-42)|n" ..
 				L["Cathedral"] .. " (37-45)"
 				, dnTex, 26, 45},
 			{"FlightH", 58.8, 51.9, L["Brill"] .. ", " .. L["Tirisfal Glades"], nil, tHTex, nil, nil},
@@ -77,7 +77,7 @@
 		},
 		--[[Eastern Plaguelands]] [1423] = {
 			{"Dungeon", 27.7, 11.6, L["Stratholme: Crusader's Square"], L["Dungeon"], dnTex, 42, 52},
-			{"Dungeon", 43.5, 19.4, L["Stratholme: The Gauntlet"], L["Dungeon"], dnTex, 46, 56},
+			{"Dungeon", 43.5, 19.4, L["Stratholme: The Gauntlet"], L["Dungeon"], dnTex, 46, 56}, -- Stratholme - Service Entrance
 			{"FlightA", 75.9, 53.4, L["Light's Hope Chapel"] .. ", " .. L["Eastern Plaguelands"], nil, tATex, nil, nil},
 			{"FlightH", 75.8, 53.3, L["Light's Hope Chapel"] .. ", " .. L["Eastern Plaguelands"], nil, tHTex, nil, nil},
 			{"FlightN", 18.5, 27.4, L["Plaguewood Tower"] .. ", " .. L["Eastern Plaguelands"], nil, tNTex, nil, nil},
@@ -108,13 +108,13 @@
 		},
 		--[[Searing Gorge]] [1427] = {
 			{"Dunraid", 34.9, 83.9, L["Blackrock Mountain"], 
-				L["Blackrock Caverns"] .. " (80-85), " .. 
-				L["Blackrock Depths"] .. " (49-61),|n" .. 
-				L["Lower Blackrock Spire"] .. " (57-65), " .. 
-				L["Upper Blackrock Spire"] .. " (55-65)," .. "|n" .. 
-				L["Blackwing Lair"] .. " (60), " .. 
-				L["Blackwing Descent"] .. " (85), " .. 
-				L["Molten Core"] .. " (60)", 
+				L["Blackrock Depths"] .. " (49-61)|n" .. 
+				L["Upper Blackrock Spire"] .. " (55-65)|n" ..
+				L["Lower Blackrock Spire"] .. " (57-65)|n" .. 
+				L["Molten Core"] .. " (60)|n" ..
+				L["Blackwing Lair"] .. " (60)|n" .. 
+				L["Blackrock Caverns"] .. " (80-85)|n" .. 
+				L["Blackwing Descent"] .. " (85)",
 				dnTex, 49, 85},
 			{"FlightA", 37.9, 30.8, L["Thorium Point"] .. ", " .. L["Searing Gorge"], nil, tATex, nil, nil},
 			{"FlightH", 34.8, 30.9, L["Thorium Point"] .. ", " .. L["Searing Gorge"], nil, tHTex, nil, nil},
@@ -122,13 +122,13 @@
 		},
 		--[[Burning Steppes]] [1428] = {
 			{"Dunraid", 21.0, 37.9, L["Blackrock Mountain"], 
-				L["Blackrock Caverns"] .. " (80-85), " .. 
-				L["Blackrock Depths"] .. " (49-61),|n" .. 
-				L["Lower Blackrock Spire"] .. " (57-65), " .. 
-				L["Upper Blackrock Spire"] .. " (55-65)," .. "|n" .. 
-				L["Blackwing Lair"] .. " (60), " .. 
-				L["Blackwing Descent"] .. " (85), " .. 
-				L["Molten Core"] .. " (60)", 
+				L["Blackrock Depths"] .. " (49-61)|n" .. 
+				L["Upper Blackrock Spire"] .. " (55-65)|n" ..
+				L["Lower Blackrock Spire"] .. " (57-65)|n" .. 
+				L["Molten Core"] .. " (60)|n" ..
+				L["Blackwing Lair"] .. " (60)|n" .. 
+				L["Blackrock Caverns"] .. " (80-85)|n" .. 
+				L["Blackwing Descent"] .. " (85)",
 				dnTex, 49, 85},
 			{"FlightA", 72.1, 65.7, L["Morgan's Vigil"] .. ", " .. L["Burning Steppes"], nil, tATex, nil, nil},
 			{"FlightH", 54.2, 24.2, L["Flame Crest"] .. ", " .. L["Burning Steppes"], nil, tHTex, nil, nil},
@@ -216,7 +216,7 @@
 		},
 		--[[Isle of Quel'Danas]] [1957] = {
 			{"Dungeon", 61.2, 30.9, L["Magisters' Terrace"], L["Dungeon"], dnTex, 68, 75},
-			{"Raid", 44.3, 45.6, L["Sunwell Plateau"], L["Raid"], rdTex, 70, 70},
+			{"Raid", 44.3, 45.6, L["Sunwell Plateau"], L["Raid"], rdTex, 70, 70}, -- The Sunwell
 			{"FlightA", 48.5, 25.2, L["Shattered Sun Staging Area"] .. ", " .. L["Isle of Quel Danas"], nil, tATex, nil, nil},
 			{"FlightH", 48.4, 25.1, L["Shattered Sun Staging Area"] .. ", " .. L["Isle of Quel Danas"], nil, tHTex, nil, nil},
 		},
@@ -291,7 +291,10 @@
 			{"FlightH", 70.6, 89.4, L["Malaka'jin"] .. ", " .. L["Stonetalon Mountains"], nil, tHTex, nil, nil},
 		},
 		--[[Desolace]] [1443] = {
-			{"Dungeon", 29.1, 62.6, L["Maraudon"], L["Dungeon"], dnTex, 30, 44},
+			{"Dungeon", 29.1, 62.6, L["Maraudon"],
+				L["The Wicked Grotto"] .. " (30-40)|n" ..
+				L["Earth Song Falls"] .. " (34-44)",
+			dnTex, 30, 44},
 			{"FlightA", 64.7, 10.5, L["Nijel's Point"] .. ", " .. L["Desolace"], nil, tATex, nil, nil},
 			{"FlightA", 36.8, 71.6, L["Thargad's Camp"] .. ", " .. L["Desolace"], nil, tATex, nil, nil},
 			{"FlightA", 39.0, 27.0, L["Ethel Rethor"] .. ", " .. L["Desolace"], nil, tATex, nil, nil},
@@ -324,11 +327,14 @@
 		--[[Tanaris]] [1446] = {
 			{"Dungeon", 39.2, 21.3, L["Zul'Farrak"], L["Dungeon"], dnTex, 44, 54},
 			{"Dunraid", 64.8, 50.0, L["Caverns of Time"], 
-				L["Culling of Stratholme"] .. " (78-80), " .. 
-				L["Black Morass"]  .. ",|n" .. 
-				L["Hyjal Summit"] .. " (70), " .. 
-				L["Old Hillsbrad"]  .. " (66-73), " .. 
-				L["Well of Eternity"]  .. " (85)", 
+				L["Old Hillsbrad"]  .. " (66-73)|n" .. -- The Escape from Durnholde
+				L["Black Morass"] .. " (69-75)|n" .. -- Opening of the Dark Portal
+				L["Hyjal Summit"] .. " (70)|n" .. -- Hyjal Past
+				L["Culling of Stratholme"] .. " (78-80)|n" .. 
+				L["End Time"]  .. " (85)|n" ..
+				L["Well of Eternity"]  .. " (85)|n" ..
+				L["Hour of Twilight"]  .. " (85)|n" ..
+				L["Dragon Soul"]  .. " (85)|n",
 				dnTex, 66, 85, nil, nil, 80},
 			{"FlightA", 51.4, 29.5, L["Gadgetzan"] .. ", " .. L["Tanaris"], nil, tATex, nil, nil},
 			{"FlightA", 40.0, 77.5, L["Gunstan's Dig"] .. ", " .. L["Tanaris"], nil, tATex, nil, nil},
@@ -370,7 +376,13 @@
 		--[[Orgrimmar]] [1454] = {
 			{"Dungeon", 55.2, 51.2, L["Ragefire Chasm"], L["Dungeon"], dnTex, 15, 20},
 			{"FlightH", 49.6, 59.2, L["Valley of Strength"] .. ", " .. L["Orgrimmar"], nil, tHTex, nil, nil},
-			{"TravelH", 50.1, 37.8, L["Western Earthshrine"], L["Deepholm"] .. ", " .. L["Hyjal"] .. ", " .. L["Twilight Highlands"] .. ", " .. L["Uldum"] .. ", " .. L["Vashj'ir"], nil, pHTex},
+			{"TravelH", 50.1, 37.8, L["Western Earthshrine"], 
+				L["Deepholm"] .. ", " .. 
+				L["Hyjal"] .. ", " .. 
+				L["Twilight Highlands"] .. ", " .. 
+				L["Uldum"] .. ", " .. 
+				L["Vashj'ir"], nil, 
+				pHTex},
 			{"TravelH", 47.4, 39.3, L["Tol Barad"], L["Portal"], nil, pHTex},
 			{"TravelH", 43.0, 65.0, L["Zeppelin to"] .." " .. L["Thunder Bluff"] .. ", " .. L["Mulgore"], nil, pHTex},
 			{"TravelH", 44.8, 62.5, L["Zeppelin to"] .. " " .. L["Borean Tundra"] .. ", " .. L["Northrend"], nil, pHTex},
@@ -440,7 +452,7 @@
 			{"Dungeon", 71.7, 55.0, L["The Botanica"], L["Dungeon"], dnTex, 70, 75},
 			{"Dungeon", 74.4, 57.7, L["The Arcatraz"], L["Dungeon"], dnTex, 70, 75},
 			{"Dungeon", 70.6, 69.7, L["The Mechanar"], L["Dungeon"], dnTex, 70, 75},
-			{"Raid", 73.7, 63.7, L["The Eye"], L["Raid"], rdTex, 70, 70, nil, 69, 80},
+			{"Raid", 73.7, 63.7, L["The Eye"], L["Raid"], rdTex, 70, 70, nil, 69, 80}, -- Tempest Keep
 			{"FlightN", 33.8, 64.0, L["Area 52"] .. ", " .. L["Netherstorm"], nil, tNTex, nil, nil},
 			{"FlightN", 45.2, 34.8, L["The Stormspire"] .. ", " .. L["Netherstorm"], nil, tNTex, nil, nil},
 			{"FlightN", 65.2, 66.6, L["Cosmowrench"] .. ", " .. L["Netherstorm"], nil, tNTex, nil, nil},
@@ -469,10 +481,10 @@
 		},
 		--[[Zangarmarsh]] [1946] = {
 			{"Dunraid", 50.4, 40.9, L["Coilfang Reservoir"], 
-				L["Serpentshrine Cavern"]  .. " (70)" .. ", " .. 
-				L["Slave Pens"]  .. " (62-69)" .. ",|n" .. 
-				L["Steamvault"]  .. " (69-75)" .. ", " .. 
-				L["Underbog"]  .. " (63-70)", 
+				L["Slave Pens"]  .. " (62-69)|n" .. 
+				L["Underbog"]  .. " (63-70)|n" ..
+				L["Steamvault"]  .. " (69-75)|n" ..
+				L["Serpentshrine Cavern"]  .. " (70)",
 				dnTex, 62, 75, nil, 61, 80},
 			{"FlightA", 41.2, 28.8, L["Orebor Harborage"] .. ", " .. L["Zangarmarsh"], nil, tATex, nil, nil},
 			{"FlightA", 67.8, 51.4, L["Telredor"] .. ", " .. L["Zangarmarsh"], nil, tATex, nil, nil},
@@ -486,8 +498,8 @@
 
 		--[[Borean Tundra]] [114] = {
 			{"Dunraid", 27.6, 26.6, L["The Nexus"],
-				L["The Nexus"]  .. " (70-79), " ..
-				L["The Oculus"]  .. " (78-80), " ..
+				L["The Nexus"]  .. " (70-79)|n" ..
+				L["The Oculus"]  .. " (78-80)|n" ..
 				L["The Eye of Eternity"] .. " (80-83)",
 				dnTex, 69, 80},
 			{"FlightA", 56.6, 20.1, L["Fizzcrank Airstrip"] .. ", " .. L["Borean Tundra"], nil, tATex, nil, nil}, -- Kara Thricestar
@@ -520,11 +532,11 @@
 		--[[Dragonblight]] [115] = {
 			{"Dungeon", 26.2, 49.6,
 				L["Azjol-Nerub"], 
-				L["Azjol-Nerub"] .. " (72-80), " ..
+				L["Azjol-Nerub"] .. " (72-80)|n" ..
 				L["The Old Kingdom"] .. " (72-80)",
 				dnTex, 72, 75},
 			{"Raid", 59.6, 51.1, L["Wyrmrest Temple"],
-				L["The Ruby Sanctum"] .. " (80-83)," ..
+				L["The Ruby Sanctum"] .. " (80-83)|n" ..
 				L["The Obsidian Sanctum"] .. " (80-83)",
 				rdTex, 80, 80},
 			{"Raid", 87.4, 51.1, L["Naxxramas"], L["Raid"], rdTex, 80, 83},
