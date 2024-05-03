@@ -2636,10 +2636,24 @@
 			subTitle:ClearAllPoints()
 			subTitle:SetPoint("BOTTOM", 0, 72)
 
-			local slashTitle = LeaMapsLC:MakeTx(interPanel, "/ltm", 0, 0)
+			local slashButton = CreateFrame("Button", nil, interPanel)
+			slashButton:SetPoint("BOTTOM", subTitle, "TOP", 0, 40)
+			slashButton:SetScript("OnClick", function() SlashCmdList["Leatrix_Maps"]("") end)
+
+			local slashTitle = LeaMapsLC:MakeTx(slashButton, "/ltm", 0, 0)
 			slashTitle:SetFont(slashTitle:GetFont(), 72)
 			slashTitle:ClearAllPoints()
-			slashTitle:SetPoint("BOTTOM", subTitle, "TOP", 0, 40)
+			slashTitle:SetAllPoints()
+
+			slashButton:SetSize(slashTitle:GetSize())
+			slashButton:SetScript("OnEnter", function()
+				slashTitle.r,  slashTitle.g, slashTitle.b = slashTitle:GetTextColor()
+				slashTitle:SetTextColor(1, 1, 0)
+			end)
+
+			slashButton:SetScript("OnLeave", function()
+				slashTitle:SetTextColor(slashTitle.r, slashTitle.g, slashTitle.b)
+			end)
 
 			local pTex = interPanel:CreateTexture(nil, "BACKGROUND")
 			pTex:SetAllPoints()
