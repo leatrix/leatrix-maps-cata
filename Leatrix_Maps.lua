@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.07 (22nd May 2024)
+	-- 	Leatrix Maps 4.0.08 (22nd May 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.07"
+	LeaMapsLC["AddonVer"] = "4.0.08"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1823,26 +1823,31 @@
 			local lastVertical = WorldMapFrame.ScrollContainer:GetNormalizedVerticalScroll()
 			local lastMapID = WorldMapFrame.mapID
 
-			-- Store pan and zoom settings when map is hidden
-			WorldMapFrame:HookScript("OnHide", function()
-				if LeaMapsLC["RememberZoom"] == "On" then
-					lastZoomLevel = WorldMapFrame.ScrollContainer:GetCanvasScale()
-					lastHorizontal = WorldMapFrame.ScrollContainer:GetNormalizedHorizontalScroll()
-					lastVertical = WorldMapFrame.ScrollContainer:GetNormalizedVerticalScroll()
-					lastMapID = WorldMapFrame.mapID
-				end
+			-- Store pan and zoom settings when canvas size is changed
+			hooksecurefunc(WorldMapFrame.ScrollContainer, "OnCanvasSizeChanged", function()
+				lastZoomLevel = WorldMapFrame.ScrollContainer:GetCanvasScale()
+				lastHorizontal = WorldMapFrame.ScrollContainer:GetNormalizedHorizontalScroll()
+				lastVertical = WorldMapFrame.ScrollContainer:GetNormalizedVerticalScroll()
+				lastMapID = WorldMapFrame.mapID
 			end)
 
 			-- Restore pan and zoom settings when map is shown
 			WorldMapFrame:HookScript("OnShow", function()
-				if LeaMapsLC["RememberZoom"] == "On" then
-					if WorldMapFrame.mapID == lastMapID then
-						WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, lastHorizontal, lastVertical)
-						WorldMapFrame.ScrollContainer:SetPanTarget(lastHorizontal, lastVertical)
-						WorldMapFrame.ScrollContainer:Hide(); WorldMapFrame.ScrollContainer:Show()
-					end
+				if WorldMapFrame.mapID == lastMapID then
+					WorldMapFrame.ScrollContainer:InstantPanAndZoom(lastZoomLevel, lastHorizontal, lastVertical)
+					WorldMapFrame.ScrollContainer:SetPanTarget(lastHorizontal, lastVertical)
+					WorldMapFrame.ScrollContainer:Hide(); WorldMapFrame.ScrollContainer:Show()
 				end
 			end)
+
+			-- Replace Blizzard's reset zoom function to not reset zoom if map hasn't changed
+			function WorldMapFrame.ScrollContainer:ResetZoom()
+				if WorldMapFrame.mapID == lastMapID then
+					return true
+				else
+					WorldMapFrame.ScrollContainer:InstantPanAndZoom(WorldMapFrame.ScrollContainer.zoomLevels[1].scale, 0.5, 0.5)
+				end
+			end
 
 		end
 
@@ -3502,7 +3507,6 @@
 
 				-- Mechanics
 				LeaMapsDB["ShowZoneMenu"] = "On"
-				LeaMapsDB["RememberZoom"] = "On"
 				LeaMapsDB["IncreaseZoom"] = "On"
 				LeaMapsDB["EnlargePlayerArrow"] = "On"
 				LeaMapsDB["PlayerArrowSize"] = 27
@@ -3614,7 +3618,6 @@
 
 			-- Mechanics
 			LeaMapsLC:LoadVarChk("ShowZoneMenu", "On")					-- Show zone menu
-			LeaMapsLC:LoadVarChk("RememberZoom", "On")					-- Remember zoom level
 			LeaMapsLC:LoadVarChk("IncreaseZoom", "Off")					-- Increase zoom level
 			LeaMapsLC:LoadVarNum("IncreaseZoomMax", 2, 1, 6)			-- Increase zoom level maximum
 			LeaMapsLC:LoadVarChk("EnlargePlayerArrow", "On")			-- Enlarge player arrow
@@ -3724,7 +3727,6 @@
 		elseif event == "PLAYER_LOGOUT" and not LeaMapsLC["NoSaveSettings"] then
 			-- Mechanics
 			LeaMapsDB["ShowZoneMenu"] = LeaMapsLC["ShowZoneMenu"]
-			LeaMapsDB["RememberZoom"] = LeaMapsLC["RememberZoom"]
 			LeaMapsDB["IncreaseZoom"] = LeaMapsLC["IncreaseZoom"]
 			LeaMapsDB["IncreaseZoomMax"] = LeaMapsLC["IncreaseZoomMax"]
 			LeaMapsDB["EnlargePlayerArrow"] = LeaMapsLC["EnlargePlayerArrow"]
@@ -3887,9 +3889,8 @@
 	LeaMapsLC:MakeCB(PageF, "UseClassIcons", "Class colored icons", 16, -192, true, "If checked, group icons will use a modern, class-colored design.")
 
 	LeaMapsLC:MakeTx(PageF, "Zoom", 16, -232)
-	LeaMapsLC:MakeCB(PageF, "RememberZoom", "Remember zoom level", 16, -252, false, "If checked, opening the map will use the same zoom level from when you last closed it as long as the map zone has not changed.")
-	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -272, false, "If checked, you will be able to zoom further into the world map.")
-	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -292, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
+	LeaMapsLC:MakeCB(PageF, "IncreaseZoom", "Increase zoom level", 16, -252, false, "If checked, you will be able to zoom further into the world map.")
+	LeaMapsLC:MakeCB(PageF, "CenterMapOnPlayer", "Center map on player", 16, -272, false, "If checked, the map will stay centered on your location as long as you are not in a dungeon.|n|nYou can hold shift while panning the map to temporarily prevent it from centering.")
 
 	LeaMapsLC:MakeTx(PageF, "System", 225, -72)
 	LeaMapsLC:MakeCB(PageF, "UnlockMapFrame", "Unlock map frame", 225, -92, false, "If checked, you will be able to scale the map by dragging the scale handle in the bottom-right corner.|n|nYou will be able to move the map by dragging any border.|n|nYou can always drag the top border to move the map regardless of this setting.")
