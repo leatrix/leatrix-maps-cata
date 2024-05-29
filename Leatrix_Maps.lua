@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.08 (22nd May 2024)
+	-- 	Leatrix Maps 4.0.09 (29th May 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.08"
+	LeaMapsLC["AddonVer"] = "4.0.09"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1815,7 +1815,7 @@
 		-- Remember zoom level
 		----------------------------------------------------------------------
 
-		do
+		if LeaMapsLC["UseDefaultMap"] == "Off" then
 
 			-- Store initial pan and zoom settings
 			local lastZoomLevel = WorldMapFrame.ScrollContainer:GetCanvasScale()

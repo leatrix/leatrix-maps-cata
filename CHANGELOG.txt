@@ -1,4 +1,7 @@
-﻿4.0.08 - 22nd May 2024
+﻿4.0.09 - 29th May 2024
+- If 'Use default map' is enabled, map zoom will not be remembered when you close and open the map.
+
+4.0.08 - 22nd May 2024
 - The 'Remember zoom level' functionality is now built into the addon (always enabled) so the option has been removed.
 - Fixed an issue which caused the zoom level to be reset following certain actions (such as accepting a quest).
 
