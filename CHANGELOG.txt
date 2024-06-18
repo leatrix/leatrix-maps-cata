@@ -1,4 +1,7 @@
-﻿4.0.09 - 29th May 2024
+﻿4.0.12.alpha.1 - 12th June 2024
+- For 'Show zone levels', the zone levels have been updated.
+
+4.0.09 - 29th May 2024
 - If 'Use default map' is enabled, map zoom will not be remembered when you close and open the map.
 
 4.0.08 - 22nd May 2024

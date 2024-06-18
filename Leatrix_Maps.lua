@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.11 (12th June 2024)
+	-- 	Leatrix Maps 4.0.12.alpha.1 (12th June 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.11"
+	LeaMapsLC["AddonVer"] = "4.0.12.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1439,84 +1439,85 @@
 			-- Create level range table
 			local mapTable = {
 
+				-- https://wowpedia.fandom.com/wiki/Zones_by_level_(Cataclysm)
+
 				-- Eastern Kingdoms
-				--[[Arathi Highlands]]		[1417] = {minLevel = 25, 	maxLevel = 40,},
-				--[[Badlands]]				[1418] = {minLevel = 36, 	maxLevel = 47,},
-				--[[Blasted Lands]]			[1419] = {minLevel = 46, 	maxLevel = 55,},
-				--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 59,},
-				--[[Deadwind Pass]]			[1430] = {minLevel = 50, 	maxLevel = 60,},
-				--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 11,},
-				--[[Duskwood]]				[1431] = {minLevel = 10, 	maxLevel = 30,},
-				--[[Eastern Plaguelands]]	[1423] = {minLevel = 40, 	maxLevel = 59,},
+				--[[Arathi Highlands]]		[1417] = {minLevel = 25, 	maxLevel = 30,},
+				--[[Badlands]]				[1418] = {minLevel = 45, 	maxLevel = 48,},
+				--[[Blasted Lands]]			[1419] = {minLevel = 55, 	maxLevel = 60,},
+				--[[Burning Steppes]]		[1428] = {minLevel = 50, 	maxLevel = 52,},
+				--[[Deadwind Pass]]			[1430] = {minLevel = 55, 	maxLevel = 56,},
+				--[[Dun Morogh]]			[1426] = {minLevel = 1, 	maxLevel = 10,},
+				--[[Duskwood]]				[1431] = {minLevel = 20, 	maxLevel = 25,},
+				--[[Eastern Plaguelands]]	[1423] = {minLevel = 40, 	maxLevel = 45,},
 				--[[Elwynn Forest]]			[1429] = {minLevel = 1, 	maxLevel = 10,},
 				--[[Eversong Woods]]		[1941] = {minLevel = 1,		maxLevel = 10,},
-				--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 39,},
+				--[[Hillsbrad Foothills]]	[1424] = {minLevel = 20, 	maxLevel = 25,},
 				--[[Ghostlands]]			[1942] = {minLevel = 10,	maxLevel = 20,},
 				--[[Isle of Quel'Danas]]	[1957] = {minLevel = 70,	maxLevel = 70,},
-				--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 18,},
-				--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 25,},
-				--[[Searing Gorge]]			[1427] = {minLevel = 43, 	maxLevel = 56,},
-				--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 19,},
-				--[[Stranglethorn Vale]]	[1434] = {minLevel = 30, 	maxLevel = 50,},
-				--[[Swamp of Sorrows]]		[1435] = {minLevel = 51, 	maxLevel = 54,},
-				--[[The Hinterlands]]		[1425] = {minLevel = 33, 	maxLevel = 49,},
-				--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 12,},
-				--[[Twilight Highlands]]	[241]  = {minLevel = 74, 	maxLevel = 85,},
-				--[[Westfall]]				[1436] = {minLevel = 9, 	maxLevel = 18,},
-				--[[Western Plaguelands]]	[1422] = {minLevel = 36, 	maxLevel = 57,},
-				--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 30,},
+				--[[Loch Modan]]			[1432] = {minLevel = 10,	maxLevel = 20,},
+				--[[Redridge Mountains]]	[1433] = {minLevel = 15, 	maxLevel = 20,},
+				--[[Searing Gorge]]			[1427] = {minLevel = 47, 	maxLevel = 51,},
+				--[[Silverpine Forest]]		[1421] = {minLevel = 10, 	maxLevel = 20,},
+				--[[Stranglethorn Vale]]	[1434] = {minLevel = 25, 	maxLevel = 35,},
+				--[[Swamp of Sorrows]]		[1435] = {minLevel = 52, 	maxLevel = 54,},
+				--[[The Hinterlands]]		[1425] = {minLevel = 30, 	maxLevel = 35,},
+				--[[Tirisfal Glades]]		[1420] = {minLevel = 1, 	maxLevel = 10,},
+				--[[Twilight Highlands]]	[241]  = {minLevel = 84, 	maxLevel = 85,},
+				--[[Westfall]]				[1436] = {minLevel = 10, 	maxLevel = 15,},
+				--[[Western Plaguelands]]	[1422] = {minLevel = 35, 	maxLevel = 40,},
+				--[[Wetlands]]				[1437] = {minLevel = 20, 	maxLevel = 25,},
 
 				-- Kalimdor
-				--[[Ashenvale]]				[1440] = {minLevel = 19, 	maxLevel = 30,},
-				--[[Azshara]]				[1447] = {minLevel = 10, 	maxLevel = 46,},
+				--[[Ashenvale]]				[1440] = {minLevel = 20, 	maxLevel = 25,},
+				--[[Azshara]]				[1447] = {minLevel = 10, 	maxLevel = 20,},
 				--[[Azuremyst Isle]]		[1943] = {minLevel = 1,		maxLevel = 10,},
-				--[[Bloodmyst Isle]]		[1950] = {minLevel = 9,		maxLevel = 19,},
+				--[[Bloodmyst Isle]]		[1950] = {minLevel = 10,	maxLevel = 20,},
 				--[[Darkshore]]				[1439] = {minLevel = 10,	maxLevel = 20,},
-				--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 39,},
+				--[[Desolace]]				[1443] = {minLevel = 30, 	maxLevel = 35,},
 				--[[Durotar]]				[1411] = {minLevel = 1, 	maxLevel = 10,},
-				--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 61,},
-				--[[Felwood]]				[1448] = {minLevel = 46, 	maxLevel = 54,},
-				--[[Feralas]]				[1444] = {minLevel = 35, 	maxLevel = 45,},
+				--[[Dustwallow Marsh]]		[1445] = {minLevel = 35, 	maxLevel = 40,},
+				--[[Felwood]]				[1448] = {minLevel = 45, 	maxLevel = 50,},
+				--[[Feralas]]				[1444] = {minLevel = 35, 	maxLevel = 40,},
 				--[[Mulgore]]				[1412] = {minLevel = 1, 	maxLevel = 10,},
-				--[[Northern Barrens]]		[1413] = {minLevel = 10, 	maxLevel = 33,},
-				--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 59,},
+				--[[Northern Barrens]]		[1413] = {minLevel = 10, 	maxLevel = 20,},
+				--[[Silithus]]				[1451] = {minLevel = 55, 	maxLevel = 60,},
 				--[[Southern Barrens]]		[199]  = {minLevel = 30, 	maxLevel = 35,},
 				--[[Stonetalon Mountains]]	[1442] = {minLevel = 25, 	maxLevel = 30,},
-				--[[Tanaris]]				[1446] = {minLevel = 40, 	maxLevel = 50,},
-				--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 11,},
-				--[[Thousand Needles]]		[1441] = {minLevel = 25, 	maxLevel = 45,},
-				--[[Un'Goro Crater]]		[1449] = {minLevel = 48, 	maxLevel = 55,},
-				--[[Winterspring]]			[1452] = {minLevel = 50, 	maxLevel = 60,},
+				--[[Tanaris]]				[1446] = {minLevel = 45, 	maxLevel = 50,},
+				--[[Teldrassil]]			[1438] = {minLevel = 1, 	maxLevel = 10,},
+				--[[Thousand Needles]]		[1441] = {minLevel = 40, 	maxLevel = 45,},
+				--[[Un'Goro Crater]]		[1449] = {minLevel = 50, 	maxLevel = 55,},
+				--[[Winterspring]]			[1452] = {minLevel = 50, 	maxLevel = 55,},
 
 				-- Outland
-				--[[Blade's Edge Montains]]	[1949] = {minLevel = 65, 	maxLevel = 70,},
-				--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 70,},
-				--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 70,},
-				--[[Netherstorm]]			[1953] = {minLevel = 66, 	maxLevel = 70,},
+				--[[Blade's Edge Montains]]	[1949] = {minLevel = 65, 	maxLevel = 68,},
+				--[[Hellfire Peninsula]]	[1944] = {minLevel = 58, 	maxLevel = 63,},
+				--[[Nagrand]]				[1951] = {minLevel = 64, 	maxLevel = 67,},
+				--[[Netherstorm]]			[1953] = {minLevel = 67, 	maxLevel = 70,},
 				--[[Shadowmoon Valley]]		[1948] = {minLevel = 67, 	maxLevel = 70,},
-				--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 70,},
-				--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 63,},
+				--[[Terokkar Forest]]		[1952] = {minLevel = 62, 	maxLevel = 65,},
+				--[[Zangarmarsh]]			[1946] = {minLevel = 60, 	maxLevel = 64,},
 
 				-- Northrend
-				-- Zone levels: https://www.wowhead.com/wotlk/zones/levels-68-80
 				--[[Borean Tundra]]			[114] = {minLevel = 68, 	maxLevel = 72,},
-				--[[Scolazar Basin]]		[119] = {minLevel = 75, 	maxLevel = 80,},
+				--[[Sholazar Basin]]		[119] = {minLevel = 76, 	maxLevel = 78,},
 				--[[Icecrown]]				[118] = {minLevel = 77, 	maxLevel = 80,},
 				--[[The Storm Peaks]]		[120] = {minLevel = 77, 	maxLevel = 80,},
-				--[[Zul'Drak]]				[121] = {minLevel = 73, 	maxLevel = 77,},
+				--[[Zul'Drak]]				[121] = {minLevel = 74, 	maxLevel = 76,},
 				--[[Grizzly Hills]]			[116] = {minLevel = 73, 	maxLevel = 75,},
 				--[[Howling Fjord]]			[117] = {minLevel = 68, 	maxLevel = 72,},
-				--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 80,},
-				--[[Crystalsong Forest]]	[127] = {minLevel = 80, 	maxLevel = 80,},
-				--[[Wintergrasp]]			[123] = {minLevel = 80, 	maxLevel = 80,},
+				--[[Dragonblight]]			[115] = {minLevel = 71, 	maxLevel = 75,},
+				--[[Crystalsong Forest]]	[127] = {minLevel = 77, 	maxLevel = 80,},
+				--[[Wintergrasp]]			[123] = {minLevel = 77, 	maxLevel = 80,},
 
 				-- Cataclysm
-				--[[Deepholm]]				[207] = {minLevel = 81, 	maxLevel = 83,},
-				--[[Kezan]]					[194] = {minLevel = 1, 		maxLevel = 6,},
-				--[[Mount Hyjal]]			[198] = {minLevel = 79, 	maxLevel = 83,},
-				--[[The Lost Isles]]		[174] = {minLevel = 6, 		maxLevel = 10,},
-				--[[Uldum]]					[249] = {minLevel = 81, 	maxLevel = 84,},
-				--[[Vashj'ir]]				[203] = {minLevel = 78, 	maxLevel = 85,},
+				--[[Deepholm]]				[207] = {minLevel = 82, 	maxLevel = 83,},
+				--[[Kezan]]					[194] = {minLevel = 1, 		maxLevel = 5,},
+				--[[Mount Hyjal]]			[198] = {minLevel = 80, 	maxLevel = 82,},
+				--[[The Lost Isles]]		[174] = {minLevel = 5, 		maxLevel = 12,},
+				--[[Uldum]]					[249] = {minLevel = 83, 	maxLevel = 84,},
+				--[[Vashj'ir]]				[203] = {minLevel = 80, 	maxLevel = 82,},
 
 			}
 
