@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.14 (3rd July 2024)
+	-- 	Leatrix Maps 4.0.15.alpha.1 (3rd July 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.14"
+	LeaMapsLC["AddonVer"] = "4.0.15.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -99,7 +99,8 @@
 
 		-- Remove right-click from title bar
 		if LeaMapsLC["UseDefaultMap"] == "Off" then
-			WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
+			-- WorldMapTitleButton:RegisterForClicks("LeftButtonDown")
+			WorldMapTitleButton:EnableMouse(false)
 		end
 
 		-- Hide title bar if default map with menus or custom map
