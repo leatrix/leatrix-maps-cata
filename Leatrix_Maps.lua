@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.15.alpha.1 (3rd July 2024)
+	-- 	Leatrix Maps 4.0.15.alpha.2 (3rd July 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.15.alpha.1"
+	LeaMapsLC["AddonVer"] = "4.0.15.alpha.2"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -1873,15 +1873,16 @@
 			WorldMapFrame:RegisterForDrag("LeftButton")
 			WorldMapFrame:SetScript("OnDragStart", function()
 				if LeaMapsLC["UnlockMapFrame"] == "On" then
-					WorldMapFrame:StartMoving()
+					-- WorldMapFrame:StartMoving()
+					WorldMapTitleButton_OnDragStart()
 				end
 			end)
 			WorldMapFrame:SetScript("OnDragStop", function()
-				WorldMapFrame:StopMovingOrSizing()
+				-- WorldMapFrame:StopMovingOrSizing()
+				WorldMapTitleButton_OnDragStop()
 				WorldMapFrame:SetUserPlaced(false)
 				-- Save map frame position
 				LeaMapsLC["MapPosA"], void, LeaMapsLC["MapPosR"], LeaMapsLC["MapPosX"], LeaMapsLC["MapPosY"] = WorldMapFrame:GetPoint()
-				WorldMapTitleButton_OnDragStop()
 			end)
 
 			-- Set position on startup
