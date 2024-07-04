@@ -1,4 +1,4 @@
-﻿4.0.15.alpha.2 - 3rd July 2024
+﻿4.0.15.alpha.3 - 4th July 2024
 - Fixed an issue which caused the map to be movable even when 'Unlock map frame' is disabled.
 - Fixed a situational issue which could cause a Lua error while moving the map.
 
