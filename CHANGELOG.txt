@@ -1,4 +1,7 @@
-﻿4.0.15 - 10th July 2024
+﻿4.0.21.alpha.1 - 18th August 2024
+- Moved the Orb of Translocation icon to the correct location on the Tirisfal Glades map.
+
+4.0.15 - 10th July 2024
 - Fixed an issue which caused the map to be movable even when 'Unlock map frame' is disabled.
 - Fixed a situational issue which could cause a Lua error while moving the map.
 

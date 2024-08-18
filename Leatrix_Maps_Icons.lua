@@ -59,6 +59,7 @@
 			{"TravelH", 60.7, 58.8, L["Zeppelin to"] .. " " .. L["Orgrimmar"] .. ", " .. L["Durotar"], nil, fHTex, nil, nil, nil, nil, nil, 0, 1411},
 			{"TravelH", 61.9, 59.0, L["Zeppelin to"] .. " " .. L["Grom'gol"] .. ", " .. L["Stranglethorn Vale"], nil, pHTex},
 			{"TravelH", 59.1, 58.9, L["Zeppelin to"] .. " " .. L["Vengeance Landing"] .. ", " .. L["Howling Fjord"], nil, pHTex},
+			{"TravelH", 59.4, 67.5, L["Silvermoon City"], L["Orb of Translocation"], nil, nil, nil, nil, nil, nil, 0, 1954},
 		},
 		--[[Silverpine Forest]] [1421] = {
 			{"Dungeon", 44.8, 67.8, L["Shadowfang Keep"], L["Dungeon"], dnTex, 18, 26},
@@ -211,7 +212,6 @@
 		},
 		--[[Undercity]] [1458] = {
 			{"FlightH", 63.3, 48.5, L["Trade Quarter"] .. ", " .. L["Undercity"], nil, tHTex, nil, nil},
-			{"TravelH", 54.9, 11.3, L["Silvermoon City"], L["Orb of Translocation"], nil, nil, nil, nil, nil, nil, 0, 1954},
 			{"TravelH", 85.3, 17.0, L["Blasted Lands"], L["Portal"], pHTex, nil, nil, nil, nil, nil, 0, 1419},
 		},
 		--[[Isle of Quel'Danas]] [1957] = {
