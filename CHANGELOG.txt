@@ -1,4 +1,4 @@
-﻿4.0.21.alpha.1 - 18th August 2024
+﻿4.0.21 - 21st August 2024
 - Moved the Orb of Translocation icon to the correct location on the Tirisfal Glades map.
 
 4.0.15 - 10th July 2024
