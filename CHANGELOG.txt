@@ -1,5 +1,6 @@
 ﻿4.0.24.alpha.1 - 21st August 2024
 - Game API updates.
+- PTR (4.4.1): Preliminary updates for game version 4.4.1.
 
 4.0.21 - 21st August 2024
 - Moved the Orb of Translocation icon to the correct location on the Tirisfal Glades map.
