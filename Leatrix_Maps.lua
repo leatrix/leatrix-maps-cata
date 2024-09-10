@@ -390,7 +390,7 @@
 				local otdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapOutlandMenu", 184, -20, mapOutlandString)
 
 				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapOutlandString[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+					WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
 				end)
 
 				-- Create Northrend dropdown menu
@@ -579,7 +579,7 @@
 
 					hooksecurefunc(WorldMapFrame, "Minimize", function()
 						outerFrame:ClearAllPoints()
-						outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+						outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, 20)
 					end)
 
 					hooksecurefunc(WorldMapFrame, "Maximize", function()
