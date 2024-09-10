@@ -401,7 +401,7 @@
 				if (zones) then
 					for i, zoneInfo in ipairs(zones) do
 						tinsert(mapNorthrendTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
-						tinsert(mapNorthrendString, {zoneInfo.name, 1 + 1})
+						tinsert(mapNorthrendString, {zoneInfo.name, i + 1})
 					end
 				end
 
