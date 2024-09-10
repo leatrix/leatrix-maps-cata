@@ -295,6 +295,21 @@
 					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, 20)
 				end
 
+				-- Move the map level dropdown menu
+				hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
+					WorldMapFrame.WorldMapLevelDropDown.header:Hide()
+					WorldMapFrame.WorldMapLevelDropDown:ClearAllPoints()
+					if WorldMapFrame:IsMaximized() then
+						WorldMapFrame.WorldMapLevelDropDown:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -15, -32)
+					else
+						WorldMapFrame.WorldMapLevelDropDown:SetPoint("TOPLEFT", outerFrame, "TOPLEFT", 0, -46)
+					end
+				end)
+
+				-- Hide the map level arrow buttons
+				WorldMapLevelDownButton:SetParent(menuTempFrame)
+				WorldMapLevelUpButton:SetParent(menuTempFrame)
+
 				-- Create a zone menu dropdown menu (using standard dropdown template)
 				function LeaMapsLC:CreateZoneMenuDropdown(frame, x, y, items)
 
@@ -409,6 +424,10 @@
 
 				tinsert(mapNorthrendString, 1, {L["Northrend"], 1})
 				tinsert(mapNorthrendTable, 1, {zonename = L["Northrend"], mapid = 113})
+
+				-- Add The Underbelly map
+				tinsert(mapNorthrendString,  {L["The Underbelly"], #mapNorthrendTable + 1})
+				tinsert(mapNorthrendTable,  {zonename = L["The Underbelly"], mapid = 126})
 
 				local nrdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapNorthrendMenu", 184, -20, mapNorthrendString)
 
