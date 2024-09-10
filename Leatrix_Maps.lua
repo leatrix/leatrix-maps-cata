@@ -284,6 +284,7 @@
 				L["Northrend"] = POSTMASTER_PIPE_NORTHREND
 				L["The Maelstrom"] = DUNGEON_FLOOR_DRAGONSOUL6
 				L["Azeroth"] = AZEROTH
+				L["The Underbelly"] = DUNGEON_FLOOR_DALARAN2
 
 				-- Create outer frame for dropdown menus
 				local outerFrame = CreateFrame("FRAME", nil, WorldMapFrame)
