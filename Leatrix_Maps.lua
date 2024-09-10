@@ -277,6 +277,338 @@
 
 			if LeaMapsLC.NewPatch then
 
+				-- Continent translations
+				L["Eastern Kingdoms"] = POSTMASTER_PIPE_EASTERNKINGDOMS
+				L["Kalimdor"] = POSTMASTER_PIPE_KALIMDOR
+				L["Outland"] = POSTMASTER_PIPE_OUTLAND
+				L["Northrend"] = POSTMASTER_PIPE_NORTHREND
+				L["The Maelstrom"] = DUNGEON_FLOOR_DRAGONSOUL6
+				L["Azeroth"] = AZEROTH
+
+				-- Create outer frame for dropdown menus
+				local outerFrame = CreateFrame("FRAME", nil, WorldMapFrame)
+				outerFrame:SetSize(360, 20)
+
+				if LeaMapsLC["UseDefaultMap"] == "Off" then
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 16, 0)
+				else
+					outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, 20)
+				end
+
+				-- Create a zone menu dropdown menu (using standard dropdown template)
+				function LeaMapsLC:CreateZoneMenuDropdown(frame, x, y, items)
+
+					local RadioDropdown = CreateFrame("DropdownButton", nil, outerFrame, "WowStyle1DropdownTemplate")
+					LeaMapsCB[frame] = RadioDropdown
+					RadioDropdown:SetPoint("TOPLEFT", outerFrame, "TOPLEFT", x, y)
+					RadioDropdown:SetFrameLevel(30)
+					RadioDropdown:SetWidth(184)
+
+					local function IsSelected(value)
+						return value == LeaMapsLC[frame]
+					end
+
+					local function SetSelected(value)
+						LeaMapsLC[frame] = value
+					end
+
+					MenuUtil.CreateRadioMenu(RadioDropdown, IsSelected, SetSelected, unpack(items))
+
+					return RadioDropdown
+
+				end
+
+				-- Create No zones available dropdown menu
+				LeaMapsLC["ZoneMapNoneMenu"] = 1
+
+				local nodd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapNoneMenu", 184, -20, {{"---"}})
+				nodd:Disable()
+
+				-- Create Eastern Kingdoms dropdown menu
+				LeaMapsLC["ZoneMapEasternMenu"] = 1
+
+				local mapEasternTable, mapEasternString = {}, {}
+				local zones = C_Map.GetMapChildrenInfo(1415)
+				if (zones) then
+					for i, zoneInfo in ipairs(zones) do
+						tinsert(mapEasternTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+						tinsert(mapEasternString, {zoneInfo.name, i + 1})
+					end
+				end
+
+				table.sort(mapEasternString, function(k, v) return k[1] < v[1] end)
+
+				tinsert(mapEasternString, 1, {L["Eastern Kingdoms"], 1})
+				tinsert(mapEasternTable, 1, {zonename = L["Eastern Kingdoms"], mapid = 1415})
+
+				local ekdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapEasternMenu", 184, -20, mapEasternString)
+
+				LeaMapsCB["ZoneMapEasternMenu"]:RegisterCallback("OnUpdate", function()
+					WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
+				end)
+
+				-- Create Kalimdor dropdown menu
+				LeaMapsLC["ZoneMapKalimdorMenu"] = 1
+
+				local mapKalimdorTable, mapKalimdorString = {}, {}
+				local zones = C_Map.GetMapChildrenInfo(1414)
+				if (zones) then
+					for i, zoneInfo in ipairs(zones) do
+						tinsert(mapKalimdorTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+						tinsert(mapKalimdorString, {zoneInfo.name, i + 1})
+					end
+				end
+
+				table.sort(mapKalimdorString, function(k, v) return k[1] < v[1] end)
+
+				tinsert(mapKalimdorString, 1, {L["Kalimdor"], 1})
+				tinsert(mapKalimdorTable, 1, {zonename = L["Kalimdor"], mapid = 1414})
+
+				local kmdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapKalimdorMenu", 184, -20, mapKalimdorString)
+
+				LeaMapsCB["ZoneMapKalimdorMenu"]:RegisterCallback("OnUpdate", function()
+					WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
+				end)
+
+				-- Create Outland dropdown menu
+				LeaMapsLC["ZoneMapOutlandMenu"] = 1
+
+				local mapOutlandTable, mapOutlandString = {}, {}
+				local zones = C_Map.GetMapChildrenInfo(1945)
+				if (zones) then
+					for i, zoneInfo in ipairs(zones) do
+						tinsert(mapOutlandTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+						tinsert(mapOutlandString, {zoneInfo.name, i + 1})
+					end
+				end
+
+				table.sort(mapOutlandString, function(k, v) return k[1] < v[1] end)
+
+				tinsert(mapOutlandString, 1, {L["Outland"], 1})
+				tinsert(mapOutlandTable, 1, {zonename = L["Outland"], mapid = 1945})
+
+				local otdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapOutlandMenu", 184, -20, mapOutlandString)
+
+				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnUpdate", function()
+					WorldMapFrame:SetMapID(mapOutlandString[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+				end)
+
+				-- Create Northrend dropdown menu
+				LeaMapsLC["ZoneMapNorthrendMenu"] = 1
+
+				local mapNorthrendTable, mapNorthrendString = {}, {}
+				local zones = C_Map.GetMapChildrenInfo(113)
+				if (zones) then
+					for i, zoneInfo in ipairs(zones) do
+						tinsert(mapNorthrendTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+						tinsert(mapNorthrendString, {zoneInfo.name, 1 + 1})
+					end
+				end
+
+				table.sort(mapNorthrendString, function(k, v) return k[1] < v[1] end)
+
+				tinsert(mapNorthrendString, 1, {L["Northrend"], 1})
+				tinsert(mapNorthrendTable, 1, {zonename = L["Northrend"], mapid = 113})
+
+				local nrdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapNorthrendMenu", 184, -20, mapNorthrendString)
+
+				LeaMapsCB["ZoneMapNorthrendMenu"]:RegisterCallback("OnUpdate", function()
+					WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
+				end)
+
+				-- Create The Maelstrom dropdown menu
+				LeaMapsLC["ZoneMapTheMaelstromMenu"] = 1
+
+				local mapTheMaelstromTable, mapTheMaelstromString = {}, {}
+				local zones = C_Map.GetMapChildrenInfo(948)
+				if (zones) then
+					for i, zoneInfo in ipairs(zones) do
+						if zoneInfo.mapID ~= 276 then
+							tinsert(mapTheMaelstromTable, {zonename = zoneInfo.name, mapid = zoneInfo.mapID})
+							tinsert(mapTheMaelstromString, {zoneInfo.name, i + 1})
+						end
+					end
+				end
+
+				table.sort(mapTheMaelstromString, function(k, v) return k[1] < v[1] end)
+
+				tinsert(mapTheMaelstromString, 1, {L["The Maelstrom"], 1})
+				tinsert(mapTheMaelstromTable, 1, {zonename = L["The Maelstrom"], mapid = 948})
+
+				local msdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapTheMaelstromMenu", 184, -20, mapTheMaelstromString)
+
+				LeaMapsCB["ZoneMapTheMaelstromMenu"]:RegisterCallback("OnUpdate", function()
+					WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+				end)
+
+				-- Create continent dropdown menu
+				LeaMapsLC["ZoneMapContinentMenu"] = 1
+
+				local mapContinentTable, mapContinentString = {}, {}
+				tinsert(mapContinentString, 1, {L["Eastern Kingdoms"], 1})
+				tinsert(mapContinentTable, 1, {zonename = L["Eastern Kingdoms"], mapid = 1415})
+				tinsert(mapContinentString, 2, {L["Kalimdor"], 2})
+				tinsert(mapContinentTable, 2, {zonename = L["Kalimdor"], mapid = 1414})
+				tinsert(mapContinentString, 3, {L["Outland"], 3})
+				tinsert(mapContinentTable, 3, {zonename = L["Outland"], mapid = 1945})
+				tinsert(mapContinentString, 4, {L["Northrend"], 4})
+				tinsert(mapContinentTable, 4, {zonename = L["Northrend"], mapid = 113})
+				tinsert(mapContinentString, 5, {L["The Maelstrom"], 5})
+				tinsert(mapContinentTable, 5, {zonename = L["The Maelstrom"], mapid = 948})
+				tinsert(mapContinentString, 6, {L["Azeroth"], 6})
+				tinsert(mapContinentTable, 6, {zonename = L["Azeroth"], mapid = 947})
+				tinsert(mapContinentString, 7, {L["Cosmic"], 7})
+				tinsert(mapContinentTable, 7, {zonename = L["Cosmic"], mapid = 946})
+
+				local cond = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapContinentMenu", 0, -20, mapContinentString)
+
+				-- Continent dropdown menu handler
+				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnUpdate", function()
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); nodd:Hide()
+					if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
+						ekdd:Show()
+						WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 2 then
+						kmdd:Show()
+						WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 3 then
+						otdd:Show()
+						WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 4 then
+						nrdd:Show()
+						WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 5 then
+						msdd:Show()
+						WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 6 then
+						nodd:Show()
+						WorldMapFrame:SetMapID(947)
+					elseif LeaMapsLC["ZoneMapContinentMenu"] == 7 then
+						nodd:Show()
+						WorldMapFrame:SetMapID(946)
+					end
+				end)
+
+				-- Create Azeroth lists
+				local mapAzerothTable, mapAzerothString = {}, {}
+				tinsert(mapAzerothString, 1, {L["Azeroth"], 1})
+				tinsert(mapAzerothTable, 1, {zonename = L["Azeroth"], mapid = 947})
+
+				-- Create Cosmic lists
+				local mapCosmicTable, mapCosmicString = {}, {}
+				tinsert(mapCosmicString, 1, {L["Azeroth"], 1})
+				tinsert(mapCosmicTable, 1, {zonename = L["Azeroth"], mapid = 947})
+
+				-- Function to set dropdown menu
+				local function SetMapControls()
+
+					-- Hide dropdown menus
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nodd:Hide(); nrdd:Hide(); msdd:Hide(); cond:Hide()
+
+					-- Eastern Kingdoms
+					for k, v in pairs(mapEasternTable) do
+						if v.mapid == WorldMapFrame.mapID then
+							LeaMapsLC["ZoneMapEasternMenu"] = k
+							ekdd:Show()
+							LeaMapsLC["ZoneMapContinentMenu"] = 1; cond:Show()
+							return
+						end
+					end
+
+					-- Kalimdor
+					for k, v in pairs(mapKalimdorTable) do
+						if v.mapid == WorldMapFrame.mapID then
+							LeaMapsLC["ZoneMapKalimdorMenu"] = k
+							kmdd:Show()
+							LeaMapsLC["ZoneMapContinentMenu"] = 2; cond:Show()
+							return
+						end
+					end
+
+					-- Outland
+					for k, v in pairs(mapOutlandTable) do
+						if v.mapid == WorldMapFrame.mapID then
+							LeaMapsLC["ZoneMapOutlandMenu"] = k
+							otdd:Show()
+							LeaMapsLC["ZoneMapContinentMenu"] = 3; cond:Show()
+							return
+						end
+					end
+
+					-- Northrend
+					for k, v in pairs(mapNorthrendTable) do
+						if v.mapid == WorldMapFrame.mapID then
+							LeaMapsLC["ZoneMapNorthrendMenu"] = k
+							nrdd:Show()
+							LeaMapsLC["ZoneMapContinentMenu"] = 4; cond:Show()
+							return
+						end
+					end
+
+					-- The Maelstrom
+					for k, v in pairs(mapTheMaelstromTable) do
+						if v.mapid == WorldMapFrame.mapID then
+							LeaMapsLC["ZoneMapTheMaelstromMenu"] = k
+							msdd:Show()
+							LeaMapsLC["ZoneMapContinentMenu"] = 5; cond:Show()
+							return
+						end
+					end
+					-- Azeroth
+					if WorldMapFrame.mapID == 947 then
+						nodd:Show()
+						LeaMapsLC["ZoneMapContinentMenu"] = 6; cond:Show()
+						return
+					end
+
+					-- Cosmic
+					if WorldMapFrame.mapID == 946 then
+						nodd:Show()
+						LeaMapsLC["ZoneMapContinentMenu"] = 7; cond:Show()
+						return
+					end
+
+				end
+
+				-- Set dropdown menu when map changes and when map is shown
+				hooksecurefunc(WorldMapFrame, "OnMapChanged", SetMapControls)
+				WorldMapFrame:HookScript("OnShow", SetMapControls)
+
+				-- Move dropdown menus if using default map
+				if LeaMapsLC["UseDefaultMap"] == "On" then
+
+					hooksecurefunc(WorldMapFrame, "Minimize", function()
+						outerFrame:ClearAllPoints()
+						outerFrame:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 14, -6)
+					end)
+
+					hooksecurefunc(WorldMapFrame, "Maximize", function()
+						outerFrame:ClearAllPoints()
+						outerFrame:SetPoint("TOP", WorldMapFrame, "TOP", 0, -12)
+					end)
+				end
+
+				-- ElvUI fixes
+				if LeaMapsLC.ElvUI then
+					local E, S = LeaMapsLC.ElvUI
+					local S = E:GetModule('Skins')
+					if E.private.skins.blizzard.enable and E.private.skins.blizzard.worldmap then
+						S:HandleDropDownBox(ekdd.dd); ekdd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						S:HandleDropDownBox(kmdd.dd); kmdd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						S:HandleDropDownBox(otdd.dd); otdd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						S:HandleDropDownBox(nrdd.dd); nrdd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						S:HandleDropDownBox(cond.dd); cond.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						S:HandleDropDownBox(nodd.dd); nodd.bg:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background-Dark", edgeFile = "", tile = false, tileSize = 0, edgeSize = 32, insets = { left = 4, right = -7, top = 0, bottom = 0 }});
+						outerFrame:SetWidth(380)
+						ekdd.btn:SetHitRectInsets(ekdd.btn:GetHitRectInsets() - 10, 0, 0, 0)
+						kmdd.btn:SetHitRectInsets(kmdd.btn:GetHitRectInsets() - 10, 0, 0, 0)
+						otdd.btn:SetHitRectInsets(otdd.btn:GetHitRectInsets() - 10, 0, 0, 0)
+						nrdd.btn:SetHitRectInsets(nrdd.btn:GetHitRectInsets() - 10, 0, 0, 0)
+						cond.btn:SetHitRectInsets(cond.btn:GetHitRectInsets() - 10, 0, 0, 0)
+						nodd.btn:SetHitRectInsets(nodd.btn:GetHitRectInsets() - 10, 0, 0, 0)
+					end
+				end
+
 			else
 
 				-- Continent translations
