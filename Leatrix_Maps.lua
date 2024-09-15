@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.24 (11th September 2024)
+	-- 	Leatrix Maps 4.0.25.alpha.1 (11th September 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.24"
+	LeaMapsLC["AddonVer"] = "4.0.25.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -311,33 +311,11 @@
 				WorldMapLevelDownButton:SetParent(menuTempFrame)
 				WorldMapLevelUpButton:SetParent(menuTempFrame)
 
-				-- Create a zone menu dropdown menu (using standard dropdown template)
-				function LeaMapsLC:CreateZoneMenuDropdown(frame, x, y, items)
-
-					local RadioDropdown = CreateFrame("DropdownButton", nil, outerFrame, "WowStyle1DropdownTemplate")
-					LeaMapsCB[frame] = RadioDropdown
-					RadioDropdown:SetPoint("TOPLEFT", outerFrame, "TOPLEFT", x, y)
-					RadioDropdown:SetFrameLevel(30)
-					RadioDropdown:SetWidth(184)
-
-					local function IsSelected(value)
-						return value == LeaMapsLC[frame]
-					end
-
-					local function SetSelected(value)
-						LeaMapsLC[frame] = value
-					end
-
-					MenuUtil.CreateRadioMenu(RadioDropdown, IsSelected, SetSelected, unpack(items))
-
-					return RadioDropdown
-
-				end
-
 				-- Create No zones available dropdown menu
 				LeaMapsLC["ZoneMapNoneMenu"] = 1
 
-				local nodd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapNoneMenu", 184, -20, {{"---"}})
+				local nodd = LeaMapsLC:CreateDropdownNew("ZoneMapNoneMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, {{"---"}})
+				nodd:SetFrameLevel(30)
 				nodd:Disable()
 
 				-- Create Eastern Kingdoms dropdown menu
@@ -357,7 +335,8 @@
 				tinsert(mapEasternString, 1, {L["Eastern Kingdoms"], 1})
 				tinsert(mapEasternTable, 1, {zonename = L["Eastern Kingdoms"], mapid = 1415})
 
-				local ekdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapEasternMenu", 184, -20, mapEasternString)
+				local ekdd = LeaMapsLC:CreateDropdownNew("ZoneMapEasternMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapEasternString)
+				ekdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapEasternMenu"]:RegisterCallback("OnUpdate", function()
 					WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
@@ -380,7 +359,8 @@
 				tinsert(mapKalimdorString, 1, {L["Kalimdor"], 1})
 				tinsert(mapKalimdorTable, 1, {zonename = L["Kalimdor"], mapid = 1414})
 
-				local kmdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapKalimdorMenu", 184, -20, mapKalimdorString)
+				local kmdd = LeaMapsLC:CreateDropdownNew("ZoneMapKalimdorMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapKalimdorString)
+				kmdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapKalimdorMenu"]:RegisterCallback("OnUpdate", function()
 					WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
@@ -403,7 +383,8 @@
 				tinsert(mapOutlandString, 1, {L["Outland"], 1})
 				tinsert(mapOutlandTable, 1, {zonename = L["Outland"], mapid = 1945})
 
-				local otdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapOutlandMenu", 184, -20, mapOutlandString)
+				local otdd = LeaMapsLC:CreateDropdownNew("ZoneMapOutlandMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapOutlandString)
+				otdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnUpdate", function()
 					WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
@@ -430,7 +411,8 @@
 				tinsert(mapNorthrendString,  {L["The Underbelly"], #mapNorthrendTable + 1})
 				tinsert(mapNorthrendTable,  {zonename = L["The Underbelly"], mapid = 126})
 
-				local nrdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapNorthrendMenu", 184, -20, mapNorthrendString)
+				local nrdd = LeaMapsLC:CreateDropdownNew("ZoneMapNorthrendMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapNorthrendString)
+				nrdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapNorthrendMenu"]:RegisterCallback("OnUpdate", function()
 					WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
@@ -455,7 +437,8 @@
 				tinsert(mapTheMaelstromString, 1, {L["The Maelstrom"], 1})
 				tinsert(mapTheMaelstromTable, 1, {zonename = L["The Maelstrom"], mapid = 948})
 
-				local msdd = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapTheMaelstromMenu", 184, -20, mapTheMaelstromString)
+				local msdd = LeaMapsLC:CreateDropdownNew("ZoneMapTheMaelstromMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapTheMaelstromString)
+				msdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapTheMaelstromMenu"]:RegisterCallback("OnUpdate", function()
 					WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
@@ -480,7 +463,8 @@
 				tinsert(mapContinentString, 7, {L["Cosmic"], 7})
 				tinsert(mapContinentTable, 7, {zonename = L["Cosmic"], mapid = 946})
 
-				local cond = LeaMapsLC:CreateZoneMenuDropdown("ZoneMapContinentMenu", 0, -20, mapContinentString)
+				local cond = LeaMapsLC:CreateDropdownNew("ZoneMapContinentMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 0, -20, mapContinentString)
+				cond:SetFrameLevel(30)
 
 				-- Continent dropdown menu handler
 				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnUpdate", function()
@@ -3168,8 +3152,7 @@
 		do
 
 			if LeaMapsLC.NewPatch then
-				LeaMapsLC:CreateDropdownNew("ZoneMapMenu", "Zone Map", 146, "TOPLEFT", LeaMapsLC["PageF"], "TOPLEFT", 16, -392, {{L["Never"], 1}, {L["Battlegrounds"], 2}, {L["Always"], 3}}, L["Choose where the zone map should be shown."])
-				LeaMapsCB["ZoneMapMenu"]:SetWidth(170)
+				LeaMapsLC:CreateDropdownNew("ZoneMapMenu", "Zone Map", 170, "TOPLEFT", LeaMapsLC["PageF"], "TOPLEFT", 16, -392, {{L["Never"], 1}, {L["Battlegrounds"], 2}, {L["Always"], 3}}, L["Choose where the zone map should be shown."])
 			else
 				LeaMapsLC:CreateDropDown("ZoneMapMenu", "Zone Map", LeaMapsLC["PageF"], 146, "TOPLEFT", 16, -392, {L["Never"], L["Battlegrounds"], L["Always"]}, L["Choose where the zone map should be shown."])
 			end
@@ -3514,6 +3497,7 @@
 		local RadioDropdown = CreateFrame("DropdownButton", nil, parent, "WowStyle1DropdownTemplate")
 		LeaMapsCB[frame] = RadioDropdown
 		RadioDropdown:SetPoint(anchor, parent, relative, x, y)
+		RadioDropdown:SetWidth(width)
 
 		local function IsSelected(value)
 			return value == LeaMapsLC[frame]
@@ -3525,7 +3509,11 @@
 
 		MenuUtil.CreateRadioMenu(RadioDropdown, IsSelected, SetSelected, unpack(items))
 
-		local lf = RadioDropdown:CreateFontString(nil, "OVERLAY", "GameFontNormal"); lf:SetPoint("TOPLEFT", RadioDropdown, 0, 20); lf:SetPoint("TOPRIGHT", RadioDropdown, -5, 20); lf:SetJustifyH("LEFT"); lf:SetText(L[label])
+		if label then
+			local lf = RadioDropdown:CreateFontString(nil, "OVERLAY", "GameFontNormal"); lf:SetPoint("TOPLEFT", RadioDropdown, 0, 20); lf:SetPoint("TOPRIGHT", RadioDropdown, -5, 20); lf:SetJustifyH("LEFT"); lf:SetText(L[label])
+		end
+
+		return RadioDropdown
 
 	end
 
