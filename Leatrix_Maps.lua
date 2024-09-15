@@ -143,20 +143,13 @@
 		-- Get player faction
 		local playerFaction = UnitFactionGroup("player")
 
-		-- Hide world map dropdown menus to prevent GuildControlSetRank() taint
+		-- Hide default world map dropdown menus
 		local menuTempFrame = CreateFrame("FRAME")
 		menuTempFrame:Hide()
-		if LeaMapsLC.NewPatch then
-			WorldMapContinentDropdown:SetParent(menuTempFrame)
-			WorldMapZoneDropdown:SetParent(menuTempFrame)
-			WorldMapZoomOutButton:SetParent(menuTempFrame)
-			WorldMapZoneMinimapDropdown:SetParent(menuTempFrame)
-		else
-			WorldMapContinentDropDown:SetParent(menuTempFrame)
-			WorldMapZoneDropDown:SetParent(menuTempFrame)
-			WorldMapZoomOutButton:SetParent(menuTempFrame)
-			WorldMapZoneMinimapDropDown:SetParent(menuTempFrame)
-		end
+		WorldMapContinentDropdown:SetParent(menuTempFrame)
+		WorldMapZoneDropdown:SetParent(menuTempFrame)
+		WorldMapZoomOutButton:SetParent(menuTempFrame)
+		WorldMapZoneMinimapDropdown:SetParent(menuTempFrame)
 
 		-- Hide world map title button (used for movement) if default maximised map is showing
 		hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
