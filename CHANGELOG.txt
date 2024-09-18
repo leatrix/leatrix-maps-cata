@@ -1,4 +1,4 @@
-﻿4.0.25.alpha.1 - 11th September 2024
+﻿4.0.25 - 18th September 2024
 - PTR (4.4.1): Game API updates.
 
 4.0.24 - 11th September 2024

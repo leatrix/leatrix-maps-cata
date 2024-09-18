@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.25.alpha.1 (11th September 2024)
+	-- 	Leatrix Maps 4.0.25 (18th September 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.25.alpha.1"
+	LeaMapsLC["AddonVer"] = "4.0.25"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -146,10 +146,17 @@
 		-- Hide default world map dropdown menus
 		local menuTempFrame = CreateFrame("FRAME")
 		menuTempFrame:Hide()
-		WorldMapContinentDropdown:SetParent(menuTempFrame)
-		WorldMapZoneDropdown:SetParent(menuTempFrame)
-		WorldMapZoomOutButton:SetParent(menuTempFrame)
-		WorldMapZoneMinimapDropdown:SetParent(menuTempFrame)
+		if LeaMapsLC.NewPatch then
+			WorldMapContinentDropdown:SetParent(menuTempFrame)
+			WorldMapZoneDropdown:SetParent(menuTempFrame)
+			WorldMapZoomOutButton:SetParent(menuTempFrame)
+			WorldMapZoneMinimapDropdown:SetParent(menuTempFrame)
+		else
+			WorldMapContinentDropDown:SetParent(menuTempFrame)
+			WorldMapZoneDropDown:SetParent(menuTempFrame)
+			WorldMapZoomOutButton:SetParent(menuTempFrame)
+			WorldMapZoneMinimapDropDown:SetParent(menuTempFrame)
+		end
 
 		-- Hide world map title button (used for movement) if default maximised map is showing
 		hooksecurefunc(WorldMapFrame, "SynchronizeDisplayState", function()
