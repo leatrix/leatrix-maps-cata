@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.26 (25th September 2024)
+	-- 	Leatrix Maps 4.0.27.alpha.1 (25th September 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.26"
+	LeaMapsLC["AddonVer"] = "4.0.27.alpha.1"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -339,7 +339,9 @@
 				ekdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapEasternMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
+					if not IsInInstance() then
+						WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
+					end
 				end)
 
 				-- Create Kalimdor dropdown menu
@@ -363,7 +365,9 @@
 				kmdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapKalimdorMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
+					if not IsInInstance() then
+						WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
+					end
 				end)
 
 				-- Create Outland dropdown menu
@@ -387,7 +391,9 @@
 				otdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+					if not IsInInstance() then
+						WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+					end
 				end)
 
 				-- Create Northrend dropdown menu
@@ -415,7 +421,9 @@
 				nrdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapNorthrendMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
+					if not IsInInstance() then
+						WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
+					end
 				end)
 
 				-- Create The Maelstrom dropdown menu
@@ -441,7 +449,9 @@
 				msdd:SetFrameLevel(30)
 
 				LeaMapsCB["ZoneMapTheMaelstromMenu"]:RegisterCallback("OnUpdate", function()
-					WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+					if not IsInInstance() then
+						WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+					end
 				end)
 
 				-- Create continent dropdown menu
@@ -469,27 +479,29 @@
 				-- Continent dropdown menu handler
 				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnUpdate", function()
 					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); nodd:Hide()
-					if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
-						ekdd:Show()
-						WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 2 then
-						kmdd:Show()
-						WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 3 then
-						otdd:Show()
-						WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 4 then
-						nrdd:Show()
-						WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 5 then
-						msdd:Show()
-						WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 6 then
-						nodd:Show()
-						WorldMapFrame:SetMapID(947)
-					elseif LeaMapsLC["ZoneMapContinentMenu"] == 7 then
-						nodd:Show()
-						WorldMapFrame:SetMapID(946)
+					if not IsInInstance() then
+						if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
+							ekdd:Show()
+							WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 2 then
+							kmdd:Show()
+							WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 3 then
+							otdd:Show()
+							WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 4 then
+							nrdd:Show()
+							WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 5 then
+							msdd:Show()
+							WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 6 then
+							nodd:Show()
+							WorldMapFrame:SetMapID(947)
+						elseif LeaMapsLC["ZoneMapContinentMenu"] == 7 then
+							nodd:Show()
+							WorldMapFrame:SetMapID(946)
+						end
 					end
 				end)
 
