@@ -478,7 +478,7 @@
 
 				-- Continent dropdown menu handler
 				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnUpdate", function()
-					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); nodd:Hide()
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); msdd:Hide(); nodd:Hide()
 					if not IsInInstance() then
 						if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
 							ekdd:Show()
@@ -519,7 +519,7 @@
 				local function SetMapControls()
 
 					-- Hide dropdown menus
-					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nodd:Hide(); nrdd:Hide(); msdd:Hide(); cond:Hide()
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); msdd:Hide(); nodd:Hide(); cond:Hide()
 
 					-- Eastern Kingdoms
 					for k, v in pairs(mapEasternTable) do
@@ -819,7 +819,7 @@
 
 				-- Continent dropdown menu handler
 				LeaMapsCB["ListFrameZoneMapContinentMenu"]:HookScript("OnHide", function()
-					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); nodd:Hide()
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); msdd:Hide(); nodd:Hide()
 					if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
 						ekdd:Show()
 						WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
@@ -848,7 +848,7 @@
 				local function SetMapControls()
 
 					-- Hide dropdown menus
-					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nodd:Hide(); nrdd:Hide(); msdd:Hide(); cond:Hide()
+					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); msdd:Hide(); nodd:Hide(); cond:Hide()
 
 					-- Hide dropdown menu list items
 					LeaMapsCB["ListFrameZoneMapEasternMenu"]:Hide()
