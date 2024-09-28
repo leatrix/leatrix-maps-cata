@@ -3173,7 +3173,7 @@
 			local function SetZoneMapStyle()
 				-- Get dropdown menu value
 				local zoneMapSetting = LeaMapsLC["ZoneMapMenu"] -- Numeric value
-				-- Set chain style according to value
+				-- Set style according to value
 				SetCVar("showBattlefieldMinimap", zoneMapSetting - 1)
 				-- From WorldMapZoneMinimapDropDown_OnClick in Blizzard_WorldMap
 				_G.SHOW_BATTLEFIELD_MINIMAP = zoneMapSetting - 1
