@@ -4247,6 +4247,14 @@
 				end
 			end
 
+			-- Lock and disable use default map option due to a bug in the game which prevents map movement
+			if LeaMapsLC.NewPatch then
+				LeaMapsLC:LockItem(LeaMapsCB["UseDefaultMap"], true)
+				LeaMapsCB["UseDefaultMap"].tiptext = LeaMapsCB["UseDefaultMap"].tiptext .. "|n|n|cff00AAFF" .. "This setting cannot be used at the moment."
+				LeaMapsLC["UseDefaultMap"] = "Off"
+				LeaMapsDB["UseDefaultMap"] = "Off"
+			end
+
 		elseif event == "PLAYER_ENTERING_WORLD" then
 			-- Run main function
 			LeaMapsLC:MainFunc()
