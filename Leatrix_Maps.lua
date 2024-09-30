@@ -338,7 +338,7 @@
 				local ekdd = LeaMapsLC:CreateDropdownNew("ZoneMapEasternMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapEasternString)
 				ekdd:SetFrameLevel(30)
 
-				LeaMapsCB["ZoneMapEasternMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapEasternMenu"]:RegisterCallback("OnMenuClose", function()
 					if not IsInInstance() then
 						WorldMapFrame:SetMapID(mapEasternTable[LeaMapsLC["ZoneMapEasternMenu"]].mapid)
 					end
@@ -364,7 +364,7 @@
 				local kmdd = LeaMapsLC:CreateDropdownNew("ZoneMapKalimdorMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapKalimdorString)
 				kmdd:SetFrameLevel(30)
 
-				LeaMapsCB["ZoneMapKalimdorMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapKalimdorMenu"]:RegisterCallback("OnMenuClose", function()
 					if not IsInInstance() then
 						WorldMapFrame:SetMapID(mapKalimdorTable[LeaMapsLC["ZoneMapKalimdorMenu"]].mapid)
 					end
@@ -390,7 +390,7 @@
 				local otdd = LeaMapsLC:CreateDropdownNew("ZoneMapOutlandMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapOutlandString)
 				otdd:SetFrameLevel(30)
 
-				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapOutlandMenu"]:RegisterCallback("OnMenuClose", function()
 					if not IsInInstance() then
 						WorldMapFrame:SetMapID(mapOutlandTable[LeaMapsLC["ZoneMapOutlandMenu"]].mapid)
 					end
@@ -420,7 +420,7 @@
 				local nrdd = LeaMapsLC:CreateDropdownNew("ZoneMapNorthrendMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapNorthrendString)
 				nrdd:SetFrameLevel(30)
 
-				LeaMapsCB["ZoneMapNorthrendMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapNorthrendMenu"]:RegisterCallback("OnMenuClose", function()
 					if not IsInInstance() then
 						WorldMapFrame:SetMapID(mapNorthrendTable[LeaMapsLC["ZoneMapNorthrendMenu"]].mapid)
 					end
@@ -448,7 +448,7 @@
 				local msdd = LeaMapsLC:CreateDropdownNew("ZoneMapTheMaelstromMenu", nil, 184, "TOPLEFT", outerFrame, "TOPLEFT", 184, -20, mapTheMaelstromString)
 				msdd:SetFrameLevel(30)
 
-				LeaMapsCB["ZoneMapTheMaelstromMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapTheMaelstromMenu"]:RegisterCallback("OnMenuClose", function()
 					if not IsInInstance() then
 						WorldMapFrame:SetMapID(mapTheMaelstromTable[LeaMapsLC["ZoneMapTheMaelstromMenu"]].mapid)
 					end
@@ -477,7 +477,7 @@
 				cond:SetFrameLevel(30)
 
 				-- Continent dropdown menu handler
-				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnUpdate", function()
+				LeaMapsCB["ZoneMapContinentMenu"]:RegisterCallback("OnMenuClose", function()
 					ekdd:Hide(); kmdd:Hide(); otdd:Hide(); nrdd:Hide(); msdd:Hide(); nodd:Hide()
 					if not IsInInstance() then
 						if LeaMapsLC["ZoneMapContinentMenu"] == 1 then
