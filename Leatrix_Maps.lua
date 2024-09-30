@@ -3194,7 +3194,7 @@
 
 			-- Set style when a drop menu is selected (procs when the list is hidden)
 			if LeaMapsLC.NewPatch then
-				LeaMapsCB["ZoneMapMenu"]:RegisterCallback("OnUpdate", SetZoneMapStyle)
+				LeaMapsCB["ZoneMapMenu"]:RegisterCallback("OnMenuClose", SetZoneMapStyle)
 			else
 				LeaMapsCB["ListFrameZoneMapMenu"]:HookScript("OnHide", SetZoneMapStyle)
 				LeaMapsCB["ListFrameZoneMapMenu"]:SetFrameLevel(30)
