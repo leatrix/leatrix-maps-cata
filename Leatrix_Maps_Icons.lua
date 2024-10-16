@@ -251,7 +251,7 @@
 			{"FlightH", 62.3, 17.1, L["Nozzlepot's Outpost"] .. ", " .. L["Northern Barrens"], nil, tHTex, nil, nil},
 			{"FlightH", 48.7, 58.7, L["The Crossroads"] .. ", " .. L["Northern Barrens"], nil, tHTex, nil, nil},
 			{"FlightN", 69.1, 70.7, L["Ratchet"] .. ", " .. L["Northern Barrens"], nil, tNTex, nil, nil},
-			{"TravelN", 63.7, 38.6, L["Boat to"] .. " " .. L["Booty Bay"] .. ", " .. L["The Cape of Stranglethorn"], nil, fNTex, nil, nil, nil, nil, nil, 0, 1434},
+			{"TravelN", 70.2, 73.3, L["Boat to"] .. " " .. L["Booty Bay"] .. ", " .. L["The Cape of Stranglethorn"], nil, fNTex, nil, nil, nil, nil, nil, 0, 1434},
 		},
 		--[[Teldrassil]] [1438] = {
 			{"FlightA", 55.4, 88.4, L["Rut'theran Village"] .. ", " .. L["Teldrassil"], nil, tATex, nil, nil},
