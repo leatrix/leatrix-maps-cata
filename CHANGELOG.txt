@@ -1,5 +1,5 @@
-﻿4.0.30.alpha.1 - 16th October 2024
-- For 'Show travel points', fixed the location of the boat to booty bay in The Barrens.
+﻿4.0.30 - 23rd October 2024
+- For 'Show travel points', fixed the location of the boat to Booty Bay in The Barrens.
 
 4.0.27 - 2nd October 2024
 - PTR (4.4.1): Game API updates.
