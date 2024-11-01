@@ -1,4 +1,7 @@
-﻿4.0.31 - 30th October 2024
+﻿4.0.32 - 1st November 2024
+- Fixed the compatibility issue with ElvUI.
+
+4.0.31 - 30th October 2024
 - Updated for game version 4.4.1.
 
 4.0.30 - 23rd October 2024
