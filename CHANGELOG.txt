@@ -1,4 +1,8 @@
-﻿4.0.32 - 1st November 2024
+﻿4.0.34.alpha.1 - 6th November 2024
+- Game API updates.
+- Removed the Carbonite fix as it doesn't seem to be needed anymore.
+
+4.0.32 - 1st November 2024
 - Fixed the compatibility issue with ElvUI.
 
 4.0.31 - 30th October 2024
