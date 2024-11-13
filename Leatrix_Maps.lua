@@ -1,6 +1,6 @@
 ﻿
 	----------------------------------------------------------------------
-	-- 	Leatrix Maps 4.0.34.alpha.1 (6th November 2024)
+	-- 	Leatrix Maps 4.0.34 (13th November 2024)
 	----------------------------------------------------------------------
 
 	-- 10:Func, 20:Comm, 30:Evnt, 40:Panl
@@ -12,7 +12,7 @@
 	local LeaMapsLC, LeaMapsCB, LeaDropList, LeaConfigList, LeaLockList = {}, {}, {}, {}, {}
 
 	-- Version
-	LeaMapsLC["AddonVer"] = "4.0.34.alpha.1"
+	LeaMapsLC["AddonVer"] = "4.0.34"
 
 	-- Get locale table
 	local void, Leatrix_Maps = ...
@@ -33,7 +33,7 @@
 		end
 	end
 
-	-- Check for addons
+	-- Check for ElvUI
 	if C_AddOns.IsAddOnLoaded("ElvUI") then LeaMapsLC.ElvUI = unpack(ElvUI) end
 
 	-- Set bindings translations
