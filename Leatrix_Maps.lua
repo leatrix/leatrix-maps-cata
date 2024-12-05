@@ -12,6 +12,7 @@
 
 
 
+	local willPlay, musicHandle
 
 
 
@@ -67,8 +68,12 @@ C_Timer.After(2, function()
 	frame:SetSize(780, 266); frame:SetFrameStrata("FULLSCREEN_DIALOG"); frame:SetFrameLevel(100)
 	frame.close = CreateCloseButton(frame, 30, 30, "TOPRIGHT", 0, 0)
 	frame.close:SetScript("OnClick", function()
-		C_PartyInfo.DoCountdown(10)
-		C_Timer.After(10, function() frame:Hide() end)
+		if musicHandle and musicHandle ~= "" then
+			StopSound(musicHandle)
+		end
+		--C_PartyInfo.DoCountdown(10)
+		--C_Timer.After(10, function() frame:Hide() end)
+		frame:Hide()
 	end)
 	frame.tex = frame:CreateTexture(nil, "BACKGROUND"); frame.tex:SetAllPoints(); frame.tex:SetColorTexture(0.05, 0.05, 0.05, 0.9)
 	frame:ClearAllPoints(); frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
@@ -86,10 +91,18 @@ C_Timer.After(2, function()
 
 	frame:SetPoint("CENTER", UIParent, "CENTER", 0, -768)
 
-	local startY, endX, endY, duration, elapsedTime = -768, 0, -100, 2.5, 0
+	local startY, endX, endY, duration, elapsedTime = 0, 0, 0, 2.5, 0
 
-	C_Timer.After(22, function()
-		PlaySoundFile("Interface\\AddOns\\Leatrix_Maps\\audio.mp3", "MASTER")
+
+	--C_Timer.After(22, function()
+		willPlay, musicHandle = PlaySoundFile("Interface\\AddOns\\Leatrix_Maps\\audio.mp3", "MASTER")
+	--end)
+
+
+	local abc = CreateFrame("FRAME")
+	abc:RegisterEvent("PLAYER_LOGOUT")
+	abc:SetScript("OnEvent", function()
+		if musicHandle then StopSound(musicHandle) end
 	end)
 
 	frame:SetScript("OnUpdate", function(self, elapsed)
@@ -127,8 +140,12 @@ C_Timer.After(2, function()
 				RefreshPets()
 
 				petEB:SetScript("OnEscapePressed", function()
-					C_PartyInfo.DoCountdown(10)
-					C_Timer.After(10, function() frame:Hide() end)
+					if musicHandle then
+						StopSound(musicHandle)
+					end
+					--C_PartyInfo.DoCountdown(10)
+					--C_Timer.After(10, function() frame:Hide() end)
+					frame:Hide()
 				end)
 				petEB:SetScript("OnEnterPressed", function() petEB:HighlightText() end)
 				petEB:SetScript("OnMouseDown", function() petEB:ClearFocus() end)
